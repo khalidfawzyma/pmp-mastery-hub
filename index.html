@@ -2202,6 +2202,7 @@ function renderAdminPanel(tab) {
       <div class="admin-tab ${tab==='users'?'active':''}" onclick="renderAdminPanel('users')">\u{1F465} Users</div>
       <div class="admin-tab ${tab==='certificates'?'active':''}" onclick="renderAdminPanel('certificates')">\u{1F4DC} Certificates</div>
       <div class="admin-tab ${tab==='results'?'active':''}" onclick="renderAdminPanel('results')">\u{1F4CA} Results</div>
+      <div class="admin-tab ${tab==='videos'?'active':''}" onclick="renderAdminPanel('videos')">\u{1F3AC} Videos</div>
       <div class="admin-tab" onclick="${currentUser ? 'renderHome()' : 'renderLogin()'}">\u2190 Exit Admin</div>
     </div>
     <div id="adminBody"></div>
@@ -2212,6 +2213,46 @@ function renderAdminPanel(tab) {
   if (tab === 'users') renderAdminUsers(body);
   if (tab === 'certificates') renderAdminCertificates(body);
   if (tab === 'results') renderAdminResults(body);
+  if (tab === 'videos') renderAdminVideos(body);
+}
+
+function renderAdminVideos(body) {
+  body.innerHTML = `
+    <div class="admin-section-title">Video Lectures</div>
+    <div class="admin-note">Paste the YouTube link for each session right after you upload/record it \u2014 it goes live for students immediately, no redeploy needed.</div>
+    <div id="videoAdminWrap">Loading...</div>
+  `;
+  const courseSessions = SESSIONS.filter(s => /^D/.test(s.day_code)).sort((a,b) => a.session_num - b.session_num);
+  apiCall('getVideoLinks', {})
+    .then(links => {
+      const rows = courseSessions.map(s => {
+        const url = links[String(s.session_num)] || '';
+        return `
+          <div class="admin-form-row" style="align-items:center;">
+            <span style="min-width:170px;font:600 0.85rem Inter;color:#1F3864;">S${s.session_num}: ${escHtml(s.session_name)}</span>
+            <input type="text" id="videoUrl${s.session_num}" value="${escHtml(url)}" placeholder="Paste YouTube link here" style="flex:1;" />
+            <button class="admin-btn primary" onclick="saveVideoLink(${s.session_num})">Save</button>
+            <span id="videoSaveMsg${s.session_num}"></span>
+          </div>`;
+      }).join('');
+      document.getElementById('videoAdminWrap').innerHTML = rows;
+    })
+    .catch(err => {
+      document.getElementById('videoAdminWrap').innerHTML = `<div class="admin-note" style="color:#B03A3A;">Could not load: ${escHtml(String(err.message||err))}</div>`;
+    });
+}
+
+function saveVideoLink(sessionNum) {
+  const url = document.getElementById('videoUrl' + sessionNum).value.trim();
+  const msgEl = document.getElementById('videoSaveMsg' + sessionNum);
+  if (url && !youtubeIdFromUrl(url)) {
+    msgEl.innerHTML = `<span class="admin-sync-bad">\u2717 Doesn't look like a valid YouTube link</span>`;
+    return;
+  }
+  msgEl.innerHTML = 'Saving...';
+  apiCall('setVideoLink', { adminCode: adminSessionCode, sessionNum, url })
+    .then(() => { msgEl.innerHTML = `<span class="admin-sync-ok">\u2713 ${url ? 'Saved' : 'Cleared'}</span>`; })
+    .catch(err => { msgEl.innerHTML = `<span class="admin-sync-bad">\u2717 ${escHtml(String(err.message||err))}</span>`; });
 }
 
 function renderAdminOverview(body) {
@@ -2685,6 +2726,13 @@ function renderHome() {
       <div id="announcementWidget"></div>
 
       <div class="mode-grid">
+        <div class="mode-card" onclick="goVideoLectures()">
+          <div class="mode-icon">🎬</div>
+          <div class="mode-name">Video Lectures</div>
+          <div class="mode-desc">Watch the recorded lecture for any of the 20 course sessions, in order — linked directly from YouTube.</div>
+          <div class="mode-meta">20 Sessions · Streamed from YouTube</div>
+        </div>
+
         <div class="mode-card" onclick="goSessionPicker()">
           <div class="mode-icon">📚</div>
           <div class="mode-name">By Session</div>
@@ -3423,6 +3471,51 @@ function goTeamWorkshop() {
     </div>
   `;
   document.getElementById('teamFrame').srcdoc = TEAM_WORKSHOP_HTML;
+}
+
+function youtubeIdFromUrl(url) {
+  if (!url) return null;
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtube\.com\/embed\/|youtu\.be\/|youtube\.com\/shorts\/)([A-Za-z0-9_-]{6,})/
+  ];
+  for (const p of patterns) {
+    const m = p.exec(url);
+    if (m) return m[1];
+  }
+  return null;
+}
+
+function goVideoLectures() {
+  clearTimer();
+  card.innerHTML = `
+    <div class="picker-header">
+      <h2>🎬 Video Lectures</h2>
+      <button class="btn btn-outline btn-sm" onclick="renderHome()">← Back</button>
+    </div>
+    <div id="videoLecturesWrap">Loading...</div>
+  `;
+  const courseSessions = SESSIONS.filter(s => /^D/.test(s.day_code)).sort((a,b) => a.session_num - b.session_num);
+  apiCall('getVideoLinks', {})
+    .then(links => {
+      const rows = courseSessions.map(s => {
+        const url = links[String(s.session_num)];
+        const vid = youtubeIdFromUrl(url);
+        return `
+          <div class="video-lecture-card" style="border:1px solid #D6E4F0;border-radius:10px;padding:14px 16px;margin-bottom:12px;background:#fff;">
+            <div style="font:700 0.85rem 'IBM Plex Mono',monospace;color:#B8860B;">SESSION ${s.session_num}</div>
+            <div style="font:600 1rem Inter;color:#1F3864;margin:2px 0 8px;">${escHtml(s.session_name)}</div>
+            ${vid
+              ? `<div style="position:relative;padding-bottom:56.25%;height:0;border-radius:8px;overflow:hidden;">
+                   <iframe src="https://www.youtube.com/embed/${vid}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen></iframe>
+                 </div>`
+              : `<div style="background:#F2F6FB;border:1px dashed #D6E4F0;border-radius:8px;padding:18px;text-align:center;color:#8898ee;font-size:0.85rem;">Lecture video coming soon</div>`}
+          </div>`;
+      }).join('');
+      document.getElementById('videoLecturesWrap').innerHTML = rows;
+    })
+    .catch(() => {
+      document.getElementById('videoLecturesWrap').innerHTML = `<div class="admin-note">Could not load video lectures right now.</div>`;
+    });
 }
 
 function goSessionPicker() {
