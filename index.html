@@ -1818,9 +1818,18 @@ function saveBest(sessionNum, pct) {
 const CONFIG_KEY = 'pmp_hub_config_v1';
 const USER_SESSION_KEY = 'pmp_hub_user_v1';
 
+// Baked-in default so a brand-new visitor's browser (which has never saved
+// anything to localStorage) still connects automatically — without this,
+// only the specific device that once visited Admin > Setup would ever work,
+// and every other visitor's registration would silently fail before it even
+// reached the backend. Update this if the deployment URL ever changes.
+const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxzI4EhhdzYthD_8P0pTyWvyS_ZhAs8kyWZ-R6OcBpy88QUFEgrxCSyWe5-plzR9M0t/exec';
+
 function loadConfig() {
-  try { return JSON.parse(localStorage.getItem(CONFIG_KEY) || '{}'); }
-  catch { return {}; }
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(CONFIG_KEY) || '{}'); }
+  catch { saved = {}; }
+  return { scriptUrl: DEFAULT_SCRIPT_URL, ...saved };
 }
 function saveConfig(cfg) {
   try { localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg)); } catch {}
