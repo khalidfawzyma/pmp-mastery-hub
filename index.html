@@ -1823,13 +1823,10 @@ const USER_SESSION_KEY = 'pmp_hub_user_v1';
 // only the specific device that once visited Admin > Setup would ever work,
 // and every other visitor's registration would silently fail before it even
 // reached the backend. Update this if the deployment URL ever changes.
-const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxzI4EhhdzYthD_8P0pTyWvyS_ZhAs8kyWZ-R6OcBpy88QUFEgrxCSyWe5-plzR9M0t/exec';
+const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzF8KmeRex01WGPGZ8TMMDT8ao7qNr42Q4gTcez-UcPNJAH2dzdUu7VlpFyXEH9nnsv/exec';
 
 function loadConfig() {
-  let saved = {};
-  try { saved = JSON.parse(localStorage.getItem(CONFIG_KEY) || '{}'); }
-  catch { saved = {}; }
-  return { scriptUrl: DEFAULT_SCRIPT_URL, ...saved };
+  return { scriptUrl: DEFAULT_SCRIPT_URL };
 }
 function saveConfig(cfg) {
   try { localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg)); } catch {}
@@ -3522,8 +3519,8 @@ function goVideoLectures() {
       }).join('');
       document.getElementById('videoLecturesWrap').innerHTML = rows;
     })
-    .catch(() => {
-      document.getElementById('videoLecturesWrap').innerHTML = `<div class="admin-note">Could not load video lectures right now.</div>`;
+    .catch(err => {
+      document.getElementById('videoLecturesWrap').innerHTML = `<div class="admin-note" style="color:#B03A3A;">Could not load video lectures: ${escHtml(String(err.message || err))}</div>`;
     });
 }
 
