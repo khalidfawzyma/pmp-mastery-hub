@@ -43,6 +43,59 @@
     gap: 12px;
     box-shadow: 0 4px 16px rgba(31, 56, 100, 0.18);
   }
+  /* 48-hour trial banner — persistent while user has trial status */
+  .trial-banner {
+    background: linear-gradient(90deg, #B8860B 0%, #D4A017 100%);
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 0.88rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(184, 134, 11, 0.25);
+    border-bottom: 2px solid #7A5A10;
+  }
+  .trial-banner.urgent {
+    background: linear-gradient(90deg, #B03A3A 0%, #D4482D 100%);
+    border-bottom-color: #7A1D1D;
+  }
+  .trial-banner-msg { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 220px; }
+  .trial-banner-icon { font-size: 1.15rem; }
+  .trial-banner-cta {
+    background: rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+  .trial-banner-pay-btn {
+    background: #fff;
+    color: #7A5A10;
+    border: 2px solid #fff;
+    padding: 6px 16px;
+    border-radius: 22px;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .trial-banner-pay-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  .trial-banner.urgent .trial-banner-pay-btn {
+    color: #7A1D1D;
+  }
   .brand-title {
     font-size: 1.3rem;
     font-weight: 700;
@@ -1554,6 +1607,8 @@
     </div>
   </header>
 
+  <div id="trial-banner-slot"></div>
+
   <main class="card" id="card"></main>
   <div class="crs-fs-overlay" id="crsFsOverlay"></div>
 
@@ -2095,6 +2150,7 @@ function saveBest(sessionNum, pct) {
 // ============================================================
 const CONFIG_KEY = 'pmp_hub_config_v1';
 const USER_SESSION_KEY = 'pmp_hub_user_v1';
+const TRIAL_SESSION_KEY = 'pmp_hub_trial_session_v1'; // stores { sessionToken, name, email, trialExpiresAt }
 
 // Baked-in default so a brand-new visitor's browser (which has never saved
 // anything to localStorage) still connects automatically — without this,
@@ -2122,9 +2178,27 @@ function saveUserSession(user) {
 function clearUserSession() {
   try { localStorage.removeItem(USER_SESSION_KEY); } catch {}
 }
+function loadTrialSession() {
+  try { return JSON.parse(localStorage.getItem(TRIAL_SESSION_KEY) || 'null'); }
+  catch { return null; }
+}
+function saveTrialSession(t) {
+  try { localStorage.setItem(TRIAL_SESSION_KEY, JSON.stringify(t)); } catch {}
+}
+function clearTrialSession() {
+  try { localStorage.removeItem(TRIAL_SESSION_KEY); } catch {}
+}
 
 let currentUser = null;
+let paymentConfigCache = null; // Cached {url, label, pitch} — invalidated when admin saves
 let adminSessionCode = null; // not persisted — admin re-enters each visit
+
+// Returns the identifier the backend should use for this user's data —
+// their access code if they have one, else their trial session token.
+function userIdentifier() {
+  if (!currentUser) return null;
+  return currentUser.code || currentUser.sessionToken || null;
+}
 
 function apiCall(action, payload) {
   const cfg = loadConfig();
@@ -2145,20 +2219,59 @@ function renderHeaderBadge() {
   const el = document.getElementById('brand-right');
   if (!el) return;
   if (currentUser) {
+    const idLabel = currentUser.code
+      ? `<span style="opacity:0.6">(${escHtml(currentUser.code)})</span>`
+      : `<span style="background:#B8860B;color:#fff;padding:2px 8px;border-radius:10px;font-size:0.7rem;font-weight:700;letter-spacing:.05em;">TRIAL</span>`;
     el.innerHTML = `
       <div class="user-badge">
         <span class="brand-instructor" style="margin-right:10px;">Instructor: Dr. Eng. Khalid Fawzy</span>
-        <span>\u{1F464} ${escHtml(currentUser.name)} <span style="opacity:0.6">(${escHtml(currentUser.code)})</span></span>
+        <span>\u{1F464} ${escHtml(currentUser.name)} ${idLabel}</span>
         <span class="ub-link" onclick="goAdminLogin()">Admin</span>
         <span class="ub-link" onclick="logoutUser()">Switch User</span>
       </div>`;
   } else {
     el.innerHTML = `<div class="brand-instructor">Instructor: Dr. Eng. Khalid Fawzy</div>`;
   }
+  renderTrialBanner();
+}
+
+// Renders / removes the persistent 48h-trial banner based on currentUser state.
+// Called from renderHeaderBadge (which fires on every screen transition).
+function renderTrialBanner() {
+  const slot = document.getElementById('trial-banner-slot');
+  if (!slot) return;
+  if (!currentUser || !currentUser.trial || !currentUser.trialExpiresAt) {
+    slot.innerHTML = '';
+    return;
+  }
+  const expMs = new Date(currentUser.trialExpiresAt).getTime();
+  const remainMs = expMs - Date.now();
+  if (remainMs <= 0) {
+    // Trial silently expired mid-session. Force logout + expired screen on next action.
+    slot.innerHTML = '';
+    return;
+  }
+  const hours = Math.floor(remainMs / 3600000);
+  const mins = Math.floor((remainMs % 3600000) / 60000);
+  const urgent = hours < 6;
+  const timeLabel = hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+  const payHtml = (paymentConfigCache && paymentConfigCache.url)
+    ? `<a href="${escHtml(paymentConfigCache.url)}" target="_blank" rel="noopener" class="trial-banner-pay-btn">\u{1F4B3} ${escHtml(paymentConfigCache.label || 'Pay for Full Access')}</a>`
+    : '';
+  slot.innerHTML = `
+    <div class="trial-banner ${urgent ? 'urgent' : ''}">
+      <div class="trial-banner-msg">
+        <span class="trial-banner-icon">${urgent ? '\u26A0\uFE0F' : '\u{1F381}'}</span>
+        <span>${urgent ? 'Trial ending soon' : '48-Hour Trial'} \u00B7 <strong>${timeLabel}</strong> remaining \u2014 ${payHtml ? 'pay now for permanent access, or ask your instructor' : 'ask your instructor for full approval to continue past ' + new Date(expMs).toLocaleString()}</span>
+      </div>
+      ${payHtml || '<span class="trial-banner-cta">Request Full Access</span>'}
+    </div>
+  `;
 }
 
 function logoutUser() {
   clearUserSession();
+  clearTrialSession();
   currentUser = null;
   renderLogin();
 }
@@ -2168,13 +2281,13 @@ function goRegister() {
   clearTimer();
   card.innerHTML = `
     <div class="login-wrap">
-      <h1>Create Your Account</h1>
-      <p>Register once to receive your access code — we'll email it to you too.</p>
+      <h1>Start Your Free 48-Hour Trial</h1>
+      <p>Instant access, no code needed. Browse freely for 48 hours \u2014 after that, your instructor will email your permanent access code.</p>
       <input type="text" id="regName" class="login-input" style="text-transform:none;text-align:left;" placeholder="Full name" autocomplete="off" />
       <input type="email" id="regEmail" class="login-input" style="text-transform:none;text-align:left;" placeholder="Email address" autocomplete="off" />
       <input type="text" id="regWhatsapp" class="login-input" style="text-transform:none;text-align:left;" placeholder="WhatsApp number (with country code)" autocomplete="off" />
       <input type="text" id="regHP" name="website" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
-      <button class="login-btn" onclick="attemptRegister()">Register</button>
+      <button class="login-btn" onclick="attemptRegister()">Start Trial \u2192</button>
       <div class="login-error" id="regError"></div>
       <p style="font-size:12px;color:#8898ee;margin-top:10px;line-height:1.4;">Your information is used only for course access, results tracking, and certification — it is never shared.</p>
       <span class="login-admin-link" onclick="renderLogin()">\u2190 Back to login</span>
@@ -2197,30 +2310,117 @@ function attemptRegister() {
     return;
   }
   errEl.textContent = 'Registering...';
-  apiCall('registerUser', { name, email, whatsapp, hp })
+  apiCall('registerTrialUser', { name, email, whatsapp, hp })
     .then(user => renderRegisterResult(user))
     .catch(err => { errEl.textContent = err.message || 'Registration failed.'; });
 }
 
 function renderRegisterResult(user) {
+  // Existing approved user — code already exists, they log in traditionally
   if (user.existing && user.status === 'Approved') {
     card.innerHTML = `
       <div class="login-wrap">
         <h1>Welcome back!</h1>
-        <p>This email is already registered and approved. Use the access code you were emailed to log in \u2014 or ask your instructor if you've lost it.</p>
+        <p>This email is already registered and approved. Use the access code your instructor emailed you to log in.</p>
         <button class="login-btn" style="margin-top:20px;" onclick="renderLogin()">Go to Login</button>
       </div>
     `;
     return;
   }
-  card.innerHTML = `
-    <div class="login-wrap">
-      <h1>\u2713 Registration Received</h1>
-      <p>Thanks, ${escHtml(user.name)}! Your registration is <strong>pending instructor approval</strong>.</p>
-      <p style="margin-top:12px;">You'll receive your access code by email as soon as it's approved.</p>
-      <button class="login-btn" style="margin-top:20px;" onclick="renderLogin()">Back to Login</button>
-    </div>
-  `;
+  // Existing user in an active trial — resume their session silently
+  if (user.existing && user.status === 'Trial' && user.sessionToken) {
+    enterAsTrialUser({
+      sessionToken: user.sessionToken,
+      name: user.name,
+      email: user.email,
+      trialExpiresAt: user.trialExpiresAt
+    });
+    return;
+  }
+  // Existing user whose trial expired or is otherwise blocked
+  if (user.existing && (user.status === 'Trial Expired' || user.status === 'Rejected' || user.status === 'Pending' || user.status === 'Trial')) {
+    card.innerHTML = `
+      <div class="login-wrap">
+        <h1>Registration on file</h1>
+        <p>This email is already registered. Your instructor will email your permanent access code once approved \u2014 or contact them if it's been a while.</p>
+        <button class="login-btn" style="margin-top:20px;" onclick="renderLogin()">Back to Login</button>
+      </div>
+    `;
+    return;
+  }
+  // NEW user: 48h trial, session-based (no code). Store token, brief welcome, enter app.
+  if (!user.sessionToken) {
+    card.innerHTML = `
+      <div class="login-wrap">
+        <h1>Registration Error</h1>
+        <p>Something went wrong \u2014 no trial session was created. Please try again or contact your instructor.</p>
+        <button class="login-btn" style="margin-top:20px;" onclick="renderLogin()">Back to Login</button>
+      </div>`;
+    return;
+  }
+  const expIso = user.trialExpiresAt || '';
+  const expLabel = expIso ? new Date(expIso).toLocaleString() : '';
+  card.innerHTML = `<div class="login-wrap"><p>Loading...</p></div>`;
+  fetchPaymentConfig().then(cfg => {
+    const payBtn = (cfg && cfg.url) ? `
+      <div style="text-align:center;margin-top:14px;padding-top:14px;border-top:1px dashed #D6E4F0;">
+        <div style="font-size:0.82rem;color:#5B6B85;margin-bottom:8px;">Want permanent access now, without waiting 48 hours?</div>
+        <a href="${escHtml(cfg.url)}" target="_blank" rel="noopener" style="display:inline-block;background:#fff;color:#B8860B;border:2px solid #B8860B;padding:8px 20px;border-radius:22px;text-decoration:none;font-weight:700;font-size:0.88rem;">\u{1F4B3} ${escHtml(cfg.label || 'Pay for Full Access')} \u2192</a>
+      </div>
+    ` : '';
+    card.innerHTML = `
+      <div class="login-wrap">
+        <h1>\u{1F389} You're In \u2014 48-Hour Trial Active</h1>
+        <p>Welcome, ${escHtml(user.name)}! Your free trial is live right now \u2014 <strong>no code needed</strong>, no waiting.</p>
+        <div style="background:#FFF8E7;border:2px dashed #B8860B;border-radius:10px;padding:16px;margin:18px 0;text-align:center;">
+          <div style="font-size:0.85rem;color:#7A5A10;font-weight:700;">Browse freely for 48 hours</div>
+          <div style="font-size:0.78rem;color:#5B6B85;margin-top:8px;">Trial expires: ${escHtml(expLabel)}</div>
+          <div style="font-size:0.78rem;color:#5B6B85;margin-top:4px;">After that, your instructor will email your <strong>permanent access code</strong>.</div>
+        </div>
+        <button class="login-btn" style="margin-top:6px;" onclick="continueIntoTrial('${escHtml(user.sessionToken)}','${escHtml(user.name)}','${escHtml(user.email)}','${escHtml(expIso)}')">Start Exploring \u2192</button>
+        ${payBtn}
+        <span class="login-admin-link" onclick="renderLogin()" style="margin-top:14px;">Back to Login</span>
+      </div>
+    `;
+  });
+}
+
+// Called from the trial welcome screen — persists the session token and enters the app
+function continueIntoTrial(sessionToken, name, email, trialExpiresAt) {
+  enterAsTrialUser({ sessionToken, name, email, trialExpiresAt });
+}
+
+// Sets up currentUser as a trial user, persists to localStorage, renders home
+function enterAsTrialUser(sess) {
+  currentUser = {
+    // No code — trial users are identified by sessionToken only
+    code: null,
+    sessionToken: sess.sessionToken,
+    name: sess.name,
+    email: sess.email,
+    trial: true,
+    trialExpiresAt: sess.trialExpiresAt
+  };
+  saveTrialSession({
+    sessionToken: sess.sessionToken,
+    name: sess.name,
+    email: sess.email,
+    trialExpiresAt: sess.trialExpiresAt
+  });
+  // Pre-load payment config so trial banner Pay button renders on first paint
+  fetchPaymentConfig().finally(() => {
+    renderHeaderBadge();
+    renderHome();
+  });
+}
+
+// Legacy helper (kept for any leftover reference — safe to leave)
+function autoLoginWithCode(code) {
+  renderLogin();
+  setTimeout(() => {
+    const inp = document.getElementById('loginCodeInput');
+    if (inp) { inp.value = code; attemptLogin(); }
+  }, 30);
 }
 
 // ---- Certificate claim (student side) ----
@@ -2233,6 +2433,19 @@ function goCertificate() {
         <h1>\u{1F4DC} Certificate</h1>
         <p>Certificate claims aren't available yet \u2014 ask your instructor.</p>
         <span class="login-admin-link" onclick="renderHome()">\u2190 Back</span>
+      </div>`;
+    return;
+  }
+  // Trial users can't claim certificates — they need to be approved to permanent access first.
+  if (currentUser && currentUser.trial) {
+    card.innerHTML = `
+      <div class="login-wrap">
+        <h1>\u{1F4DC} Certificate</h1>
+        <div style="background:#FFF8E7;border:2px solid #B8860B;border-radius:10px;padding:16px;margin:16px 0;">
+          <div style="font-weight:700;color:#7A5A10;margin-bottom:6px;">Available with full access</div>
+          <div style="font-size:0.9rem;color:#333;">Certificates of Completion require the full 35 contact hours program. Once your trial ends and your instructor emails your permanent access code, you'll be able to claim your certificate here.</div>
+        </div>
+        <span class="login-admin-link" onclick="renderHome()">\u2190 Back to Home</span>
       </div>`;
     return;
   }
@@ -2433,12 +2646,77 @@ function attemptLogin() {
   }
   apiCall('validateCode', { code })
     .then(user => {
-      currentUser = user;
-      saveUserSession(user);
-      renderHeaderBadge();
-      renderHome();
+      const finish = () => {
+        currentUser = user;
+        saveUserSession(user);
+        renderHeaderBadge();
+        renderHome();
+      };
+      // Trial users need payment config loaded before the banner renders,
+      // so the Pay button appears without a delayed second render.
+      if (user.trial) {
+        fetchPaymentConfig().finally(finish);
+      } else {
+        finish();
+      }
     })
-    .catch(err => { errEl.textContent = (err && err.message) ? err.message : 'Access code not recognized. Check with your instructor.'; });
+    .catch(err => {
+      const msg = (err && err.message) ? err.message : 'Access code not recognized. Check with your instructor.';
+      if (msg.indexOf('TRIAL_EXPIRED') === 0) {
+        renderTrialExpiredScreen(msg.replace(/^TRIAL_EXPIRED:\s*/, ''));
+        return;
+      }
+      errEl.textContent = msg;
+    });
+}
+
+// Fetch payment config once, cache it. Returns a promise resolving to the config
+// (or an empty object if the fetch fails / no backend). Cache is invalidated when
+// admin saves a new payment config via savePaymentConfig().
+function fetchPaymentConfig() {
+  if (paymentConfigCache) return Promise.resolve(paymentConfigCache);
+  return apiCall('getPaymentConfig', {})
+    .then(cfg => { paymentConfigCache = cfg || {}; return paymentConfigCache; })
+    .catch(() => { paymentConfigCache = {}; return paymentConfigCache; });
+}
+
+// Screen shown when a user's 48h trial has ended
+function renderTrialExpiredScreen(message) {
+  clearTimer();
+  currentUser = null;
+  clearUserSession();
+  clearTrialSession();
+  renderHeaderBadge();
+  card.innerHTML = `<div class="login-wrap"><p>Loading...</p></div>`;
+  fetchPaymentConfig().then(cfg => {
+    const hasPay = cfg && cfg.url;
+    const pitch = (cfg && cfg.pitch) ? cfg.pitch : 'Skip the wait \u2014 unlock permanent access instantly.';
+    const label = (cfg && cfg.label) ? cfg.label : 'Pay for Full Access';
+    const payBlock = hasPay ? `
+      <div style="background:#FFF8E7;border:2px solid #B8860B;border-radius:10px;padding:18px;margin:18px 0;text-align:center;">
+        <div style="font-weight:700;color:#7A5A10;font-size:1rem;margin-bottom:8px;">\u{1F680} ${escHtml(pitch)}</div>
+        <a href="${escHtml(cfg.url)}" target="_blank" rel="noopener" style="display:inline-block;background:linear-gradient(90deg,#B8860B,#D4A017);color:#fff;padding:12px 28px;border-radius:24px;text-decoration:none;font-weight:800;font-size:1rem;box-shadow:0 4px 12px rgba(184,134,11,0.35);margin-top:6px;">\u{1F4B3} ${escHtml(label)} \u2192</a>
+      </div>
+      <div style="text-align:center;color:#5B6B85;font-size:0.85rem;margin:12px 0;">\u2014 or wait for approval \u2014</div>
+      <div style="background:#EEF4FB;border-left:4px solid #2E75B6;border-radius:8px;padding:14px;margin:16px 0;text-align:left;">
+        <div style="font-weight:700;color:#1F3864;margin-bottom:6px;">Your instructor will email your access code</div>
+        <div style="font-size:0.88rem;color:#333;line-height:1.6;">If you don't receive it within 24 hours, contact your instructor. You'll use that code to log in from then on \u2014 and any practice history from your trial will carry over.</div>
+      </div>
+    ` : `
+      <div style="background:#FFF8E7;border-left:4px solid #B8860B;border-radius:8px;padding:14px;margin:16px 0;text-align:left;">
+        <div style="font-weight:700;color:#7A5A10;margin-bottom:6px;">What happens next</div>
+        <div style="font-size:0.9rem;color:#333;line-height:1.6;">Your instructor will review your registration and email your <strong>permanent access code</strong> within 24 hours. Use that code to log back in \u2014 all your practice history from the trial will carry over.</div>
+      </div>
+    `;
+    card.innerHTML = `
+      <div class="login-wrap">
+        <h1>\u23F1 Trial Expired</h1>
+        <p style="margin:14px 0;">${escHtml(message || 'Your 48-hour trial has ended.')}</p>
+        ${payBlock}
+        <button class="login-btn" onclick="renderLogin()" style="margin-top:14px;background:#5B6B85;">Back to Login</button>
+      </div>
+    `;
+  });
 }
 
 function goAdminLogin() {
@@ -2550,7 +2828,8 @@ function renderAdminOverview(body) {
     apiCall('getResults', { adminCode: adminSessionCode })
   ]).then(([users, claims, results]) => {
     const approved = users.filter(u => (u.status || 'Approved') === 'Approved').length;
-    const pending = users.filter(u => u.status === 'Pending').length;
+    const pending = users.filter(u => u.status === 'Pending' || u.status === 'Trial Expired').length;
+    const activeTrial = users.filter(u => u.status === 'Trial').length;
     const certsIssued = claims.filter(c => c.status === 'Approved').length;
     const certsPending = claims.filter(c => c.status === 'Pending').length;
     const mockResults = results.filter(r => r.mode === 'mock' && r.percent != null);
@@ -2638,9 +2917,56 @@ function renderAdminSetup(body, cfg) {
       <button class="admin-btn primary" onclick="saveAnnouncement()">Save Announcement</button>
     </div>
     <div id="announcementResult"></div>
+
+    <div class="admin-section-title">Payment Link \u2014 Convert Trials to Paid Access</div>
+    <div class="admin-note">
+      Paste the checkout URL from your payment provider (Stripe, PayPal.me, PayMob, Fawry, WhatsApp order link \u2014 anything that opens in a browser). If set, trial and trial-expired users see a <strong>Pay for Full Access</strong> button in the trial banner and on the trial-expired screen. Leave URL blank to hide the button. After a student pays, approve them manually from the Users tab (their trial converts to full access, same code).
+    </div>
+    <div class="admin-form-row">
+      <input type="text" id="paymentUrlInput" placeholder="https://buy.stripe.com/... or https://wa.me/... or your PayMob checkout URL" style="flex:2;" />
+      <input type="text" id="paymentLabelInput" placeholder="Button label (e.g. Pay $49 \u2014 Lifetime Access)" style="flex:1;" />
+    </div>
+    <div class="admin-form-row">
+      <textarea id="paymentPitchInput" rows="2" style="flex:1;padding:10px 12px;border:1px solid #D6E4F0;border-radius:6px;font-family:inherit;font-size:0.9rem;" placeholder="Optional short pitch shown on the trial-expired screen (e.g. 'Skip the wait \u2014 unlock permanent access instantly.')"></textarea>
+      <button class="admin-btn primary" onclick="savePaymentConfig()">Save Payment Link</button>
+    </div>
+    <div id="paymentConfigResult"></div>
   `;
   loadCertConfigIntoSetup();
   loadAnnouncementIntoSetup();
+  loadPaymentConfigIntoSetup();
+}
+
+function loadPaymentConfigIntoSetup() {
+  apiCall('getPaymentConfig', {})
+    .then(cfg => {
+      const u = document.getElementById('paymentUrlInput');
+      const l = document.getElementById('paymentLabelInput');
+      const p = document.getElementById('paymentPitchInput');
+      if (u) u.value = cfg.url || '';
+      if (l) l.value = cfg.label || '';
+      if (p) p.value = cfg.pitch || '';
+    })
+    .catch(() => { /* not yet configured */ });
+}
+
+function savePaymentConfig() {
+  const url = document.getElementById('paymentUrlInput').value.trim();
+  const label = document.getElementById('paymentLabelInput').value.trim();
+  const pitch = document.getElementById('paymentPitchInput').value.trim();
+  const resultEl = document.getElementById('paymentConfigResult');
+  if (url && !/^https?:\/\//i.test(url) && !/^https?:\/\/wa\.me/i.test(url) && !/^whatsapp:/i.test(url)) {
+    resultEl.innerHTML = `<span class="admin-sync-bad">\u2717 URL must start with http:// or https:// (or whatsapp:).</span>`;
+    return;
+  }
+  resultEl.innerHTML = 'Saving...';
+  apiCall('setPaymentConfig', { adminCode: adminSessionCode, url, label, pitch })
+    .then(() => {
+      resultEl.innerHTML = `<span class="admin-sync-ok">\u2713 ${url ? 'Payment link saved and live for trial users.' : 'Payment link cleared \u2014 button hidden.'}</span>`;
+      // Refresh cache so a subsequent trial-banner render picks up the change immediately
+      paymentConfigCache = null;
+    })
+    .catch(err => { resultEl.innerHTML = `<span class="admin-sync-bad">\u2717 ${escHtml(String(err.message||err))}</span>`; });
 }
 
 function loadAnnouncementIntoSetup() {
@@ -2750,27 +3076,46 @@ function refreshUsersList() {
   apiCall('listUsers', { adminCode: adminSessionCode })
     .then(users => {
       if (!users.length) { wrap.innerHTML = '<div class="admin-note">No users yet — add one above.</div>'; return; }
-      // Pending registrations need attention first.
-      users.sort((a, b) => {
-        const pa = a.status === 'Pending' ? 0 : 1;
-        const pb = b.status === 'Pending' ? 0 : 1;
-        return pa - pb;
-      });
+      // Order: pending → trial expired → active trial → approved/rejected
+      const rank = s => (s === 'Pending' ? 0 : s === 'Trial Expired' ? 1 : s === 'Trial' ? 2 : 3);
+      users.sort((a, b) => rank(a.status) - rank(b.status));
       const pendingCount = users.filter(u => u.status === 'Pending').length;
-      const noteHtml = pendingCount
-        ? `<div class="admin-note" style="border-left-color:#B8860B;">\u{1F551} ${pendingCount} registration${pendingCount>1?'s':''} awaiting approval.</div>`
+      const trialCount = users.filter(u => u.status === 'Trial').length;
+      const expiredCount = users.filter(u => u.status === 'Trial Expired').length;
+      const noteParts = [];
+      if (pendingCount) noteParts.push(`\u{1F551} ${pendingCount} pending`);
+      if (expiredCount) noteParts.push(`\u23F1 ${expiredCount} trial expired \u2014 awaiting approval`);
+      if (trialCount) noteParts.push(`\u{1F381} ${trialCount} active trial${trialCount>1?'s':''}`);
+      const noteHtml = noteParts.length
+        ? `<div class="admin-note" style="border-left-color:#B8860B;">${noteParts.join(' \u00B7 ')}</div>`
         : '';
       const rows = users.map(u => {
-        const isPending = u.status === 'Pending';
-        const statusBadge = isPending
-          ? `<span style="color:#B8860B;font-weight:700;">Pending</span>`
-          : (u.status === 'Rejected' ? `<span style="color:#B91C1C;font-weight:700;">Rejected</span>` : `<span style="color:#2E7D32;font-weight:700;">Approved</span>`);
-        const actions = (isPending
-          ? `<button class="admin-btn gold" onclick="doApproveRegistration('${escHtml(u.code)}')">Approve</button> `
-          : '') + `<button class="admin-btn danger" onclick="doRemoveUser('${escHtml(u.code)}')">Remove</button>`;
+        const status = u.status || 'Approved';
+        const needsApproval = (status === 'Pending' || status === 'Trial' || status === 'Trial Expired');
+        const idForActions = u.identifier || u.code || '';
+        let statusBadge;
+        if (status === 'Pending') {
+          statusBadge = `<span style="color:#B8860B;font-weight:700;">Pending</span>`;
+        } else if (status === 'Trial') {
+          const hrs = typeof u.hoursRemaining === 'number' ? Math.max(0, Math.floor(u.hoursRemaining)) : '?';
+          statusBadge = `<span style="color:#B8860B;font-weight:700;">Trial</span> <span style="color:#5B6B85;font-size:0.8rem;">(${hrs}h left)</span>`;
+        } else if (status === 'Trial Expired') {
+          statusBadge = `<span style="color:#B91C1C;font-weight:700;">Trial Expired</span>`;
+        } else if (status === 'Rejected') {
+          statusBadge = `<span style="color:#B91C1C;font-weight:700;">Rejected</span>`;
+        } else {
+          statusBadge = `<span style="color:#2E7D32;font-weight:700;">Approved</span>`;
+        }
+        const codeCell = u.code
+          ? `<span class="admin-code-pill">${escHtml(u.code)}</span>`
+          : `<span style="background:#EEF4FB;color:#2E75B6;font-size:0.72rem;font-family:'IBM Plex Mono',monospace;padding:2px 8px;border-radius:10px;font-weight:700;letter-spacing:.03em;">SESSION</span>`;
+        const approveLabel = u.isTrialSession ? 'Approve &amp; Send Code' : 'Approve';
+        const actions = (needsApproval
+          ? `<button class="admin-btn gold" onclick="doApproveRegistration('${escHtml(idForActions)}')">${approveLabel}</button> `
+          : '') + `<button class="admin-btn danger" onclick="doRemoveUser('${escHtml(idForActions)}','${escHtml(u.name)}')">Remove</button>`;
         return `
         <tr>
-          <td><span class="admin-code-pill">${escHtml(u.code)}</span></td>
+          <td>${codeCell}</td>
           <td>${escHtml(u.name)}</td>
           <td>${escHtml(u.email || '')}</td>
           <td>${escHtml(u.whatsapp || '')}</td>
@@ -2785,15 +3130,19 @@ function refreshUsersList() {
     .catch(err => { wrap.innerHTML = `<span class="admin-sync-bad">Could not load users: ${escHtml(String(err.message||err))}</span>`; });
 }
 
-function doApproveRegistration(code) {
-  apiCall('approveRegistration', { adminCode: adminSessionCode, code })
-    .then(() => refreshUsersList())
+function doApproveRegistration(identifier) {
+  apiCall('approveRegistration', { adminCode: adminSessionCode, code: identifier })
+    .then(res => {
+      alert(`Approved. Access code ${res.code} has been emailed to the student.`);
+      refreshUsersList();
+    })
     .catch(err => alert('Could not approve registration: ' + (err.message || err)));
 }
 
-function doRemoveUser(code) {
-  if (!confirm(`Remove access code ${code}? This cannot be undone.`)) return;
-  apiCall('removeUser', { adminCode: adminSessionCode, code })
+function doRemoveUser(identifier, name) {
+  const label = name ? `${name}` : `this user`;
+  if (!confirm(`Remove ${label}? This cannot be undone.`)) return;
+  apiCall('removeUser', { adminCode: adminSessionCode, code: identifier })
     .then(() => refreshUsersList())
     .catch(err => alert('Could not remove user: ' + (err.message || err)));
 }
@@ -3053,7 +3402,7 @@ function syncResultToBackend(modeLabel, label, correctCount, total, pct, detail)
   const cfg = loadConfig();
   if (!cfg.scriptUrl || !currentUser) return;
   apiCall('saveResult', {
-    code: currentUser.code, name: currentUser.name, mode: modeLabel, label: label,
+    code: userIdentifier(), name: currentUser.name, mode: modeLabel, label: label,
     score: correctCount, total: total, percent: pct, detail: detail
   }).catch(() => {});
 }
@@ -3064,10 +3413,58 @@ const card = document.getElementById('card');
 // ===== Initialize app =====
 
 function init() {
-  // Always start at the access-code screen — don't auto-resume a
-  // previous session, even if one is stored. currentUser stays null
-  // until the person actually logs in again on this visit.
   renderHeaderBadge();
+  // Trial users have a session token stored in localStorage — auto-resume for them
+  // (no code entry needed, they just come back and pick up where they left off).
+  // Code-based users always re-enter their code at the login screen.
+  const trialSess = loadTrialSession();
+  if (trialSess && trialSess.sessionToken) {
+    // Ping the backend to make sure the session is still valid (may have been approved,
+    // expired, or the row deleted since last visit).
+    card.innerHTML = `<div class="login-wrap"><p>Resuming your trial...</p></div>`;
+    apiCall('validateTrialSession', { sessionToken: trialSess.sessionToken })
+      .then(res => {
+        if (res.upgraded && res.code) {
+          // Admin approved them mid-trial — transition to permanent code auth
+          clearTrialSession();
+          currentUser = { code: res.code, name: res.name, email: res.email || '', whatsapp: res.whatsapp || '' };
+          saveUserSession(currentUser);
+          renderHeaderBadge();
+          card.innerHTML = `
+            <div class="login-wrap">
+              <h1>\u{1F389} You're Approved!</h1>
+              <p>Your instructor approved your access while you were away. Your permanent access code is:</p>
+              <div style="background:#FFF8E7;border:2px dashed #B8860B;border-radius:10px;padding:16px;margin:18px 0;text-align:center;">
+                <div style="font:700 1.6rem 'IBM Plex Mono',monospace;color:#1F3864;letter-spacing:.15em;">${escHtml(res.code)}</div>
+              </div>
+              <p style="font-size:0.88rem;color:#5B6B85;">We've emailed it to you too. Save it \u2014 you'll use it to log in from now on.</p>
+              <button class="login-btn" style="margin-top:14px;" onclick="renderHome()">Continue \u2192</button>
+            </div>`;
+          return;
+        }
+        if (res.trial) {
+          enterAsTrialUser({
+            sessionToken: res.sessionToken || trialSess.sessionToken,
+            name: res.name,
+            email: res.email,
+            trialExpiresAt: res.trialExpiresAt
+          });
+        } else {
+          clearTrialSession();
+          renderLogin();
+        }
+      })
+      .catch(err => {
+        const msg = (err && err.message) || '';
+        clearTrialSession();
+        if (msg.indexOf('TRIAL_EXPIRED') === 0) {
+          renderTrialExpiredScreen(msg.replace(/^TRIAL_EXPIRED:\s*/, ''));
+        } else {
+          renderLogin();
+        }
+      });
+    return;
+  }
   renderLogin();
 }
 
@@ -4332,7 +4729,7 @@ function goMockExamPicker() {
   // ones made on this specific browser.
   renderPicker(localAttempts);
   if (canFetchServer) {
-    apiCall('getMyResults', { code: currentUser.code })
+    apiCall('getMyResults', { code: userIdentifier() })
       .then(results => {
         const serverAttempts = {};
         results
