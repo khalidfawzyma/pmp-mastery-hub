@@ -200,6 +200,118 @@
     color: #7A1D1D;
     font-weight: 700;
   }
+
+  /* ===== PMI APPLICATION ASSISTANT ===== */
+  .pmi-wrap { max-width: 900px; margin: 20px auto; padding: 0 12px; }
+  .pmi-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
+  .pmi-title { font-size: 1.4rem; color: #1F3864; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+  .pmi-back-btn { background: #fff; border: 1.5px solid #D6E4F0; color: #2E75B6; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 600; }
+  .pmi-back-btn:hover { background: #F5F9FE; border-color: #2E75B6; }
+  .pmi-progress { display: flex; gap: 4px; margin-bottom: 20px; padding: 12px; background: #F5F9FE; border-radius: 8px; }
+  .pmi-progress-step { flex: 1; text-align: center; padding: 6px 4px; font-size: 0.7rem; color: #5B6B85; border-radius: 4px; transition: all 0.2s; }
+  .pmi-progress-step.active { background: #1F3864; color: #fff; font-weight: 700; }
+  .pmi-progress-step.done { background: #D6E4F0; color: #1F3864; font-weight: 600; }
+  .pmi-card { background: #fff; border: 1px solid #E4EAF3; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(31,56,100,0.06); }
+  .pmi-card h3 { color: #1F3864; font-size: 1.05rem; margin-bottom: 12px; }
+  .pmi-card p { color: #5B6B85; font-size: 0.9rem; line-height: 1.5; margin-bottom: 10px; }
+  .pmi-form-field { margin-bottom: 14px; }
+  .pmi-form-field label { display: block; font-size: 0.82rem; color: #1F3864; font-weight: 600; margin-bottom: 5px; }
+  .pmi-form-field label .req { color: #C62828; }
+  .pmi-form-field input, .pmi-form-field textarea, .pmi-form-field select {
+    width: 100%; padding: 10px 12px; font-size: 0.9rem; color: #1F3864;
+    border: 1.5px solid #D6E4F0; border-radius: 6px; font-family: inherit; box-sizing: border-box;
+  }
+  .pmi-form-field input:focus, .pmi-form-field textarea:focus, .pmi-form-field select:focus { outline: none; border-color: #2E75B6; }
+  .pmi-form-field textarea { resize: vertical; min-height: 90px; }
+  .pmi-form-field .hint { font-size: 0.75rem; color: #6B7280; margin-top: 3px; font-style: italic; }
+  .pmi-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .pmi-form-row { grid-template-columns: 1fr; } }
+  .pmi-path-choice { display: flex; gap: 12px; margin: 14px 0; flex-wrap: wrap; }
+  .pmi-path-card {
+    flex: 1; min-width: 240px; background: #fff; border: 2px solid #D6E4F0; border-radius: 10px;
+    padding: 16px; cursor: pointer; transition: all 0.2s;
+  }
+  .pmi-path-card:hover { border-color: #2E75B6; background: #F5F9FE; }
+  .pmi-path-card.selected { border-color: #B8860B; background: #FFF8E7; box-shadow: 0 3px 12px rgba(184,134,11,0.18); }
+  .pmi-path-card h4 { color: #1F3864; margin-bottom: 6px; }
+  .pmi-path-card .months { color: #B8860B; font-weight: 800; font-size: 1.3rem; margin: 6px 0; }
+  .pmi-path-card p { font-size: 0.82rem; color: #5B6B85; margin: 0; }
+  .pmi-eligibility-panel {
+    background: linear-gradient(135deg, #FFF8E7 0%, #FFFDF5 100%);
+    border: 1.5px solid #E8D9A8; border-radius: 10px; padding: 14px 16px; margin-bottom: 16px;
+  }
+  .pmi-elig-row { display: flex; justify-content: space-between; align-items: center; margin: 6px 0; font-size: 0.88rem; }
+  .pmi-elig-label { color: #7A5A10; font-weight: 600; }
+  .pmi-elig-value { font-weight: 800; color: #1F3864; }
+  .pmi-elig-value.ok { color: #2E7D32; }
+  .pmi-elig-value.warn { color: #C62828; }
+  .pmi-progress-bar-outer { height: 10px; background: #E4EAF3; border-radius: 5px; overflow: hidden; margin: 8px 0; }
+  .pmi-progress-bar-inner { height: 100%; background: linear-gradient(90deg,#B8860B,#D4A017); transition: width 0.3s; }
+  .pmi-progress-bar-inner.done { background: linear-gradient(90deg,#2E7D32,#4CAF50); }
+  .pmi-project-item {
+    background: #F5F9FE; border: 1px solid #D6E4F0; border-radius: 8px;
+    padding: 12px 14px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  }
+  .pmi-project-item.incomplete { border-left: 4px solid #B8860B; }
+  .pmi-project-item.complete { border-left: 4px solid #2E7D32; }
+  .pmi-project-info { flex: 1; min-width: 0; }
+  .pmi-project-title { font-weight: 700; color: #1F3864; font-size: 0.95rem; margin-bottom: 3px; }
+  .pmi-project-meta { font-size: 0.78rem; color: #5B6B85; }
+  .pmi-project-actions { display: flex; gap: 6px; flex-shrink: 0; }
+  .pmi-btn {
+    padding: 8px 16px; border-radius: 6px; border: none; cursor: pointer;
+    font-weight: 700; font-size: 0.85rem; transition: all 0.15s;
+  }
+  .pmi-btn-primary { background: linear-gradient(135deg,#1F3864,#2E75B6); color: #fff; }
+  .pmi-btn-primary:hover { opacity: 0.92; }
+  .pmi-btn-gold { background: linear-gradient(135deg,#B8860B,#D4A017); color: #fff; }
+  .pmi-btn-gold:hover { opacity: 0.92; }
+  .pmi-btn-secondary { background: #fff; color: #2E75B6; border: 1.5px solid #2E75B6; }
+  .pmi-btn-secondary:hover { background: #F5F9FE; }
+  .pmi-btn-danger { background: #fff; color: #C62828; border: 1.5px solid #C62828; padding: 6px 12px; font-size: 0.8rem; }
+  .pmi-btn-danger:hover { background: #FFEBEE; }
+  .pmi-nav-row { display: flex; justify-content: space-between; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+  .pmi-add-project-btn {
+    background: #FFF8E7; color: #7A5A10; border: 2px dashed #B8860B; width: 100%;
+    padding: 14px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.9rem;
+  }
+  .pmi-add-project-btn:hover { background: #FFEECB; }
+  .pmi-refined-preview {
+    background: #F0F7EB; border-left: 4px solid #2E7D32; padding: 10px 14px; border-radius: 6px;
+    font-size: 0.85rem; color: #1B5E20; line-height: 1.5; margin-top: 8px;
+  }
+  .pmi-refined-preview .label { font-size: 0.7rem; color: #2E7D32; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 4px; }
+  .pmi-warning {
+    background: #FFF3E0; border-left: 4px solid #B8860B; padding: 10px 14px; border-radius: 6px;
+    font-size: 0.85rem; color: #7A5A10; margin-top: 10px;
+  }
+  .pmi-error-box {
+    background: #FFEBEE; border-left: 4px solid #C62828; padding: 10px 14px; border-radius: 6px;
+    font-size: 0.85rem; color: #B71C1C; margin-top: 10px;
+  }
+  .pmi-tag { display: inline-block; background: #E4EAF3; color: #1F3864; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 700; margin-right: 4px; }
+
+  /* PDF-ready print layout for PMI Application */
+  .pmi-pdf-doc { background: #fff; padding: 40px; max-width: 780px; margin: 20px auto; border: 1px solid #E4EAF3; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .pmi-pdf-header { border-bottom: 3px solid #B8860B; padding-bottom: 16px; margin-bottom: 20px; }
+  .pmi-pdf-header h1 { color: #1F3864; font-size: 1.5rem; margin-bottom: 4px; }
+  .pmi-pdf-header .sub { color: #5B6B85; font-size: 0.9rem; }
+  .pmi-pdf-section { margin-bottom: 22px; page-break-inside: avoid; }
+  .pmi-pdf-section h2 { color: #B8860B; font-size: 1rem; border-bottom: 1px solid #E8D9A8; padding-bottom: 4px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: .04em; }
+  .pmi-pdf-field { margin-bottom: 6px; font-size: 0.88rem; line-height: 1.5; }
+  .pmi-pdf-field .k { color: #7A5A10; font-weight: 700; display: inline-block; min-width: 130px; }
+  .pmi-pdf-field .v { color: #1F3864; }
+  .pmi-pdf-project { border: 1px solid #E4EAF3; border-radius: 8px; padding: 14px 16px; margin-bottom: 16px; page-break-inside: avoid; }
+  .pmi-pdf-project h3 { color: #1F3864; font-size: 1rem; margin-bottom: 8px; }
+  .pmi-pdf-project .desc { background: #FFFDF5; border-left: 3px solid #B8860B; padding: 8px 12px; margin-top: 8px; font-size: 0.85rem; line-height: 1.55; color: #1F3864; }
+  .pmi-pdf-footer { border-top: 1px solid #E4EAF3; padding-top: 12px; margin-top: 24px; text-align: center; color: #5B6B85; font-size: 0.75rem; }
+
+  @media print {
+    body { background: #fff !important; }
+    .brand-header, .footer-note, #trial-banner-slot, .pmi-back-btn, .pmi-nav-row, .pmi-progress, .no-print { display: none !important; }
+    .pmi-pdf-doc { border: none; box-shadow: none; margin: 0; padding: 20px; max-width: 100%; }
+    .app, .card { padding: 0 !important; margin: 0 !important; background: #fff !important; box-shadow: none !important; }
+  }
   .mode-icon {
     font-size: 1.8rem;
     margin-bottom: 10px;
@@ -1694,7 +1806,7 @@
 
   <div class="footer-note">
     © Khalid Fawzy · <span class="gold">PMP Mastery: The Decision Framework</span> · Aligned with PMBOK® 8 & PMI ECO
-    <div style="opacity:0.5;font-size:0.7rem;margin-top:6px;">Build v21 · 2026-08-19 · forgot-code always visible</div>
+    <div style="opacity:0.5;font-size:0.7rem;margin-top:6px;">Build v23 · 2026-08-29 · PMI Assistant + Word export</div>
   </div>
 
 </div>
@@ -3737,6 +3849,13 @@ function renderHome() {
           <div class="mode-meta">Instructor-Approved · Auto-Generated PDF</div>
         </div>
 
+        <div class="mode-card" onclick="goPMIApplication()" style="border-color:#B8860B;">
+          <div class="mode-icon">📋</div>
+          <div class="mode-name">PMI Application Assistant</div>
+          <div class="mode-desc">Guided wizard to prepare your PMP application for PMI. Enter your project experience once — the system auto-formats it into PMI-approved language, checks eligibility, and generates a PDF ready to upload to pmi.org.</div>
+          <div class="mode-meta">Auto-Formatted · Eligibility Check · Print-Ready PDF</div>
+        </div>
+
         <div class="mode-card" onclick="goHorizonWorkshop()">
           <div class="mode-icon">🧭</div>
           <div class="mode-name">Horizon Workshop</div>
@@ -4263,6 +4382,667 @@ function goAbout() {
     </div>
   `;
 }
+
+// ============================================================
+// PMI APPLICATION ASSISTANT (v22)
+// ============================================================
+// Guided wizard that captures the user's project experience and auto-formats
+// it into PMI-approved language for their pmp.pmi.org application.
+// State persists in localStorage per-user (keyed by their code or trial token)
+// so drafts survive page refreshes and mid-wizard closures.
+
+const PMI_STORAGE_KEY_PREFIX = 'pmp_hub_pmi_app_';
+
+// Rule-based verb replacement — the "auto-refinement" engine.
+// Replaces weak/passive verbs with PMI's preferred "leading and directing" verbs.
+// PMI reviewers specifically look for these strong action verbs on applications.
+const PMI_VERB_REFINEMENTS = [
+  { weak: /\bhelped (to )?/gi, strong: 'led ' },
+  { weak: /\bassisted (in |with )?/gi, strong: 'directed ' },
+  { weak: /\bwas (part of|involved in|responsible for)\b/gi, strong: 'served as lead for' },
+  { weak: /\bworked on\b/gi, strong: 'delivered' },
+  { weak: /\bworked with\b/gi, strong: 'coordinated with' },
+  { weak: /\bparticipated in\b/gi, strong: 'led' },
+  { weak: /\bsupported\b/gi, strong: 'managed' },
+  { weak: /\btook part in\b/gi, strong: 'directed' },
+  { weak: /\bcontributed to\b/gi, strong: 'delivered' },
+  { weak: /\bwas in charge of\b/gi, strong: 'directed' },
+  { weak: /\bin charge of\b/gi, strong: 'directing' },
+  { weak: /\bhandled\b/gi, strong: 'managed' },
+  { weak: /\bdid\b/gi, strong: 'executed' },
+  { weak: /\bmade\b/gi, strong: 'developed' },
+  { weak: /\bfollowed up on\b/gi, strong: 'monitored' },
+  { weak: /\bchecked\b/gi, strong: 'verified' },
+  { weak: /\blooked after\b/gi, strong: 'oversaw' },
+  { weak: /\bdealt with\b/gi, strong: 'resolved' },
+  { weak: /\bcarried out\b/gi, strong: 'executed' },
+  { weak: /\bran\b/gi, strong: 'directed' },
+  { weak: /\bset up\b/gi, strong: 'established' },
+  { weak: /\bmade sure\b/gi, strong: 'ensured' },
+  { weak: /\bgot\b/gi, strong: 'obtained' },
+  { weak: /\bfixed\b/gi, strong: 'resolved' }
+];
+
+// PMI-recommended keywords by process group — appended as suggestions if missing.
+const PMI_PROCESS_KEYWORDS = {
+  initiating: ['project charter', 'stakeholder identification', 'business case'],
+  planning: ['scope baseline', 'WBS', 'schedule baseline', 'cost baseline', 'risk register', 'communication plan'],
+  executing: ['team development', 'deliverables', 'quality management', 'stakeholder engagement'],
+  monitoring: ['performance measurement', 'variance analysis', 'change control', 'risk response'],
+  closing: ['lessons learned', 'final acceptance', 'contract closure', 'project handover']
+};
+
+// ----- Storage -----
+function pmiStorageKey() {
+  const id = userIdentifier() || 'guest';
+  return PMI_STORAGE_KEY_PREFIX + id;
+}
+function loadPMIApp() {
+  try {
+    const raw = localStorage.getItem(pmiStorageKey());
+    if (raw) return JSON.parse(raw);
+  } catch {}
+  return { path: null, projects: [], currentStep: 1, currentProjectIdx: null };
+}
+function savePMIApp(app) {
+  try { localStorage.setItem(pmiStorageKey(), JSON.stringify(app)); } catch {}
+}
+function clearPMIApp() {
+  try { localStorage.removeItem(pmiStorageKey()); } catch {}
+}
+
+// ----- Auto-refinement engine -----
+function refineDescription(text, project) {
+  if (!text || !text.trim()) return '';
+  let refined = text.trim();
+  // Step 1: Replace weak verbs with PMI's strong action verbs
+  PMI_VERB_REFINEMENTS.forEach(rule => { refined = refined.replace(rule.weak, rule.strong); });
+  // Step 2: Capitalize first letter of each sentence
+  refined = refined.replace(/(^|\. )([a-z])/g, (m, p1, p2) => p1 + p2.toUpperCase());
+  // Step 3: Trim to PMI's 550-character description cap
+  if (refined.length > 550) {
+    refined = refined.substring(0, 547).trim() + '...';
+  }
+  return refined;
+}
+
+// ----- Eligibility calculation -----
+function calculatePMIEligibility(app) {
+  const requiredMonths = (app.path === 'bachelor') ? 36 : 60;
+  const projects = app.projects || [];
+  // Collect all month spans as {start, end} in YYYYMM integer form
+  const spans = [];
+  let totalHours = 0;
+  const processGroupTotals = { initiating: 0, planning: 0, executing: 0, monitoring: 0, closing: 0 };
+  const flags = [];
+  projects.forEach((p, i) => {
+    if (!p.startDate || !p.endDate) return;
+    const s = new Date(p.startDate); const e = new Date(p.endDate);
+    if (isNaN(s) || isNaN(e) || s > e) return;
+    const startInt = s.getFullYear() * 12 + s.getMonth();
+    const endInt = e.getFullYear() * 12 + e.getMonth();
+    spans.push({ start: startInt, end: endInt, hours: Number(p.totalHours) || 0, idx: i, title: p.title });
+    totalHours += Number(p.totalHours) || 0;
+    processGroupTotals.initiating += Number(p.hoursInitiating) || 0;
+    processGroupTotals.planning += Number(p.hoursPlanning) || 0;
+    processGroupTotals.executing += Number(p.hoursExecuting) || 0;
+    processGroupTotals.monitoring += Number(p.hoursMonitoring) || 0;
+    processGroupTotals.closing += Number(p.hoursClosing) || 0;
+    // Red flags per project
+    const durationMonths = endInt - startInt + 1;
+    if (durationMonths < 3) flags.push(`Project "${p.title}" is under 3 months — PMI may flag this`);
+    if (durationMonths > 0 && (Number(p.totalHours) / durationMonths) > 200) {
+      flags.push(`Project "${p.title}" has more than 200 hours/month — verify accuracy`);
+    }
+  });
+  // Compute unique months (merge overlapping spans)
+  spans.sort((a, b) => a.start - b.start);
+  const merged = [];
+  spans.forEach(s => {
+    if (merged.length && s.start <= merged[merged.length - 1].end + 1) {
+      merged[merged.length - 1].end = Math.max(merged[merged.length - 1].end, s.end);
+    } else {
+      merged.push({ start: s.start, end: s.end });
+    }
+  });
+  let uniqueMonths = 0;
+  merged.forEach(m => { uniqueMonths += (m.end - m.start + 1); });
+  // Detect overlaps
+  const overlaps = [];
+  for (let i = 0; i < spans.length; i++) {
+    for (let j = i + 1; j < spans.length; j++) {
+      if (spans[i].end >= spans[j].start && spans[i].start <= spans[j].end) {
+        overlaps.push(`"${spans[i].title}" overlaps with "${spans[j].title}"`);
+      }
+    }
+  }
+  return {
+    requiredMonths, uniqueMonths, totalHours, processGroupTotals,
+    flags, overlaps,
+    monthsMet: uniqueMonths >= requiredMonths,
+    projectCount: projects.length,
+    projectsComplete: projects.filter(p => isProjectComplete(p)).length
+  };
+}
+
+function isProjectComplete(p) {
+  return !!(p && p.title && p.organization && p.role && p.startDate && p.endDate && p.totalHours && p.description);
+}
+
+// ----- Entry point -----
+function goPMIApplication() {
+  clearTimer();
+  const app = loadPMIApp();
+  // If starting fresh, show intro screen; otherwise resume where they left off
+  if (!app.path && (!app.projects || !app.projects.length)) {
+    renderPMIIntro();
+  } else {
+    renderPMIWizard(app.currentStep || 1);
+  }
+}
+
+function renderPMIIntro() {
+  card.innerHTML = `
+    <div class="pmi-wrap">
+      <div class="pmi-header">
+        <div class="pmi-title">\u{1F4CB} PMI Application Assistant</div>
+        <button class="pmi-back-btn" onclick="renderHome()">\u2190 Back to Home</button>
+      </div>
+      <div class="pmi-card">
+        <h3>Prepare your PMP application in 5 guided steps</h3>
+        <p>This wizard helps you organize your project experience exactly the way PMI reviewers expect it. You enter your plain description of what you did on each project \u2014 the system automatically rewrites it in PMI-approved language (using strong "leading and directing" verbs), checks that your months and hours meet eligibility, and generates a PDF you can upload alongside your application at pmi.org.</p>
+        <div style="background:#F5F9FE;border-radius:8px;padding:14px;margin:14px 0;">
+          <div style="font-weight:700;color:#1F3864;margin-bottom:8px;">What you'll do:</div>
+          <div style="font-size:0.88rem;color:#5B6B85;line-height:1.7;">
+            <strong>Step 1</strong> \u2014 Confirm your education path (Bachelor's or High School)<br>
+            <strong>Step 2</strong> \u2014 List each project you led (title, dates, hours, contact)<br>
+            <strong>Step 3</strong> \u2014 For each project, describe what you did in plain words<br>
+            <strong>Step 4</strong> \u2014 Review auto-refined descriptions and eligibility summary<br>
+            <strong>Step 5</strong> \u2014 Download your PDF, ready to reference when filling PMI's online form
+          </div>
+        </div>
+        <div class="pmi-warning">
+          <strong>Important:</strong> This tool prepares your submission but does not submit to PMI on your behalf. You still create your PMI account and enter the information at pmi.org \u2014 the PDF makes that data entry fast and accurate.
+        </div>
+        <div style="text-align:center;margin-top:18px;">
+          <button class="pmi-btn pmi-btn-gold" style="padding:12px 32px;font-size:1rem;" onclick="startPMIWizard()">Start Wizard \u2192</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function startPMIWizard() {
+  const app = loadPMIApp();
+  app.currentStep = 1;
+  savePMIApp(app);
+  renderPMIWizard(1);
+}
+
+// ----- Wizard router -----
+function renderPMIWizard(step) {
+  const app = loadPMIApp();
+  app.currentStep = step;
+  savePMIApp(app);
+  const stepNames = ['Path', 'Projects', 'Details', 'Review', 'Generate PDF'];
+  const progressHtml = stepNames.map((n, i) => {
+    const stepNum = i + 1;
+    const cls = stepNum === step ? 'active' : (stepNum < step ? 'done' : '');
+    return `<div class="pmi-progress-step ${cls}">${stepNum}. ${n}</div>`;
+  }).join('');
+  const header = `
+    <div class="pmi-header">
+      <div class="pmi-title">\u{1F4CB} PMI Application Assistant</div>
+      <button class="pmi-back-btn" onclick="renderHome()">\u2190 Save &amp; Exit</button>
+    </div>
+    <div class="pmi-progress">${progressHtml}</div>`;
+  let body = '';
+  switch (step) {
+    case 1: body = renderPMIStep_Path(app); break;
+    case 2: body = renderPMIStep_Projects(app); break;
+    case 3: body = renderPMIStep_ProjectForm(app); break;
+    case 4: body = renderPMIStep_Review(app); break;
+    case 5: body = renderPMIStep_PDF(app); break;
+  }
+  card.innerHTML = `<div class="pmi-wrap">${header}${body}</div>`;
+}
+
+// ----- Step 1: Education Path -----
+function renderPMIStep_Path(app) {
+  const bachelorSel = app.path === 'bachelor' ? 'selected' : '';
+  const hsSel = app.path === 'highschool' ? 'selected' : '';
+  return `
+    <div class="pmi-card">
+      <h3>Step 1 \u2014 Select Your Education Path</h3>
+      <p>PMI has two eligibility paths depending on your highest education level. This determines the minimum project experience required.</p>
+      <div class="pmi-path-choice">
+        <div class="pmi-path-card ${bachelorSel}" onclick="pmiChoosePath('bachelor')">
+          <h4>\u{1F393} Bachelor's Degree or Higher</h4>
+          <div class="months">36 months</div>
+          <p>Four-year degree (or global equivalent) plus 36 months of leading projects within the last 8 years, plus 35 contact hours of PM education.</p>
+        </div>
+        <div class="pmi-path-card ${hsSel}" onclick="pmiChoosePath('highschool')">
+          <h4>\u{1F4DA} High School / Associate's Degree</h4>
+          <div class="months">60 months</div>
+          <p>High school diploma or Associate's degree plus 60 months of leading projects within the last 8 years, plus 35 contact hours of PM education.</p>
+        </div>
+      </div>
+      <div class="pmi-nav-row">
+        <span></span>
+        <button class="pmi-btn pmi-btn-primary" onclick="pmiNextStep(2)" ${app.path ? '' : 'disabled style="opacity:0.5;cursor:not-allowed;"'}>
+          Continue to Projects \u2192
+        </button>
+      </div>
+    </div>`;
+}
+
+function pmiChoosePath(path) {
+  const app = loadPMIApp();
+  app.path = path;
+  savePMIApp(app);
+  renderPMIWizard(1);
+}
+
+function pmiNextStep(n) {
+  const app = loadPMIApp();
+  if (n === 2 && !app.path) return;
+  renderPMIWizard(n);
+}
+
+// ----- Step 2: Projects list -----
+function renderPMIStep_Projects(app) {
+  const elig = calculatePMIEligibility(app);
+  const bar = Math.min(100, (elig.uniqueMonths / elig.requiredMonths) * 100);
+  const eligPanel = `
+    <div class="pmi-eligibility-panel">
+      <div class="pmi-elig-row">
+        <span class="pmi-elig-label">Unique months toward eligibility:</span>
+        <span class="pmi-elig-value ${elig.monthsMet ? 'ok' : 'warn'}">${elig.uniqueMonths} / ${elig.requiredMonths} ${elig.monthsMet ? '\u2713' : ''}</span>
+      </div>
+      <div class="pmi-progress-bar-outer"><div class="pmi-progress-bar-inner ${elig.monthsMet ? 'done' : ''}" style="width:${bar}%"></div></div>
+      <div class="pmi-elig-row">
+        <span class="pmi-elig-label">Total project hours:</span>
+        <span class="pmi-elig-value">${elig.totalHours.toLocaleString()} hours</span>
+      </div>
+      <div class="pmi-elig-row">
+        <span class="pmi-elig-label">Projects added:</span>
+        <span class="pmi-elig-value">${elig.projectCount} (${elig.projectsComplete} complete)</span>
+      </div>
+      ${elig.overlaps.length ? `<div class="pmi-warning" style="margin-top:8px;"><strong>Overlaps detected:</strong> ${elig.overlaps.join('; ')}. Overlapping months only count once toward eligibility.</div>` : ''}
+    </div>`;
+  const projectsList = (app.projects || []).map((p, i) => {
+    const complete = isProjectComplete(p);
+    const dates = p.startDate && p.endDate ? `${p.startDate} \u2192 ${p.endDate}` : '<em>Dates missing</em>';
+    return `
+      <div class="pmi-project-item ${complete ? 'complete' : 'incomplete'}">
+        <div class="pmi-project-info">
+          <div class="pmi-project-title">${escHtml(p.title || 'Untitled Project')} ${complete ? '\u2713' : ''}</div>
+          <div class="pmi-project-meta">${escHtml(p.role || 'Role missing')} \u00b7 ${escHtml(p.organization || 'Organization missing')} \u00b7 ${dates} \u00b7 ${Number(p.totalHours) || 0} hrs</div>
+        </div>
+        <div class="pmi-project-actions">
+          <button class="pmi-btn pmi-btn-secondary" onclick="pmiEditProject(${i})">Edit</button>
+          <button class="pmi-btn pmi-btn-danger" onclick="pmiDeleteProject(${i})">\u{1F5D1}</button>
+        </div>
+      </div>`;
+  }).join('');
+  return `
+    <div class="pmi-card">
+      <h3>Step 2 \u2014 Your Projects</h3>
+      <p>Add each project where you led project work. You need to reach <strong>${elig.requiredMonths} unique months</strong> across all projects. Overlapping months count only once.</p>
+      ${eligPanel}
+      <div style="margin-top:16px;">${projectsList || '<p style="text-align:center;color:#6B7280;padding:20px;">No projects yet. Add your first project below.</p>'}</div>
+      <button class="pmi-add-project-btn" onclick="pmiAddProject()">+ Add Project</button>
+      <div class="pmi-nav-row">
+        <button class="pmi-btn pmi-btn-secondary" onclick="renderPMIWizard(1)">\u2190 Back</button>
+        <button class="pmi-btn pmi-btn-primary" onclick="renderPMIWizard(4)" ${elig.projectCount > 0 ? '' : 'disabled style="opacity:0.5;cursor:not-allowed;"'}>
+          Review Refined Descriptions \u2192
+        </button>
+      </div>
+    </div>`;
+}
+
+function pmiAddProject() {
+  const app = loadPMIApp();
+  app.projects = app.projects || [];
+  app.projects.push({
+    title: '', organization: '', role: '', startDate: '', endDate: '', totalHours: '',
+    hoursInitiating: 0, hoursPlanning: 0, hoursExecuting: 0, hoursMonitoring: 0, hoursClosing: 0,
+    description: '', contactName: '', contactEmail: ''
+  });
+  app.currentProjectIdx = app.projects.length - 1;
+  savePMIApp(app);
+  renderPMIWizard(3);
+}
+function pmiEditProject(idx) {
+  const app = loadPMIApp();
+  app.currentProjectIdx = idx;
+  savePMIApp(app);
+  renderPMIWizard(3);
+}
+function pmiDeleteProject(idx) {
+  if (!confirm('Delete this project? This cannot be undone.')) return;
+  const app = loadPMIApp();
+  app.projects.splice(idx, 1);
+  savePMIApp(app);
+  renderPMIWizard(2);
+}
+
+// ----- Step 3: Project form -----
+function renderPMIStep_ProjectForm(app) {
+  const idx = app.currentProjectIdx;
+  const p = (app.projects || [])[idx];
+  if (!p) return renderPMIStep_Projects(app);
+  return `
+    <div class="pmi-card">
+      <h3>Step 3 \u2014 Project Details (${idx + 1} of ${app.projects.length})</h3>
+      <p>Fill out this project's details. All fields marked <span class="req">*</span> are required.</p>
+      <div class="pmi-form-field">
+        <label>Project Title <span class="req">*</span></label>
+        <input type="text" id="pmiF_title" value="${escHtml(p.title)}" placeholder="e.g. Regional ERP System Deployment" />
+      </div>
+      <div class="pmi-form-row">
+        <div class="pmi-form-field">
+          <label>Organization <span class="req">*</span></label>
+          <input type="text" id="pmiF_organization" value="${escHtml(p.organization)}" placeholder="Company name" />
+        </div>
+        <div class="pmi-form-field">
+          <label>Your Role <span class="req">*</span></label>
+          <input type="text" id="pmiF_role" value="${escHtml(p.role)}" placeholder="e.g. Project Manager, Team Lead" />
+        </div>
+      </div>
+      <div class="pmi-form-row">
+        <div class="pmi-form-field">
+          <label>Start Date <span class="req">*</span></label>
+          <input type="month" id="pmiF_startDate" value="${escHtml(p.startDate)}" />
+        </div>
+        <div class="pmi-form-field">
+          <label>End Date <span class="req">*</span></label>
+          <input type="month" id="pmiF_endDate" value="${escHtml(p.endDate)}" />
+        </div>
+      </div>
+      <div class="pmi-form-field">
+        <label>Total Project Hours <span class="req">*</span></label>
+        <input type="number" id="pmiF_totalHours" value="${escHtml(String(p.totalHours || ''))}" min="0" placeholder="e.g. 1800" />
+        <div class="hint">Total hours you spent leading this project. Rough estimate is fine.</div>
+      </div>
+      <div class="pmi-card" style="background:#F5F9FE;border:1px solid #D6E4F0;padding:14px;margin:12px 0;">
+        <div style="font-weight:700;color:#1F3864;margin-bottom:8px;font-size:0.9rem;">Process Group Hours Breakdown (optional but recommended)</div>
+        <div style="font-size:0.8rem;color:#5B6B85;margin-bottom:10px;">Split your total hours across PMI's 5 process groups. Should sum roughly to your total hours above.</div>
+        <div class="pmi-form-row">
+          <div class="pmi-form-field"><label>Initiating</label><input type="number" id="pmiF_hoursInitiating" value="${p.hoursInitiating || 0}" min="0" /></div>
+          <div class="pmi-form-field"><label>Planning</label><input type="number" id="pmiF_hoursPlanning" value="${p.hoursPlanning || 0}" min="0" /></div>
+        </div>
+        <div class="pmi-form-row">
+          <div class="pmi-form-field"><label>Executing</label><input type="number" id="pmiF_hoursExecuting" value="${p.hoursExecuting || 0}" min="0" /></div>
+          <div class="pmi-form-field"><label>Monitoring &amp; Controlling</label><input type="number" id="pmiF_hoursMonitoring" value="${p.hoursMonitoring || 0}" min="0" /></div>
+        </div>
+        <div class="pmi-form-field"><label>Closing</label><input type="number" id="pmiF_hoursClosing" value="${p.hoursClosing || 0}" min="0" /></div>
+      </div>
+      <div class="pmi-form-field">
+        <label>What did you do on this project? <span class="req">*</span></label>
+        <textarea id="pmiF_description" placeholder="Describe your work in plain words \u2014 what did you plan, execute, deliver? The system will automatically rewrite this in PMI-approved language.">${escHtml(p.description)}</textarea>
+        <div class="hint">Write naturally in your own words. Auto-refinement happens in Step 4. Aim for 4-8 sentences covering scope, execution, and deliverables.</div>
+      </div>
+      <div class="pmi-form-row">
+        <div class="pmi-form-field">
+          <label>Contact Person (for PMI verification)</label>
+          <input type="text" id="pmiF_contactName" value="${escHtml(p.contactName)}" placeholder="Manager, sponsor, or colleague" />
+        </div>
+        <div class="pmi-form-field">
+          <label>Contact Email</label>
+          <input type="email" id="pmiF_contactEmail" value="${escHtml(p.contactEmail)}" placeholder="contact@company.com" />
+        </div>
+      </div>
+      <div class="pmi-nav-row">
+        <button class="pmi-btn pmi-btn-secondary" onclick="pmiSaveAndBackToList()">\u2190 Save &amp; Back to List</button>
+        <button class="pmi-btn pmi-btn-primary" onclick="pmiSaveProjectAndContinue()">Save Project \u2192</button>
+      </div>
+    </div>`;
+}
+
+function pmiCollectFormData() {
+  return {
+    title: document.getElementById('pmiF_title').value.trim(),
+    organization: document.getElementById('pmiF_organization').value.trim(),
+    role: document.getElementById('pmiF_role').value.trim(),
+    startDate: document.getElementById('pmiF_startDate').value,
+    endDate: document.getElementById('pmiF_endDate').value,
+    totalHours: Number(document.getElementById('pmiF_totalHours').value) || 0,
+    hoursInitiating: Number(document.getElementById('pmiF_hoursInitiating').value) || 0,
+    hoursPlanning: Number(document.getElementById('pmiF_hoursPlanning').value) || 0,
+    hoursExecuting: Number(document.getElementById('pmiF_hoursExecuting').value) || 0,
+    hoursMonitoring: Number(document.getElementById('pmiF_hoursMonitoring').value) || 0,
+    hoursClosing: Number(document.getElementById('pmiF_hoursClosing').value) || 0,
+    description: document.getElementById('pmiF_description').value.trim(),
+    contactName: document.getElementById('pmiF_contactName').value.trim(),
+    contactEmail: document.getElementById('pmiF_contactEmail').value.trim()
+  };
+}
+function pmiSaveAndBackToList() {
+  const app = loadPMIApp();
+  const idx = app.currentProjectIdx;
+  if (idx !== null && app.projects[idx]) app.projects[idx] = { ...app.projects[idx], ...pmiCollectFormData() };
+  savePMIApp(app);
+  renderPMIWizard(2);
+}
+function pmiSaveProjectAndContinue() {
+  const app = loadPMIApp();
+  const idx = app.currentProjectIdx;
+  if (idx !== null && app.projects[idx]) app.projects[idx] = { ...app.projects[idx], ...pmiCollectFormData() };
+  savePMIApp(app);
+  renderPMIWizard(2);
+}
+
+// ----- Step 4: Review with auto-refinement -----
+function renderPMIStep_Review(app) {
+  const elig = calculatePMIEligibility(app);
+  const bar = Math.min(100, (elig.uniqueMonths / elig.requiredMonths) * 100);
+  const reviewCards = (app.projects || []).map((p, i) => {
+    const refined = refineDescription(p.description || '', p);
+    return `
+      <div class="pmi-card" style="border-left:4px solid #B8860B;">
+        <h3>Project ${i + 1}: ${escHtml(p.title || 'Untitled')}</h3>
+        <div style="font-size:0.85rem;color:#5B6B85;margin-bottom:10px;">
+          ${escHtml(p.role || '')} at ${escHtml(p.organization || '')} \u00b7 ${escHtml(p.startDate)} \u2192 ${escHtml(p.endDate)} \u00b7 ${p.totalHours} hrs
+        </div>
+        <div style="font-size:0.82rem;color:#7A5A10;font-weight:700;margin-bottom:4px;">Your original description:</div>
+        <div style="background:#F5F9FE;padding:10px 14px;border-radius:6px;font-size:0.85rem;color:#5B6B85;font-style:italic;line-height:1.5;">${escHtml(p.description || '(no description entered)')}</div>
+        <div class="pmi-refined-preview">
+          <div class="label">\u2728 Auto-refined for PMI submission (${refined.length}/550 chars)</div>
+          ${escHtml(refined) || '<em>Enter a description first</em>'}
+        </div>
+      </div>`;
+  }).join('');
+  const flagsHtml = (elig.flags.length || elig.overlaps.length) ? `
+    <div class="pmi-card" style="background:#FFF3E0;border:1px solid #FFB74D;">
+      <h3 style="color:#7A5A10;">\u26A0\uFE0F Warnings to Review</h3>
+      ${elig.flags.map(f => `<div class="pmi-warning" style="margin-bottom:6px;">${escHtml(f)}</div>`).join('')}
+      ${elig.overlaps.map(o => `<div class="pmi-warning" style="margin-bottom:6px;">${escHtml(o)}</div>`).join('')}
+    </div>` : '';
+  const eligOK = elig.monthsMet;
+  return `
+    <div class="pmi-card">
+      <h3>Step 4 \u2014 Review Your Application</h3>
+      <p>The system has automatically rewritten each project description using PMI-approved language (strong verbs like "led", "directed", "delivered"). Review each one below \u2014 you can edit if needed by clicking Back.</p>
+      <div class="pmi-eligibility-panel">
+        <div class="pmi-elig-row">
+          <span class="pmi-elig-label">Eligibility status:</span>
+          <span class="pmi-elig-value ${eligOK ? 'ok' : 'warn'}">${eligOK ? '\u2713 Meets Minimum' : '\u26A0 Below Minimum'}</span>
+        </div>
+        <div class="pmi-elig-row">
+          <span class="pmi-elig-label">Unique months (${app.path === 'bachelor' ? "Bachelor's path" : 'High school path'}):</span>
+          <span class="pmi-elig-value ${eligOK ? 'ok' : 'warn'}">${elig.uniqueMonths} / ${elig.requiredMonths}</span>
+        </div>
+        <div class="pmi-progress-bar-outer"><div class="pmi-progress-bar-inner ${eligOK ? 'done' : ''}" style="width:${bar}%"></div></div>
+        <div class="pmi-elig-row">
+          <span class="pmi-elig-label">Total project hours:</span>
+          <span class="pmi-elig-value">${elig.totalHours.toLocaleString()}</span>
+        </div>
+      </div>
+    </div>
+    ${flagsHtml}
+    ${reviewCards}
+    <div class="pmi-nav-row">
+      <button class="pmi-btn pmi-btn-secondary" onclick="renderPMIWizard(2)">\u2190 Back to Projects</button>
+      <button class="pmi-btn pmi-btn-gold" onclick="renderPMIWizard(5)">Generate PDF \u2192</button>
+    </div>`;
+}
+
+// ----- Step 5: PDF-ready output -----
+function renderPMIStep_PDF(app) {
+  const elig = calculatePMIEligibility(app);
+  const userName = currentUser ? currentUser.name : 'Applicant';
+  const userEmail = currentUser ? (currentUser.email || '') : '';
+  const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const projectsHtml = (app.projects || []).map((p, i) => {
+    const refined = refineDescription(p.description || '', p);
+    return `
+      <div class="pmi-pdf-project">
+        <h3>Project ${i + 1}: ${escHtml(p.title)}</h3>
+        <div class="pmi-pdf-field"><span class="k">Organization:</span> <span class="v">${escHtml(p.organization)}</span></div>
+        <div class="pmi-pdf-field"><span class="k">Your Role:</span> <span class="v">${escHtml(p.role)}</span></div>
+        <div class="pmi-pdf-field"><span class="k">Dates:</span> <span class="v">${escHtml(p.startDate)} to ${escHtml(p.endDate)}</span></div>
+        <div class="pmi-pdf-field"><span class="k">Total Hours:</span> <span class="v">${p.totalHours}</span></div>
+        <div class="pmi-pdf-field"><span class="k">Process Group Hours:</span> <span class="v">Initiating ${p.hoursInitiating || 0} \u00b7 Planning ${p.hoursPlanning || 0} \u00b7 Executing ${p.hoursExecuting || 0} \u00b7 M&amp;C ${p.hoursMonitoring || 0} \u00b7 Closing ${p.hoursClosing || 0}</span></div>
+        ${p.contactName ? `<div class="pmi-pdf-field"><span class="k">Contact:</span> <span class="v">${escHtml(p.contactName)}${p.contactEmail ? ' \u00b7 ' + escHtml(p.contactEmail) : ''}</span></div>` : ''}
+        <div class="desc"><strong style="color:#7A5A10;">Description (PMI-formatted, ${refined.length}/550 chars):</strong><br>${escHtml(refined)}</div>
+      </div>`;
+  }).join('');
+  return `
+    <div class="no-print" style="margin-bottom:12px;text-align:center;">
+      <button class="pmi-btn pmi-btn-secondary" onclick="renderPMIWizard(4)" style="margin-right:8px;">\u2190 Back to Review</button>
+      <button class="pmi-btn pmi-btn-gold" onclick="window.print()" style="padding:12px 22px;font-size:0.95rem;margin-right:8px;">\u{1F5A8}\uFE0F Print / Save as PDF</button>
+      <button class="pmi-btn pmi-btn-primary" onclick="downloadPMIAsWord()" style="padding:12px 22px;font-size:0.95rem;">\u{1F4C4} Download as Word (.doc)</button>
+    </div>
+    <div class="no-print pmi-warning" style="margin-bottom:12px;">
+      <strong>Two ways to save:</strong> Click <strong>Print / Save as PDF</strong> for a print-ready copy \u2014 or <strong>Download as Word</strong> to get an editable .doc you can open in Microsoft Word, tweak (add your PMI ID, adjust wording, etc.), then export or copy into PMI's online application at pmi.org.
+    </div>
+    <div class="pmi-pdf-doc">
+      <div class="pmi-pdf-header">
+        <h1>PMP Application Summary</h1>
+        <div class="sub">Prepared for: <strong>${escHtml(userName)}</strong> \u00b7 ${escHtml(userEmail)} \u00b7 Generated ${escHtml(today)}</div>
+      </div>
+      <div class="pmi-pdf-section">
+        <h2>Eligibility Path</h2>
+        <div class="pmi-pdf-field"><span class="k">Selected Path:</span> <span class="v">${app.path === 'bachelor' ? "Bachelor's Degree (36-month minimum)" : 'High School / Associate Degree (60-month minimum)'}</span></div>
+        <div class="pmi-pdf-field"><span class="k">Unique Months:</span> <span class="v">${elig.uniqueMonths} months ${elig.monthsMet ? '\u2713 Meets minimum' : '\u26A0 Below minimum \u2014 add more projects'}</span></div>
+        <div class="pmi-pdf-field"><span class="k">Total Hours:</span> <span class="v">${elig.totalHours.toLocaleString()}</span></div>
+      </div>
+      <div class="pmi-pdf-section">
+        <h2>Project Experience (${(app.projects || []).length} projects)</h2>
+        ${projectsHtml}
+      </div>
+      <div class="pmi-pdf-section">
+        <h2>Contact Hours (35-hour Requirement)</h2>
+        <div class="pmi-pdf-field"><span class="k">Program:</span> <span class="v">PMP Mastery Hub \u2014 The Decision Framework</span></div>
+        <div class="pmi-pdf-field"><span class="k">Instructor:</span> <span class="v">Dr. Eng. Khalid Fawzy, PMP\u00ae</span></div>
+        <div class="pmi-pdf-field"><span class="k">Note:</span> <span class="v">Attach your Certificate of Completion (issued separately from this platform).</span></div>
+      </div>
+      <div class="pmi-pdf-footer">
+        Generated by PMP Mastery Hub \u00b7 Instructor Khalid Fawzy, PMP\u00ae \u00b7 ${escHtml(today)}
+      </div>
+    </div>`;
+}
+
+// Generate an editable Word document (.doc via HTML) from the PMI application data.
+// Uses Microsoft Word's ability to open HTML files with .doc extension as editable documents,
+// preserving styles. No external library required — fully offline.
+function downloadPMIAsWord() {
+  const app = loadPMIApp();
+  const elig = calculatePMIEligibility(app);
+  const userName = currentUser ? currentUser.name : 'Applicant';
+  const userEmail = currentUser ? (currentUser.email || '') : '';
+  const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+  // Build project sections
+  const projectsHtml = (app.projects || []).map((p, i) => {
+    const refined = refineDescription(p.description || '', p);
+    return `
+      <div style="border:1px solid #B8860B;padding:14px;margin-bottom:14px;">
+        <h3 style="color:#1F3864;font-family:Arial,sans-serif;font-size:14pt;margin:0 0 8pt;">Project ${i + 1}: ${escHtml(p.title)}</h3>
+        <p style="margin:4pt 0;font-family:Arial,sans-serif;font-size:11pt;"><b style="color:#7A5A10;">Organization:</b> ${escHtml(p.organization)}</p>
+        <p style="margin:4pt 0;font-family:Arial,sans-serif;font-size:11pt;"><b style="color:#7A5A10;">Your Role:</b> ${escHtml(p.role)}</p>
+        <p style="margin:4pt 0;font-family:Arial,sans-serif;font-size:11pt;"><b style="color:#7A5A10;">Dates:</b> ${escHtml(p.startDate)} to ${escHtml(p.endDate)}</p>
+        <p style="margin:4pt 0;font-family:Arial,sans-serif;font-size:11pt;"><b style="color:#7A5A10;">Total Hours:</b> ${p.totalHours}</p>
+        <p style="margin:4pt 0;font-family:Arial,sans-serif;font-size:11pt;"><b style="color:#7A5A10;">Process Group Hours:</b> Initiating ${p.hoursInitiating || 0} · Planning ${p.hoursPlanning || 0} · Executing ${p.hoursExecuting || 0} · M&amp;C ${p.hoursMonitoring || 0} · Closing ${p.hoursClosing || 0}</p>
+        ${p.contactName ? `<p style="margin:4pt 0;font-family:Arial,sans-serif;font-size:11pt;"><b style="color:#7A5A10;">Contact:</b> ${escHtml(p.contactName)}${p.contactEmail ? ' · ' + escHtml(p.contactEmail) : ''}</p>` : ''}
+        <div style="background:#FFFDF5;border-left:3px solid #B8860B;padding:10pt 12pt;margin-top:8pt;">
+          <p style="margin:0 0 4pt;font-family:Arial,sans-serif;font-size:10pt;"><b style="color:#7A5A10;">Description (PMI-formatted, ${refined.length}/550 chars):</b></p>
+          <p style="margin:0;font-family:Arial,sans-serif;font-size:11pt;color:#1F3864;line-height:1.5;">${escHtml(refined)}</p>
+        </div>
+      </div>`;
+  }).join('');
+
+  // Word-compatible HTML with proper MS Word XML namespace declarations.
+  // Word recognizes files with this preamble + .doc extension as editable documents.
+  const wordHtml = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="UTF-8">
+<title>PMP Application Summary — ${escHtml(userName)}</title>
+<!--[if gte mso 9]>
+<xml>
+<w:WordDocument>
+<w:View>Print</w:View>
+<w:Zoom>100</w:Zoom>
+<w:DoNotOptimizeForBrowser/>
+</w:WordDocument>
+</xml>
+<![endif]-->
+<style>
+  @page { margin: 2.5cm; }
+  body { font-family: Arial, sans-serif; color: #1F3864; font-size: 11pt; line-height: 1.5; }
+  h1 { color: #1F3864; font-size: 20pt; margin: 0 0 4pt; border-bottom: 3pt solid #B8860B; padding-bottom: 6pt; }
+  h2 { color: #B8860B; font-size: 13pt; margin: 20pt 0 10pt; border-bottom: 1pt solid #E8D9A8; padding-bottom: 3pt; text-transform: uppercase; letter-spacing: 0.05em; }
+  h3 { color: #1F3864; font-size: 14pt; margin: 0 0 8pt; }
+  p { margin: 4pt 0; }
+  .sub { color: #5B6B85; font-size: 10pt; margin-bottom: 20pt; }
+  .footer { border-top: 1pt solid #E4EAF3; padding-top: 8pt; margin-top: 24pt; text-align: center; color: #5B6B85; font-size: 9pt; }
+</style>
+</head>
+<body>
+  <h1>PMP Application Summary</h1>
+  <p class="sub">Prepared for: <b>${escHtml(userName)}</b> · ${escHtml(userEmail)} · Generated ${escHtml(today)}</p>
+
+  <h2>Eligibility Path</h2>
+  <p><b style="color:#7A5A10;">Selected Path:</b> ${app.path === 'bachelor' ? "Bachelor's Degree (36-month minimum)" : 'High School / Associate Degree (60-month minimum)'}</p>
+  <p><b style="color:#7A5A10;">Unique Months:</b> ${elig.uniqueMonths} months ${elig.monthsMet ? '\u2713 Meets minimum' : '\u26A0 Below minimum \u2014 add more projects'}</p>
+  <p><b style="color:#7A5A10;">Total Hours:</b> ${elig.totalHours.toLocaleString()}</p>
+
+  <h2>Project Experience (${(app.projects || []).length} projects)</h2>
+  ${projectsHtml}
+
+  <h2>Contact Hours (35-hour Requirement)</h2>
+  <p><b style="color:#7A5A10;">Program:</b> PMP Mastery Hub \u2014 The Decision Framework</p>
+  <p><b style="color:#7A5A10;">Instructor:</b> Dr. Eng. Khalid Fawzy, PMP\u00ae</p>
+  <p><b style="color:#7A5A10;">Note:</b> Attach your Certificate of Completion (issued separately from this platform).</p>
+
+  <h2>Instructions for PMI Submission</h2>
+  <p>1. Log in to your PMI account at <b>pmi.org</b>.</p>
+  <p>2. Start the PMP application process.</p>
+  <p>3. Copy each project's information from this document into the corresponding fields on PMI's online form.</p>
+  <p>4. Use the PMI-formatted description text exactly as shown \u2014 it has been prepared with PMI's preferred "leading and directing" language.</p>
+  <p>5. Attach your Certificate of Completion (35 contact hours) when prompted.</p>
+  <p>6. Submit for review. PMI's turnaround is typically 5 business days.</p>
+
+  <div class="footer">
+    Generated by PMP Mastery Hub \u00b7 Instructor Khalid Fawzy, PMP\u00ae \u00b7 ${escHtml(today)}<br>
+    This is an editable Word document \u2014 add your PMI ID, tweak wording, or expand descriptions before submitting to PMI.
+  </div>
+</body>
+</html>`;
+
+  // Trigger download as .doc file
+  const blob = new Blob(['\ufeff' + wordHtml], { type: 'application/msword' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const safeName = (userName || 'applicant').replace(/[^a-z0-9]+/gi, '_');
+  a.href = url;
+  a.download = `PMP_Application_${safeName}.doc`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
 function goHorizonWorkshop() {
   clearTimer();
   const HORIZON_WORKSHOP_HTML = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>Horizon Programme \u2014 PMBOK 8 Applied Workshop</title>\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap\" rel=\"stylesheet\">\n<style>\n:root{--navy:#1F3864;--gold:#B8860B;--blue:#2E75B6;--tb:#D6E4F0;--tg:#FFF8E7;\n--ink:#0D1626;--mute:#5B6B85;--line:#C9D6E8;--in:#2E75B6;--tt:#B8860B;--out:#1E7A4D;\n--ok:#1E7A4D;--bad:#B03A3A;--warn:#B8860B}\n*{box-sizing:border-box;margin:0;padding:0}\nbody{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:#F2F6FB;line-height:1.62;-webkit-text-size-adjust:100%}\nh1,h2,h3,h4{font-family:'IBM Plex Sans',sans-serif}\n.mono{font-family:'IBM Plex Mono',monospace}\n.wrap{max-width:1060px;margin:0 auto;padding:0 14px 80px}\n\nheader{background:linear-gradient(135deg,var(--navy),#122544 65%,#0A1424);color:#fff;padding:26px 14px 20px;border-bottom:4px solid var(--gold)}\n.hin{max-width:1060px;margin:0 auto}\n.kicker{font:600 11px 'IBM Plex Mono';letter-spacing:.18em;color:var(--gold);text-transform:uppercase}\nheader h1{font-size:clamp(21px,4.6vw,32px);margin:7px 0 6px;letter-spacing:-.01em}\nheader p{color:#B9CBE4;font-size:14px;max-width:690px}\n.spec{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}\n.spec span{font:500 11.5px 'IBM Plex Mono';background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);padding:5px 10px;border-radius:6px;color:#D6E4F0}\n\n/* MODE SWITCH */\n.modes{background:#0A1424;border-bottom:1px solid #24344F}\n.min{max-width:1060px;margin:0 auto;display:flex;padding:0 14px}\n.mode{background:none;border:0;border-bottom:3px solid transparent;color:#8FA5C4;padding:11px 16px;font:600 13.5px Inter;cursor:pointer}\n.mode.on{color:#fff;border-bottom-color:var(--gold)}\n\n/* CONTROL PANEL */\n.panel{position:sticky;top:0;z-index:60;background:#0D1626;border-bottom:1px solid #24344F;box-shadow:0 4px 18px rgba(13,22,38,.28)}\n.pin{max-width:1060px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:#24344F}\n.met{background:#0D1626;padding:8px}\n.met{text-align:center}\n.met .lbl{font:500 9.5px 'IBM Plex Mono';letter-spacing:.1em;color:#7A8CA8;text-transform:uppercase}\n.met .val{font:600 15px 'IBM Plex Mono';color:#fff;margin-top:2px}\n.met .val.up{color:#5FD39A}.met .val.dn{color:#FF8A8A}.met .val.gd{color:#E5B94E}\n@media(max-width:620px){.pin{grid-template-columns:repeat(3,1fr)}.met:nth-child(n+4){border-top:1px solid #24344F}}\n\n.rail{display:flex;margin:20px 0 8px;overflow-x:auto;scrollbar-width:none}\n.rail::-webkit-scrollbar{display:none}\n.st{flex:1 0 auto;min-width:120px;background:#fff;border:1px solid var(--line);padding:9px 12px;position:relative;cursor:pointer;transition:.18s}\n.st:not(:last-child){border-right:0}\n.st:first-child{border-radius:10px 0 0 10px}.st:last-child{border-radius:0 10px 10px 0}\n.st .no{font:600 10px 'IBM Plex Mono';color:var(--blue);letter-spacing:.1em}\n.st .nm{font:600 13px 'IBM Plex Sans';color:var(--navy);white-space:nowrap}\n.st.on{background:var(--navy)}.st.on .nm{color:#fff}.st.on .no{color:var(--gold)}\n.st.done::after{content:\"\u2713\";position:absolute;top:6px;right:8px;font-size:11px;color:var(--ok)}\n.st.on.done::after{color:var(--gold)}\n\n.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:14px}\n.card h2{font-size:19px;color:var(--navy);letter-spacing:-.01em}\n.card h3{font-size:15px;color:var(--navy);margin-bottom:5px}\n.eyebrow{font:600 10.5px 'IBM Plex Mono';letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:4px}\n.brief{border-left:4px solid var(--gold);background:var(--tg);padding:13px 15px;border-radius:0 10px 10px 0;font-size:14.5px;margin:12px 0}\n.brief b{color:var(--navy)}\n.lens{font-size:12.5px;color:var(--mute);background:#F5F9FE;border:1px dashed var(--line);border-radius:9px;padding:9px 12px;margin-bottom:12px}\n.lens b{color:var(--navy)}\n\n/* PROCESS CARD */\n.proc{border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:#FBFDFF;overflow:hidden}\n.proc.open{background:#fff;border-color:var(--blue)}\n.ph{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;cursor:pointer}\n.ph:hover{background:#F5F9FE}\n.idx{font:600 11px 'IBM Plex Mono';color:#fff;background:var(--navy);border-radius:5px;padding:2px 6px;flex:0 0 auto;margin-top:3px}\n.ph .t{flex:1;min-width:0}\n.ph h4{font-size:14.5px;color:var(--navy);line-height:1.35;font-weight:600}\n.ctx{font-size:12.5px;color:var(--mute);margin-top:3px}\n.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}\n.tags span{font:500 10px 'IBM Plex Mono';letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:4px;background:var(--tb);color:var(--navy)}\n.tags span.fa{background:var(--tg);color:#8A6508}\n.caret{color:var(--blue);font-size:12px;flex:0 0 auto;margin-top:5px;transition:.2s}\n.proc.open .caret{transform:rotate(90deg)}\n.pb{display:none;padding:0 13px 14px;border-top:1px solid var(--line)}\n.proc.open .pb{display:block}\n.why{font-size:13.5px;margin:11px 0}\n.delta{background:var(--tg);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:8px 11px;font-size:12.5px;margin-bottom:12px}\n.delta b{color:var(--navy)}\n\n.sch{display:grid;grid-template-columns:1fr 24px 1fr 24px 1fr;margin:6px 0 11px}\n.col{border:1.5px solid;border-radius:10px;padding:9px 10px;background:#fff}\n.col.i{border-color:var(--in);background:#F4F9FE}\n.col.t{border-color:var(--tt);background:#FFFCF3}\n.col.o{border-color:var(--out);background:#F3FBF7}\n.col h5{font:600 10px 'IBM Plex Mono';letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}\n.col.i h5{color:var(--in)}.col.t h5{color:var(--tt)}.col.o h5{color:var(--out)}\n.col ul{list-style:none}\n.col li{font-size:12px;padding:3px 0 3px 11px;position:relative;line-height:1.45}\n.col li::before{content:\"\";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%}\n.col.i li::before{background:var(--in)}.col.t li::before{background:var(--tt)}.col.o li::before{background:var(--out)}\n.col li b{font-weight:600;color:var(--navy)}\n.arw{display:flex;align-items:center;justify-content:center;color:var(--mute);font-size:16px;font-weight:700}\n@media(max-width:760px){.sch{grid-template-columns:1fr}.arw{padding:5px 0;transform:rotate(90deg)}}\n.tip{background:#EEF4FB;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:12.5px}\n.tip .lb{font:600 10px 'IBM Plex Mono';letter-spacing:.12em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:3px}\n\n/* DECISION */\n.dec{border:1px solid var(--navy);border-radius:12px;overflow:hidden;margin-bottom:14px;background:#fff}\n.dec .hd{background:var(--navy);color:#fff;padding:11px 15px}\n.dec .hd .tagl{font:600 10px 'IBM Plex Mono';letter-spacing:.14em;color:var(--gold)}\n.dec .hd h3{color:#fff;font-size:15.5px;margin:2px 0 0}\n.dec .bd{padding:15px}\n.dec .q{font-size:14.5px;margin-bottom:12px}\n.opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:9px;padding:11px 13px;margin-bottom:8px;font:400 14px Inter;cursor:pointer;color:var(--ink);transition:.15s}\n.opt:hover{border-color:var(--blue);background:#F6FAFE}\n.opt .ol{font:600 11px 'IBM Plex Mono';color:var(--blue);margin-right:8px}\n.opt.best{border-color:var(--ok);background:#EDF8F2}\n.opt.poor{border-color:var(--bad);background:#FCEFEF}\n.opt.mid{border-color:var(--warn);background:var(--tg)}\n.opt.dim{opacity:.5}\n.fb{display:none;margin-top:12px;padding:13px;border-radius:10px;font-size:13.5px;background:#F5F9FE;border:1px solid var(--line)}\n.fb.show{display:block}\n.fb .verdict{font:600 12px 'IBM Plex Mono';letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}\n.fb .prin{margin-top:8px;font-size:12.5px;color:var(--mute);border-top:1px dashed var(--line);padding-top:8px}\n.fb .prin b{color:var(--gold)}\n.deltas{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}\n.deltas span{font:500 11px 'IBM Plex Mono';padding:3px 8px;border-radius:5px;background:#EEF3FA;color:var(--navy)}\n.deltas span.g{background:#E6F5ED;color:var(--ok)}\n.deltas span.r{background:#FBEBEB;color:var(--bad)}\n\n.btn{background:var(--navy);color:#fff;border:0;padding:10px 20px;border-radius:8px;font:600 13.5px Inter;cursor:pointer}\n.btn:hover{opacity:.9}\n.btn.alt{background:#fff;color:var(--navy);border:1px solid var(--line)}\n.btn:disabled{opacity:.35;cursor:not-allowed}\n.navrow{display:flex;justify-content:space-between;gap:10px;margin-top:6px}\n.mini{background:#fff;border:1px solid var(--line);color:var(--navy);border-radius:8px;padding:7px 12px;font:600 12.5px Inter;cursor:pointer}\n\n/* LIBRARY */\n.bar{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:9px 0;box-shadow:0 2px 12px rgba(31,56,100,.07);margin-bottom:6px}\n.bin{max-width:1060px;margin:0 auto;padding:0 14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}\n#q{flex:1;min-width:150px;border:1px solid var(--line);border-radius:8px;padding:8px 12px;font:400 13.5px Inter}\n#q:focus{outline:2px solid var(--gold);border-color:var(--gold)}\n.chips{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;width:100%;padding-bottom:2px}\n.chips::-webkit-scrollbar{display:none}\n.chip{flex:0 0 auto;border:1px solid var(--line);background:#fff;color:var(--navy);padding:5px 11px;border-radius:99px;font:600 12px Inter;cursor:pointer;white-space:nowrap}\n.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}\n.chip .c{font-family:'IBM Plex Mono';font-size:10.5px;opacity:.7;margin-left:5px}\n.count{font:500 12px 'IBM Plex Mono';color:var(--mute);margin:14px 0 8px;letter-spacing:.05em}\n.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font:500 11.5px 'IBM Plex Mono'}\n.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}\n.legend span{color:#C7D6EC}\n\n.note{background:var(--tg);border:1px solid #E8D9A8;border-radius:10px;padding:12px 14px;font-size:13px;color:#7A5A10;margin:14px 0}\n.note b{color:var(--navy)}\n.empty{text-align:center;color:var(--mute);padding:40px 0;font-size:14px}\n\n.close-out{background:linear-gradient(135deg,var(--navy),#122544);color:#fff;border-radius:12px;padding:22px;display:none}\n.close-out.show{display:block}\n.close-out h2{color:#fff}\n.grade{font:600 46px 'IBM Plex Mono';color:var(--gold);line-height:1}\n.close-out .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:16px 0}\n.close-out .row div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:11px}\n.close-out .row b{display:block;font:600 19px 'IBM Plex Mono';color:#fff}\n.close-out .row small{font:500 10px 'IBM Plex Mono';letter-spacing:.1em;color:#93A9C6;text-transform:uppercase}\n.close-out p{color:#C2D3E8;font-size:14px}\n\nfooter{text-align:center;color:var(--mute);font-size:12.5px;padding:22px 14px;border-top:1px solid var(--line);margin-top:26px}\n@media print{\n  .bar,.modes,.panel,.rail,.navrow,header p,.spec,.legend,.caret,.mini{display:none}\n  body{background:#fff}\n  .pb{display:block!important}\n  .proc{break-inside:avoid;page-break-inside:avoid;border-color:#999;background:#fff}\n}\n@media(prefers-reduced-motion:reduce){*{transition:none!important}}\n:focus-visible{outline:3px solid var(--gold);outline-offset:2px}\n</style>\n</head>\n<body>\n\n<header><div class=\"hin\">\n  <div class=\"kicker\">PMBOK\u00ae Guide 8th Edition \u00b7 Applied Workshop</div>\n  <h1>The Horizon Programme</h1>\n  <p>One project, run end to end. Establish a new regional service centre: premises, systems, people, and processes \u2014 a shape that maps onto construction, IT, healthcare, manufacturing, finance, education, or public sector work without translation. Every decision moves the numbers, and every process opens its own inputs, tools, and outputs.</p>\n  <div class=\"spec\">\n    <span>Budget $12.0M</span><span>18 months</span><span>60 staff to recruit and train</span>\n    <span>Fixed opening commitment</span><span>Hybrid delivery</span><span>Regulated service</span>\n  </div>\n</div></header>\n\n<div class=\"modes\"><div class=\"min\">\n  <button class=\"mode on\" data-m=\"sim\">Run the programme</button>\n  <button class=\"mode\" data-m=\"lib\">Process library \u2014 all 40</button>\n</div></div>\n\n<div class=\"panel\" id=\"panel\">\n  <div class=\"pin\">\n    <div class=\"met\"><div class=\"lbl\">Stage</div><div class=\"val\" id=\"m-stage\">1 / 5</div></div>\n    <div class=\"met\"><div class=\"lbl\">EAC</div><div class=\"val\" id=\"m-cost\">$12.0M</div></div>\n    <div class=\"met\"><div class=\"lbl\">Sched. Var</div><div class=\"val\" id=\"m-sched\">0 wks</div></div>\n    <div class=\"met\"><div class=\"lbl\">Risk EMV</div><div class=\"val\" id=\"m-risk\">$0.00M</div></div>\n    <div class=\"met\"><div class=\"lbl\">Stakeholder</div><div class=\"val\" id=\"m-stk\">70%</div></div>\n  </div>\n</div>\n\n<div id=\"libbar\" class=\"bar\" style=\"display:none\"><div class=\"bin\">\n  <input id=\"q\" placeholder=\"Search process, tool, or output\u2026\">\n  <button class=\"mini\" id=\"expand\">Expand all</button>\n  <button class=\"mini\" onclick=\"window.print()\">Print handbook</button>\n  <div class=\"chips\" id=\"chips\"></div>\n</div></div>\n\n<div class=\"wrap\">\n  <div id=\"simView\">\n    <div class=\"rail\" id=\"rail\"></div>\n    <div id=\"stageArea\"></div>\n    <div class=\"close-out\" id=\"report\"></div>\n  </div>\n  <div id=\"libView\" style=\"display:none\">\n    <div class=\"note\"><b>Read this first.</b> The 8th Edition treats inputs, tools, techniques, and outputs as <b>illustrative, not prescriptive</b>. They are not a checklist to memorise and the exam no longer rewards recall of them. Use these schematics to understand flow and dependency \u2014 which artifact must exist before which decision becomes possible.</div>\n    <div class=\"count\" id=\"count\"></div>\n    <div id=\"list\"></div>\n  </div>\n</div>\n\n<footer>PMBOK\u00ae 8 applied workshop \u00b7 Prepared by Khalid Fawzy, PMP \u00b7 Governance 9 \u00b7 Stakeholders 7 \u00b7 Scope 6 \u00b7 Risk 6 \u00b7 Resources 5 \u00b7 Finance 4 \u00b7 Schedule 3 = 40</footer>\n\n<script>\nconst P=[\n/* ================= GOVERNANCE (9) ================= */\n{d:\"Governance\",f:\"Initiating\",n:\"Initiate Project or Phase\",new:\"Renamed from <b>Develop Project Charter</b> and widened to cover phase initiation, not just project start.\",\n why:\"Formally authorises the project or a phase, appoints the project manager, and links the work to a business need. Nothing downstream is legitimate until this exists \u2014 the charter is what converts an intention into an accountable undertaking.\",\n i:[\"Business case and benefits management plan\",\"Agreements (contract, MOU, SLA)\",\"Enterprise environmental factors\",\"Organisational process assets\",\"Product or programme strategy documents\"],\n t:[\"Expert judgment\",\"Data gathering \u2014 brainstorming, focus groups\",\"Interpersonal skills \u2014 facilitation, conflict management\",\"Kick-off and authorisation meetings\"],\n o:[\"<b>Project charter</b>\",\"Assumption log\",\"Initial high-level success criteria\"],\n tip:\"Constraints are not success criteria. A charter that says only \\u201cby June, under $48M\\u201d has defined an output, not a value outcome.\"},\n\n{d:\"Governance\",f:\"Planning\",n:\"Integrate and Align Project Plans\",new:\"Renamed from <b>Develop Project Management Plan</b>. The emphasis moved from producing one document to reconciling many.\",\n why:\"Consolidates every subsidiary plan and baseline into one coherent, internally consistent whole. The value is in the alignment: catching where the resource plan contradicts the schedule, or the quality approach contradicts the budget.\",\n i:[\"Project charter\",\"Outputs from all other planning processes\",\"Enterprise environmental factors\",\"Organisational process assets\"],\n t:[\"Expert judgment\",\"Data gathering \u2014 brainstorming, checklists, interviews\",\"Interpersonal skills \u2014 conflict management, facilitation\",\"Planning and alignment meetings\"],\n o:[\"<b>Project management plan</b> (integrated, with scope, schedule and cost baselines)\"],\n tip:\"An integrated plan is one where a change in any subsidiary plan forces a visible change in at least one other. If yours doesn't, it isn't integrated.\"},\n\n{d:\"Governance\",f:\"Planning\",n:\"Plan Sourcing Strategy\",new:\"Replaces <b>Plan Procurement Management</b>. Tactical procurement moved to <b>Appendix X4</b>; the strategic sourcing decision stayed in the core.\",\n why:\"Decides what the organisation will do itself and what it will buy, how work is packaged, and which contract type suits each package's scope maturity. This is a governance decision because it allocates risk between parties.\",\n i:[\"Project charter and business documents\",\"Scope baseline and requirements documentation\",\"Risk register and resource requirements\",\"Market conditions and supplier capability data\",\"EEFs and OPAs\"],\n t:[\"Expert judgment\",\"Market research and benchmarking\",\"Data analysis \u2014 <b>make-or-buy analysis</b>, source selection analysis\",\"Contract-type suitability assessment\",\"Meetings\"],\n o:[\"<b>Sourcing strategy</b> and make-or-buy decisions\",\"Procurement statement of work\",\"Bid documents \u2014 RFP, RFQ, IFB/ITB\",\"Source selection criteria\",\"Independent cost estimates\"],\n tip:\"Contract type follows scope maturity, not organisational habit. Lump-sum on undefined scope prices ambiguity and converts every iteration into a claim.\"},\n\n{d:\"Governance\",f:\"Executing\",n:\"Manage Project Execution\",new:\"Renamed from <b>Direct and Manage Project Work</b>.\",\n why:\"Performs the work defined in the plan, produces the deliverables, and implements approved changes. This is where the plan meets reality and generates the raw performance data everything else monitors.\",\n i:[\"Project management plan (all components)\",\"Project documents \u2014 issue log, lessons learned register, milestone list\",\"<b>Approved change requests</b>\",\"EEFs and OPAs\"],\n t:[\"Expert judgment\",\"Project management information system (PMIS)\",\"Meetings \u2014 daily stand-ups, coordination, iteration reviews\"],\n o:[\"<b>Deliverables</b>\",\"<b>Work performance data</b> (raw measurements)\",\"Issue log and change requests\",\"Plan and document updates\"],\n tip:\"Only <i>approved</i> change requests enter here. A change implemented without passing the change gate is a scope leak, however sensible it seemed.\"},\n\n{d:\"Governance\",f:\"Executing\",n:\"Manage Project Knowledge\",new:\"Retained from the 7th Edition with a stronger tacit-knowledge emphasis.\",\n why:\"Uses existing organisational knowledge to do the work, and captures new knowledge so it outlives the project. Explicit knowledge moves through documents; tacit knowledge moves only through people.\",\n i:[\"Project management plan\",\"Deliverables\",\"Project documents \u2014 lessons learned register, team assignments, stakeholder register, resource breakdown structure\",\"EEFs and OPAs\"],\n t:[\"<b>Knowledge management</b> \u2014 networking, communities of practice, shadowing, work shadowing, storytelling\",\"<b>Information management</b> \u2014 lessons learned register, library services, PMIS\",\"Interpersonal skills \u2014 active listening, facilitation, political awareness\"],\n o:[\"<b>Lessons learned register</b>\",\"Project management plan updates\",\"Organisational process asset updates\"],\n tip:\"A departing expert's switching philosophy is tacit. A handover document will miss exactly the judgement calls she never had to justify in writing \u2014 pair her with the successor instead.\"},\n\n{d:\"Governance\",f:\"Executing\",n:\"Manage Quality Assurance\",new:\"Renamed from <b>Manage Quality</b>. Note that <b>Plan Quality Management</b> no longer exists as a standalone process \u2014 quality planning is embedded across the domains.\",\n why:\"Audits whether the right processes are being followed and whether they are capable of producing conforming deliverables. Assurance is about the process; control is about the product.\",\n i:[\"Project management plan \u2014 quality approach\",\"Project documents \u2014 quality metrics, quality control measurements, risk report, lessons learned\",\"Organisational process assets\"],\n t:[\"<b>Quality audits</b> and process analysis\",\"Data analysis \u2014 alternatives, document, process, <b>root cause analysis</b>\",\"Data representation \u2014 cause-and-effect, flowcharts, histograms, Pareto, scatter, matrix diagrams\",\"<b>Design for X</b>, problem solving\",\"Quality improvement methods \u2014 <b>PDCA</b>, Six Sigma <b>DMAIC</b>\"],\n o:[\"<b>Quality reports</b>\",\"Test and evaluation documents\",\"Change requests\",\"Plan and document updates\"],\n tip:\"Assurance answers \\u201care we working correctly?\\u201d Control answers \\u201cis the output correct?\\u201d Exam questions about audits are assurance; questions about measurements and defects are control.\"},\n\n{d:\"Governance\",f:\"Monitoring & Controlling\",n:\"Monitor and Control Project Performance\",new:\"Renamed from <b>Monitor and Control Project Work</b> \u2014 the object is performance, not activity.\",\n why:\"Tracks, reviews, and reports overall progress against the plan, converting raw work performance data into information a decision-maker can act on. This is where forecasts are produced.\",\n i:[\"Project management plan\",\"Project documents \u2014 cost and schedule forecasts, issue log, risk register, quality reports\",\"<b>Work performance information</b> from all control processes\",\"Agreements, EEFs, OPAs\"],\n t:[\"Expert judgment\",\"Data analysis \u2014 <b>earned value analysis</b>, variance, trend, root cause, alternatives, cost-benefit\",\"Decision making \u2014 voting, multicriteria decision analysis\",\"Status and performance review meetings\"],\n o:[\"<b>Work performance reports</b>\",\"Change requests\",\"Plan and document updates\"],\n tip:\"Data \u2192 information \u2192 report. Raw measurements are data; a variance with a cause attached is information; a report is what the sponsor decides from.\"},\n\n{d:\"Governance\",f:\"Monitoring & Controlling\",n:\"Assess and Implement Changes\",new:\"Renamed from <b>Perform Integrated Change Control</b>. More action-oriented, less bureaucratic in tone \u2014 but still the mandatory gate.\",\n why:\"Reviews every change request, assesses its full impact across all baselines, approves or rejects it, and manages the implementation. It exists so no one can change one baseline without seeing the effect on the others.\",\n i:[\"Project management plan \u2014 change management plan, configuration management plan, baselines\",\"<b>Change requests</b>\",\"Work performance reports\",\"Project documents \u2014 requirements traceability matrix, risk report\",\"EEFs and OPAs\"],\n t:[\"Expert judgment\",\"<b>Change control tools</b> and configuration management\",\"Data analysis \u2014 alternatives analysis, cost-benefit analysis\",\"Decision making \u2014 voting, autocratic, MCDA\",\"<b>Change control board</b> meetings\"],\n o:[\"<b>Approved change requests</b>\",\"<b>Change log</b> updates\",\"Project management plan and document updates\"],\n tip:\"A mandatory external change \u2014 a new regulation \u2014 still passes through this gate. Mandatory means you must comply; it does not mean you accept the first price you are quoted.\"},\n\n{d:\"Governance\",f:\"Closing\",n:\"Close Project or Phase\",new:\"The only process in the Closing focus area. Benefit-realisation handover is more explicit than in earlier editions.\",\n why:\"Finalises all activity: confirms acceptance against specification, settles contracts, releases resources, transfers the product to operations, and converts lessons into organisational change.\",\n i:[\"Project charter and project management plan\",\"<b>Accepted deliverables</b>\",\"Business documents \u2014 business case, benefits management plan\",\"Agreements and procurement documentation\",\"Project documents \u2014 issue log, risk register, quality reports\",\"OPAs\"],\n t:[\"Expert judgment\",\"Data analysis \u2014 document analysis, regression, trend, variance analysis\",\"Closure and retrospective meetings\"],\n o:[\"<b>Final product, service, or result transition</b>\",\"<b>Final report</b> and benefit-realisation handover\",\"Project document updates\",\"<b>Organisational process asset updates</b>\"],\n tip:\"The most-failed process in practice. Retention is the last instrument you hold \u2014 accepting 94% against a 95% specification because the fault was \\u201calready fixed\\u201d trades evidence for a promise the operator inherits.\"},\n\n/* ================= STAKEHOLDERS (7) ================= */\n{d:\"Stakeholders\",f:\"Initiating\",n:\"Identify Stakeholders\",new:\"Unchanged in name. Now sits in a domain that also absorbed all of Communications.\",\n why:\"Finds every individual, group, or organisation that can affect or be affected by the project, and analyses their power, interest, influence, and expectations. Identification is about influence, not authority.\",\n i:[\"Project charter and business documents\",\"Project management plan \u2014 communications and stakeholder engagement plans\",\"Agreements\",\"EEFs and OPAs\"],\n t:[\"Expert judgment\",\"Data gathering \u2014 questionnaires, surveys, brainstorming\",\"Data analysis \u2014 <b>stakeholder analysis</b>, document analysis\",\"Data representation \u2014 <b>power/interest grid</b>, power/influence grid, <b>salience model</b> (power, urgency, legitimacy), directions of influence\",\"Meetings\"],\n o:[\"<b>Stakeholder register</b>\",\"Change requests\",\"Plan and document updates\"],\n tip:\"A party with no contractual role but high public influence \u2014 an NGO, a community group \u2014 belongs on the register. Omitting them removes your earliest warning system.\"},\n\n{d:\"Stakeholders\",f:\"Planning\",n:\"Plan Stakeholder Engagement\",new:\"Retained. The engagement assessment matrix is now a core exam tool.\",\n why:\"Defines how each stakeholder will be engaged, based on the gap between their current and desired level of engagement. Turns the register from a list into a strategy.\",\n i:[\"Project charter and project management plan\",\"Project documents \u2014 stakeholder register, assumption log, change log, issue log, risk register\",\"Agreements, EEFs, OPAs\"],\n t:[\"Expert judgment\",\"Data gathering \u2014 benchmarking\",\"Data analysis \u2014 assumption and constraint analysis, root cause analysis\",\"Decision making \u2014 prioritisation and ranking\",\"Data representation \u2014 mind mapping, <b>stakeholder engagement assessment matrix</b>\",\"Meetings\"],\n o:[\"<b>Stakeholder engagement plan</b>\"],\n tip:\"The engagement assessment matrix maps current (C) against desired (D) across five levels: unaware, resistant, neutral, supportive, leading. The gap is the work.\"},\n\n{d:\"Stakeholders\",f:\"Planning\",n:\"Plan Communications Management\",new:\"<b>Moved into the Stakeholders domain.</b> Communications is no longer a separate knowledge area or performance domain.\",\n why:\"Determines who needs what information, when, in what format, and through which channel \u2014 based on stakeholder needs rather than on organisational reporting habit.\",\n i:[\"Project charter and project management plan \u2014 resource and stakeholder engagement plans\",\"Project documents \u2014 stakeholder register, requirements documentation\",\"EEFs and OPAs\"],\n t:[\"Expert judgment\",\"<b>Communication requirements analysis</b> \u2014 channels formula <b>n(n\u22121)/2</b>\",\"Communication technology and <b>communication models</b> (sender \u2192 encode \u2192 transmit \u2192 decode \u2192 receiver \u2192 feedback, with noise)\",\"<b>Communication methods</b> \u2014 interactive, push, pull\",\"Interpersonal skills \u2014 cultural awareness, political awareness\",\"Meetings\"],\n o:[\"<b>Communications management plan</b>\",\"Plan and document updates\"],\n tip:\"Adding one person to a 10-person team takes channels from 45 to 55. The formula is tested; more usefully, it explains why large teams need structure, not more meetings.\"},\n\n{d:\"Stakeholders\",f:\"Executing\",n:\"Manage Stakeholder Engagement\",new:\"Retained.\",\n why:\"Communicates and works with stakeholders to meet needs, address issues, and foster appropriate involvement. This is the active relationship work \u2014 negotiation, expectation-setting, and issue resolution.\",\n i:[\"Project management plan \u2014 communications, risk, stakeholder engagement, change management plans\",\"Project documents \u2014 change log, issue log, lessons learned register, stakeholder register\",\"EEFs and OPAs\"],\n t:[\"Expert judgment\",\"Communication skills \u2014 <b>feedback</b>\",\"Interpersonal skills \u2014 conflict management, cultural awareness, <b>negotiation</b>, observation, political awareness\",\"<b>Ground rules</b>\",\"Meetings\"],\n o:[\"Change requests\",\"Project management plan updates\",\"Project document updates \u2014 issue log, stakeholder register, change log\"],\n tip:\"Rejecting a stakeholder comment is legitimate; rejecting it without written rationale is not. Documented reasoning is what keeps a supportive stakeholder from drifting to neutral.\"},\n\n{d:\"Stakeholders\",f:\"Executing\",n:\"Manage Communications\",new:\"Sits in the Stakeholders domain in the 8th Edition.\",\n why:\"Ensures information is created, collected, distributed, stored, retrieved, and disposed of in a timely and appropriate way. Execution of the communications plan, adapted in real time.\",\n i:[\"Project management plan \u2014 resource, communications, stakeholder engagement plans\",\"Project documents \u2014 change log, issue log, quality report, risk report, stakeholder register\",\"<b>Work performance reports</b>\",\"EEFs and OPAs\"],\n t:[\"Communication technology, methods, and skills \u2014 competence, feedback, non-verbal, presentations\",\"<b>PMIS</b> and project reporting\",\"Interpersonal skills \u2014 active listening, conflict management, cultural awareness, meeting management, networking, political awareness\"],\n o:[\"<b>Project communications</b>\",\"Plan and document updates\",\"OPA updates\"],\n tip:\"On distributed teams, silence in an asynchronous channel is not agreement. Closed-loop confirmation \u2014 the receiver restates the message \u2014 is the countermeasure.\"},\n\n{d:\"Stakeholders\",f:\"Monitoring & Controlling\",n:\"Monitor Stakeholder Engagement\",new:\"Retained.\",\n why:\"Monitors relationships and adjusts strategies as engagement levels shift. A stakeholder moving from supportive to neutral is a leading indicator, not a soft observation.\",\n i:[\"Project management plan\",\"Project documents \u2014 issue log, lessons learned register, project communications, risk register, stakeholder register\",\"<b>Work performance data</b>\",\"EEFs and OPAs\"],\n t:[\"Data analysis \u2014 alternatives analysis, root cause analysis, <b>stakeholder analysis</b>\",\"Decision making \u2014 MCDA, voting\",\"Data representation \u2014 <b>stakeholder engagement assessment matrix</b>\",\"Communication and interpersonal skills \u2014 active listening, cultural awareness, leadership, political awareness\",\"Meetings\"],\n o:[\"<b>Work performance information</b>\",\"Change requests\",\"Plan and document updates\"],\n tip:\"Track movement, not position. A stakeholder who has been neutral throughout is manageable; one who was supportive last month and is neutral now is a signal.\"},\n\n{d:\"Stakeholders\",f:\"Monitoring & Controlling\",n:\"Monitor Communications\",new:\"Sits in the Stakeholders domain.\",\n why:\"Confirms that information needs are actually being met \u2014 that the messages sent were received and understood, not merely distributed.\",\n i:[\"Project management plan \u2014 resource, communications, stakeholder engagement plans\",\"Project documents \u2014 issue log, lessons learned register, project communications\",\"<b>Work performance data</b>\",\"EEFs and OPAs\"],\n t:[\"Expert judgment\",\"<b>PMIS</b>\",\"Data representation \u2014 stakeholder engagement assessment matrix\",\"Interpersonal skills \u2014 <b>observation and conversation</b>\",\"Meetings\"],\n o:[\"<b>Work performance information</b>\",\"Change requests\",\"Plan and document updates\"],\n tip:\"Distribution is not communication. If a weekly report is opened by 20% of recipients, the communications plan has failed regardless of how punctually it was issued.\"},\n\n/* ================= SCOPE (6) ================= */\n{d:\"Scope\",f:\"Planning\",n:\"Plan Scope Management\",new:\"Retained.\",\n why:\"Documents how scope will be defined, validated, and controlled \u2014 and critically, how change tolerance differs between predictive and adaptive parts of the same project.\",\n i:[\"Project charter\",\"Project management plan \u2014 quality management plan, project life cycle description, <b>development approach</b>\",\"EEFs and OPAs\"],\n t:[\"Expert judgment\",\"Data analysis \u2014 alternatives analysis\",\"Meetings\"],\n o:[\"<b>Scope management plan</b>\",\"<b>Requirements management plan</b>\"],\n tip:\"On a hybrid project this plan must state two change regimes. A single tolerance applied to both a fixed civils package and an evolving software package will fail one of them.\"},\n\n{d:\"Scope\",f:\"Planning\",n:\"Elicit and Analyze Requirements\",new:\"Renamed from <b>Collect Requirements</b> \u2014 the change is deliberate. Requirements are drawn out and analysed, not received.\",\n why:\"Determines, documents, and manages stakeholder needs to meet objectives. Elicitation implies facilitation and probing; analysis implies testing requirements for conflict, feasibility, and value before accepting them.\",\n i:[\"Project charter and business documents\",\"Project management plan \u2014 scope, requirements, stakeholder engagement plans\",\"Project documents \u2014 assumption log, lessons learned register, stakeholder register\",\"Agreements, EEFs, OPAs\"],\n t:[\"Data gathering \u2014 brainstorming, <b>interviews</b>, focus groups, questionnaires, benchmarking\",\"Data analysis \u2014 document analysis\",\"Decision making \u2014 voting, autocratic, <b>MCDA</b>\",\"Data representation \u2014 <b>affinity diagrams</b>, mind mapping\",\"Interpersonal skills \u2014 <b>nominal group technique</b>, observation, facilitation\",\"<b>Context diagrams</b>, prototypes, user stories\"],\n o:[\"<b>Requirements documentation</b>\",\"<b>Requirements traceability matrix</b>\"],\n tip:\"The classic failure this rename addresses: a project delivered on time and budget that the operator refuses to run, because the stated requirement was never tested against the actual need.\"},\n\n{d:\"Scope\",f:\"Planning\",n:\"Define Scope\",new:\"Retained.\",\n why:\"Develops a detailed description of the project and product, including explicit exclusions. The exclusions matter as much as the inclusions \u2014 they are where scope creep is pre-empted.\",\n i:[\"Project charter\",\"Project management plan \u2014 scope management plan\",\"Project documents \u2014 assumption log, requirements documentation, risk register\",\"EEFs and OPAs\"],\n t:[\"Expert judgment\",\"Data analysis \u2014 alternatives analysis\",\"Decision making \u2014 MCDA\",\"Interpersonal skills \u2014 facilitation\",\"<b>Product analysis</b> \u2014 value engineering, value analysis, requirements analysis, systems analysis\"],\n o:[\"<b>Project scope statement</b>\",\"Project document updates\"],\n tip:\"A scope statement without an exclusions section is an invitation. \\u201cNo distribution feeder work, no civils beyond the fence line\\u201d prevents a year of argument.\"},\n\n{d:\"Scope\",f:\"Planning\",n:\"Develop Scope Structure\",new:\"Replaces <b>Create WBS</b>. The broader term accommodates a product backlog or story map, not only a deliverable-oriented hierarchy.\",\n why:\"Subdivides deliverables into smaller, manageable components \u2014 by decomposition on predictive work, by backlog refinement and story mapping on adaptive work. Produces the scope baseline.\",\n i:[\"Project management plan \u2014 scope management plan\",\"Project documents \u2014 <b>project scope statement</b>, requirements documentation\",\"EEFs and OPAs\"],\n t:[\"Expert judgment\",\"<b>Decomposition</b> and the 100% rule\",\"<b>Progressive elaboration</b> and rolling wave planning\",\"<b>Story mapping</b> and backlog refinement\",\"Work package and control account definition\"],\n o:[\"<b>Scope baseline</b> \u2014 scope statement + WBS + WBS dictionary, or the equivalent product backlog\",\"Project document updates\"],\n tip:\"The rename recognises that a WBS is one structure among several. What the exam still tests is the 100% rule: the structure must contain all the scope and only the scope.\"},\n\n{d:\"Scope\",f:\"Monitoring & Controlling\",n:\"Validate Scope\",new:\"Retained.\",\n why:\"Formalises acceptance of completed deliverables by the customer or sponsor. Validation is about acceptance; control quality is about correctness. Verified deliverables come in, accepted deliverables come out.\",\n i:[\"Project management plan \u2014 scope management plan, requirements management plan, scope baseline\",\"Project documents \u2014 lessons learned register, quality reports, requirements documentation, <b>requirements traceability matrix</b>\",\"<b>Verified deliverables</b>\",\"Work performance data\"],\n t:[\"<b>Inspection</b> \u2014 measuring, examining, validating\",\"Decision making \u2014 <b>voting</b>\",\"Demonstrations, walkthroughs, and reviews\"],\n o:[\"<b>Accepted deliverables</b>\",\"<b>Work performance information</b>\",\"Change requests\",\"Project document updates\"],\n tip:\"Sequence question, frequently tested: quality control produces <i>verified</i> deliverables; Validate Scope produces <i>accepted</i> ones. Verification precedes validation.\"},\n\n{d:\"Scope\",f:\"Monitoring & Controlling\",n:\"Monitor and Control Scope\",new:\"Renamed from <b>Control Scope</b> and now absorbs product-correctness checking \u2014 <b>Control Quality</b> no longer exists as a standalone process.\",\n why:\"Monitors scope status and manages changes to the baseline, while also verifying that deliverables conform to requirements. Scope creep and gold plating are both detected here.\",\n i:[\"Project management plan \u2014 scope, requirements, change management plans, scope and performance baselines\",\"Project documents \u2014 lessons learned register, requirements documentation, RTM, quality metrics\",\"<b>Work performance data</b>\",\"OPAs\"],\n t:[\"Data analysis \u2014 <b>variance analysis</b>, trend analysis\",\"<b>Inspection</b>, testing, and product evaluations\",\"<b>Statistical sampling</b>\",\"<b>Control charts</b> \u2014 rule of seven, control limits vs specification limits\",\"Checklists and check sheets\"],\n o:[\"<b>Work performance information</b>\",\"<b>Verified deliverables</b> and quality control measurements\",\"Change requests\",\"Plan and document updates\"],\n tip:\"Scope creep is uncontrolled expansion from outside; gold plating is the team adding unrequested value. Both are baseline violations, and both surface here.\"},\n\n/* ================= SCHEDULE (3) ================= */\n{d:\"Schedule\",f:\"Planning\",n:\"Plan Schedule Management\",new:\"Retained.\",\n why:\"Establishes the policies and procedures for developing, managing, and controlling the schedule \u2014 including units, tolerances, and reporting cadence for each part of a hybrid delivery.\",\n i:[\"Project charter\",\"Project management plan \u2014 scope management plan, <b>development approach</b>\",\"EEFs and OPAs\"],\n t:[\"Expert judgment\",\"Data analysis \u2014 alternatives analysis\",\"Meetings\"],\n o:[\"<b>Schedule management plan</b>\"],\n tip:\"Set the control thresholds here, not when the first variance appears. A plan that defines \\u201cwhen do we re-baseline?\\u201d in advance prevents that becoming a political question later.\"},\n\n{d:\"Schedule\",f:\"Planning\",n:\"Develop Schedule\",new:\"<b>Absorbs four 6th Edition processes</b>: Define Activities, Sequence Activities, Estimate Activity Durations, and Develop Schedule. The techniques survive; the process boundaries did not.\",\n why:\"Analyses activities, durations, dependencies, resources, and constraints to produce an executable schedule model with a critical path and a baseline.\",\n i:[\"Project management plan \u2014 schedule and scope management plans, scope baseline\",\"Project documents \u2014 requirements, resource requirements and calendars, risk register, assumption log\",\"Agreements, EEFs, OPAs\"],\n t:[\"<b>Decomposition</b> and rolling wave planning\",\"<b>Precedence diagramming method</b> \u2014 FS, SS, FF, SF; mandatory, discretionary, external, internal dependencies; <b>leads and lags</b>\",\"Estimating \u2014 analogous, parametric, <b>three-point / PERT</b> (Triangular = (O+M+P)/3; Beta = (O+4M+P)/6; \u03c3 = (P\u2212O)/6), bottom-up\",\"<b>Critical path method</b> \u2014 forward and backward pass, total and free float\",\"<b>Critical chain method</b> \u2014 feeding and project buffers\",\"<b>Resource optimisation</b> \u2014 levelling (changes the critical path) vs smoothing (respects float)\",\"<b>Schedule compression</b> \u2014 crashing (adds cost) vs fast tracking (adds risk and rework)\",\"Simulation \u2014 <b>Monte Carlo</b>\",\"Agile release planning; PMIS\"],\n o:[\"<b>Schedule baseline</b>\",\"<b>Project schedule</b> \u2014 Gantt, milestone, and network diagrams\",\"Schedule data and project calendars\",\"Change requests; plan and document updates\"],\n tip:\"The merge is the trap. Candidates trained on the 6th Edition look for Sequence Activities and conclude sequencing was removed \u2014 it became a technique inside this process, not a deleted concept.\"},\n\n{d:\"Schedule\",f:\"Monitoring & Controlling\",n:\"Monitor and Control Schedule\",new:\"Renamed from <b>Control Schedule</b>.\",\n why:\"Monitors schedule status, measures variance, forecasts completion, and manages baseline changes. Provides SPI and SV into the integrated performance picture.\",\n i:[\"Project management plan \u2014 schedule management plan, schedule and scope baselines, performance measurement baseline\",\"Project documents \u2014 lessons learned register, project calendars, schedule data, resource calendars\",\"<b>Work performance data</b>\",\"OPAs\"],\n t:[\"Data analysis \u2014 <b>earned value analysis (SV, SPI)</b>, iteration burndown/burnup, performance reviews, trend analysis, variance analysis, <b>what-if scenario analysis</b>\",\"<b>Critical path method</b>\",\"PMIS and resource optimisation\",\"Leads and lags; <b>schedule compression</b>\"],\n o:[\"<b>Work performance information</b> \u2014 SV and SPI by component\",\"<b>Schedule forecasts</b>\",\"Change requests\",\"Plan and document updates\"],\n tip:\"SPI = EV/PV. Its known weakness: it drifts toward 1.0 near completion even on a late project, because PV converges on BAC. Read it alongside the critical path, never alone.\"},\n\n/* ================= FINANCE (4) ================= */\n{d:\"Finance\",f:\"Planning\",n:\"Plan Financial Management\",new:\"Renamed from <b>Plan Cost Management</b> and broadened \u2014 the domain is Finance, not Cost, so funding, cash flow, and value analysis are in scope.\",\n why:\"Establishes how costs will be estimated, budgeted, funded, monitored, and controlled \u2014 including funding sources, drawdown profile, and the organisation's value measurement approach.\",\n i:[\"Project charter\",\"Project management plan \u2014 schedule and risk management plans, scope baseline\",\"EEFs \u2014 currency, exchange rate, and market conditions\",\"OPAs\"],\n t:[\"Expert judgment\",\"Data analysis \u2014 <b>funding options analysis</b>, alternatives analysis, payback / NPV / IRR approaches\",\"Meetings\"],\n o:[\"<b>Financial management plan</b> \u2014 units, precision, thresholds, EVM rules, reporting formats, funding approach\"],\n tip:\"The rename is not cosmetic. A project can be on-budget and still fail financially if the drawdown profile does not match the organisation's cash availability.\"},\n\n{d:\"Finance\",f:\"Planning\",n:\"Estimate Costs\",new:\"Retained.\",\n why:\"Develops an approximation of the monetary resources needed to complete the work, with a documented basis and a stated confidence range.\",\n i:[\"Project management plan \u2014 financial management plan, quality approach, scope baseline\",\"Project documents \u2014 lessons learned register, project schedule, resource requirements, risk register\",\"EEFs and OPAs\"],\n t:[\"Expert judgment\",\"<b>Analogous estimating</b> \u2014 fast, least accurate, top-down from history\",\"<b>Parametric estimating</b> \u2014 unit rate \u00d7 quantity, scalable\",\"<b>Bottom-up estimating</b> \u2014 most accurate, most costly\",\"<b>Three-point estimating</b> \u2014 see Develop Schedule for the formulas\",\"Data analysis \u2014 <b>reserve analysis</b>, alternatives analysis, <b>cost of quality</b> (prevention + appraisal vs internal + external failure)\",\"Decision making \u2014 voting, wideband Delphi; PMIS\"],\n o:[\"<b>Cost estimates</b>\",\"<b>Basis of estimates</b> \u2014 assumptions, constraints, confidence range\",\"Project document updates\"],\n tip:\"Range matters more than point value. An estimate presented without a confidence interval invites the sponsor to treat the mean as a commitment.\"},\n\n{d:\"Finance\",f:\"Planning\",n:\"Develop Budget\",new:\"Renamed from <b>Determine Budget</b>.\",\n why:\"Aggregates estimated costs to establish an authorised cost baseline, and reconciles it against funding limits. Distinguishes contingency reserve (inside the baseline, for known risks) from management reserve (outside it, for unknown risks).\",\n i:[\"Project management plan \u2014 financial and risk management plans, scope baseline\",\"Project documents \u2014 <b>cost estimates</b>, basis of estimates, project schedule, risk register\",\"Business documents and agreements\",\"EEFs and OPAs\"],\n t:[\"Expert judgment\",\"<b>Cost aggregation</b> \u2014 work package \u2192 control account \u2192 project\",\"Data analysis \u2014 <b>reserve analysis</b>\",\"Historical information review\",\"<b>Funding limit reconciliation</b>\",\"Financing\"],\n o:[\"<b>Cost baseline</b> = estimates + contingency reserve (management reserve sits outside)\",\"<b>Project funding requirements</b> \u2014 the drawdown profile\",\"Project document updates\"],\n tip:\"Frequently tested: the PM authorises contingency reserve; management reserve requires sponsor or board approval and, once released, changes the cost baseline.\"},\n\n{d:\"Finance\",f:\"Monitoring & Controlling\",n:\"Monitor and Control Finances\",new:\"Renamed from <b>Control Costs</b>. Earned value management lives here in the 8th Edition, alongside benefit and value tracking.\",\n why:\"Monitors spend against the baseline, forecasts completion cost, and manages baseline changes \u2014 while also testing whether the money spent is producing the intended benefit.\",\n i:[\"Project management plan \u2014 financial management plan, <b>cost baseline</b>, performance measurement baseline\",\"<b>Project funding requirements</b>\",\"Project documents \u2014 lessons learned register\",\"<b>Work performance data</b>\",\"OPAs\"],\n t:[\"Expert judgment\",\"<b>Earned value analysis</b> \u2014 CV = EV\u2212AC; SV = EV\u2212PV; CPI = EV/AC; SPI = EV/PV\",\"<b>Forecasting</b> \u2014 EAC = BAC/CPI (typical variance); EAC = AC + (BAC\u2212EV) (atypical); ETC = EAC\u2212AC; <b>TCPI</b> = (BAC\u2212EV)/(BAC\u2212AC)\",\"<b>Variance and trend analysis</b>; reserve analysis\",\"Benefit and value analysis; PMIS\"],\n o:[\"<b>Work performance information</b> \u2014 CV, SV, CPI, SPI by component\",\"<b>Cost forecasts</b> \u2014 EAC and ETC\",\"Change requests\",\"Plan and document updates\"],\n tip:\"The EAC choice is the whole question. If the variance is systemic \u2014 rework, a productivity shortfall \u2014 use BAC/CPI. Only a genuine one-off justifies AC + (BAC\u2212EV).\"},\n\n/* ================= RESOURCES (5) ================= */\n{d:\"Resources\",f:\"Planning\",n:\"Plan Resource Management\",new:\"Retained. The domain was renamed from Team to Resources, covering both people and physical resources.\",\n why:\"Defines how to estimate, acquire, manage, and release both team and physical resources, and establishes roles, authority, and team working agreements.\",\n i:[\"Project charter\",\"Project management plan \u2014 quality management plan, scope baseline\",\"Project documents \u2014 project schedule, requirements documentation, risk register, stakeholder register\",\"EEFs and OPAs\"],\n t:[\"Expert judgment\",\"Data representation \u2014 hierarchical charts and <b>resource breakdown structure</b>, <b>responsibility assignment matrix (RACI)</b>, text-oriented position descriptions\",\"<b>Organisational theory</b>\",\"Meetings\"],\n o:[\"<b>Resource management plan</b>\",\"<b>Team charter</b> \u2014 values, communication guidelines, decision criteria, conflict resolution, meeting guidelines\",\"Project document updates\"],\n tip:\"RACI fails when a task has two Accountables or none. One A per row is the rule the exam tests.\"},\n\n{d:\"Resources\",f:\"Planning\",n:\"Estimate Resources\",new:\"Renamed from <b>Estimate Activity Resources</b> \u2014 no longer tied to the activity level.\",\n why:\"Estimates team resources and the type and quantity of material, equipment, and supplies needed. Feeds directly into cost estimating and schedule development.\",\n i:[\"Project management plan \u2014 resource management plan, scope baseline\",\"Project documents \u2014 activity attributes, assumption log, cost estimates, resource calendars, risk register\",\"EEFs and OPAs\"],\n t:[\"Expert judgment\",\"<b>Bottom-up estimating</b>\",\"Analogous and parametric estimating\",\"Data analysis \u2014 alternatives analysis\",\"PMIS; meetings\"],\n o:[\"<b>Resource requirements</b>\",\"<b>Basis of estimates</b>\",\"<b>Resource breakdown structure</b>\",\"Project document updates\"],\n tip:\"Specialist resources with long recruitment lead times \u2014 a commissioning lead needed 14 months out \u2014 are a resource estimate, not a staffing problem to solve later.\"},\n\n{d:\"Resources\",f:\"Executing\",n:\"Acquire Resources\",new:\"Retained.\",\n why:\"Obtains team members, facilities, equipment, materials, and supplies. Negotiation with functional managers and external suppliers is the core skill.\",\n i:[\"Project management plan \u2014 resource management plan, procurement approach, cost baseline\",\"Project documents \u2014 project schedule, resource calendars, resource requirements, stakeholder register\",\"EEFs and OPAs\"],\n t:[\"Decision making \u2014 <b>multicriteria decision analysis</b> (availability, cost, experience, ability, knowledge, skills, attitude, international factors)\",\"Interpersonal skills \u2014 <b>negotiation</b>\",\"<b>Pre-assignment</b>\",\"<b>Virtual teams</b>\"],\n o:[\"<b>Physical resource assignments</b>\",\"<b>Project team assignments</b>\",\"<b>Resource calendars</b>\",\"Change requests; plan and document updates\"],\n tip:\"When you cannot get the resource you need, the answer is rarely escalation first. Negotiate, then assess the alternative's impact, then escalate with an option \u2014 not a complaint.\"},\n\n{d:\"Resources\",f:\"Executing\",n:\"Lead the Team\",new:\"<b>Merges Develop Team and Manage Team</b> into a single process. Building capability and directing performance are treated as one continuous act of leadership.\",\n why:\"Improves competencies and interaction, tracks performance, provides feedback, resolves issues, and manages team changes to optimise project performance.\",\n i:[\"Project management plan \u2014 resource management plan\",\"Project documents \u2014 lessons learned register, project schedule, team assignments, <b>team charter</b>, resource calendars\",\"<b>Work performance reports</b> and team performance assessments\",\"EEFs and OPAs\"],\n t:[\"<b>Colocation</b> and virtual teams; communication technology\",\"Interpersonal skills \u2014 <b>conflict management</b> (collaborate/problem solve, compromise, smooth/accommodate, force, withdraw/avoid), influencing, <b>motivation</b>, negotiation, <b>team building</b>, <b>emotional intelligence</b>, decision making\",\"<b>Recognition and rewards</b>; training; individual and team assessments\",\"Meetings; PMIS\"],\n o:[\"<b>Team performance assessments</b>\",\"Change requests\",\"Plan, document, EEF, and OPA updates\"],\n tip:\"Supporting theory sits here: <b>Tuckman</b> (forming, storming, norming, performing, adjourning), <b>Maslow</b>, <b>Herzberg</b> (hygiene vs motivators), <b>McGregor</b> (X vs Y), and situational leadership. Collaborate/problem solve is the default preferred conflict mode.\"},\n\n{d:\"Resources\",f:\"Monitoring & Controlling\",n:\"Monitor and Control Resourcing\",new:\"Renamed from <b>Control Resources</b>.\",\n why:\"Ensures assigned resources are available as planned, monitors actual versus planned utilisation, and takes corrective action on shortfalls or over-allocation.\",\n i:[\"Project management plan \u2014 resource management plan, performance measurement baseline\",\"Project documents \u2014 issue log, lessons learned register, physical resource assignments, resource breakdown structure, risk register\",\"<b>Work performance data</b>\",\"Agreements and OPAs\"],\n t:[\"Data analysis \u2014 alternatives analysis, cost-benefit analysis, <b>performance reviews</b>, trend analysis\",\"<b>Problem solving</b>\",\"Interpersonal skills \u2014 negotiation, influencing\",\"PMIS\"],\n o:[\"<b>Work performance information</b>\",\"Change requests\",\"Plan and document updates\"],\n tip:\"This process covers physical resources as much as people. Material shortfall, equipment downtime, and consumable burn rate all belong here, not in procurement.\"},\n\n/* ================= RISK (6) ================= */\n{d:\"Risk\",f:\"Planning\",n:\"Plan Risk Management\",new:\"Retained. Note that Risk is now a <b>performance domain</b> \u2014 \\u201coptimise risk responses\\u201d is no longer a principle.\",\n why:\"Defines how risk activities will be conducted: methodology, roles, funding, timing, categories, probability and impact definitions, and the stakeholders' risk thresholds.\",\n i:[\"Project charter\",\"Project management plan \u2014 all subsidiary plans\",\"Project documents \u2014 stakeholder register\",\"EEFs and OPAs\"],\n t:[\"Expert judgment\",\"Data analysis \u2014 <b>stakeholder risk appetite analysis</b>\",\"Meetings\"],\n o:[\"<b>Risk management plan</b> \u2014 methodology, roles and responsibilities, funding, timing, <b>risk categories / RBS</b>, stakeholder risk appetite, probability and impact definitions, <b>probability-impact matrix</b>, reporting formats, tracking\"],\n tip:\"Risk appetite, tolerance, and threshold are distinct: appetite is the willingness to take risk, tolerance is the acceptable range, threshold is the measurable line that triggers action.\"},\n\n{d:\"Risk\",f:\"Planning\",n:\"Identify Risks\",new:\"Retained.\",\n why:\"Identifies individual project risks and sources of overall project risk, and documents their characteristics. An iterative process \u2014 the register is never finished.\",\n i:[\"Project management plan \u2014 risk, schedule, cost, quality, resource management plans, scope baseline\",\"Project documents \u2014 assumption log, cost and duration estimates, requirements documentation, resource requirements, stakeholder register, issue log, lessons learned register\",\"Agreements and procurement documentation\",\"EEFs and OPAs\"],\n t:[\"Expert judgment\",\"Data gathering \u2014 <b>brainstorming</b>, checklists, interviews\",\"Data analysis \u2014 <b>root cause analysis</b>, assumption and constraint analysis, <b>SWOT analysis</b>, document analysis\",\"Interpersonal skills \u2014 facilitation\",\"<b>Prompt lists</b> \u2014 PESTLE, TECOP, <b>VUCA</b>\",\"Meetings\"],\n o:[\"<b>Risk register</b> \u2014 individual risks, potential owners, candidate responses\",\"<b>Risk report</b> \u2014 sources of overall project risk\",\"Project document updates\"],\n tip:\"Write risks as cause \u2192 event \u2192 effect. \\u201cGeotechnical data is absent, so foundation conditions may differ from assumed, which would add piling cost and delay.\\u201d A one-word risk cannot be analysed.\"},\n\n{d:\"Risk\",f:\"Planning\",n:\"Perform Risk Analysis\",new:\"<b>Merges Perform Qualitative and Perform Quantitative Risk Analysis</b> into one process.\",\n why:\"Prioritises individual risks by probability and impact, and \u2014 where warranted \u2014 quantifies the combined effect on overall project outcomes to produce a defensible cost and schedule distribution.\",\n i:[\"Project management plan \u2014 risk management plan, scope, schedule, and cost baselines\",\"Project documents \u2014 assumption log, risk register, risk report, cost and duration estimates, resource requirements, project schedule\",\"EEFs and OPAs\"],\n t:[\"<b>Probability and impact assessment</b>; <b>probability-impact matrix</b>\",\"Assessment of other parameters \u2014 urgency, proximity, dormancy, manageability, controllability, detectability, connectivity, strategic impact, propinquity\",\"<b>Risk categorisation</b> by RBS or source\",\"<b>Simulation \u2014 Monte Carlo</b> (produces P50/P80 cost and schedule distributions)\",\"<b>Sensitivity analysis</b> \u2014 tornado diagram\",\"<b>Decision tree analysis</b> and <b>expected monetary value</b> (EMV = probability \u00d7 impact)\",\"Influence diagrams; interviews; facilitation\",\"Data representation \u2014 bubble chart, hierarchical charts\"],\n o:[\"Project document updates \u2014 <b>risk register</b> with prioritised risks and scores, <b>risk report</b> with overall project risk exposure and quantified distributions\"],\n tip:\"The merge does not merge the logic. Qualitative prioritises individual risks by subjective scoring; quantitative models the aggregate numerically. A P80 above the approved ceiling is a governance conversation, not an estimating problem to reverse-engineer.\"},\n\n{d:\"Risk\",f:\"Planning\",n:\"Plan Risk Responses\",new:\"Retained.\",\n why:\"Develops options and actions to reduce threats and enhance opportunities, assigns owners, and funds the response \u2014 including what happens if the response fails.\",\n i:[\"Project management plan \u2014 risk management plan, resource management plan, cost baseline\",\"Project documents \u2014 lessons learned register, project schedule, team assignments, resource calendars, <b>risk register</b>, <b>risk report</b>, stakeholder register\",\"EEFs and OPAs\"],\n t:[\"Expert judgment; interviews; facilitation\",\"<b>Strategies for threats</b> \u2014 escalate, avoid, transfer, mitigate, accept\",\"<b>Strategies for opportunities</b> \u2014 escalate, exploit, share, enhance, accept\",\"<b>Contingent response strategies</b> \u2014 triggered by defined conditions\",\"Strategies for overall project risk\",\"Data analysis \u2014 alternatives analysis, cost-benefit analysis\",\"Decision making \u2014 MCDA\"],\n o:[\"Change requests\",\"Project management plan updates \u2014 including contingency reserve\",\"Project document updates \u2014 <b>risk register</b> with agreed responses, owners, <b>residual and secondary risks</b>, contingency and fallback plans, triggers\"],\n tip:\"Escalate is not a strategy of last resort \u2014 it is correct when the risk falls outside the project's authority. Escalated risks leave the project register and enter the programme or portfolio register.\"},\n\n{d:\"Risk\",f:\"Executing\",n:\"Implement Risk Responses\",new:\"Retained.\",\n why:\"Executes the agreed responses. The process exists because the most common risk failure is not poor analysis \u2014 it is a well-documented response that nobody performs.\",\n i:[\"Project management plan \u2014 risk management plan\",\"Project documents \u2014 lessons learned register, <b>risk register</b>, risk report\",\"OPAs\"],\n t:[\"Expert judgment\",\"Interpersonal skills \u2014 <b>influencing</b>\",\"PMIS\"],\n o:[\"Change requests\",\"Project document updates \u2014 risk register, issue log, lessons learned register\"],\n tip:\"When an identified, analysed, and reserved-for risk occurs, drawing the reserve and executing the planned response is the system working. Escalating it as a crisis signals that reserves do not buy decisions.\"},\n\n{d:\"Risk\",f:\"Monitoring & Controlling\",n:\"Monitor Risks\",new:\"Retained.\",\n why:\"Tracks identified risks, monitors residual risks, identifies new ones, evaluates response effectiveness, and confirms whether risk assumptions still hold.\",\n i:[\"Project management plan \u2014 risk management plan\",\"Project documents \u2014 issue log, lessons learned register, risk register, risk report\",\"<b>Work performance data</b> and <b>work performance reports</b>\"],\n t:[\"Data analysis \u2014 <b>technical performance analysis</b>, <b>reserve analysis</b>, variance and trend analysis\",\"<b>Risk audits</b> \u2014 effectiveness of the risk process\",\"<b>Risk reviews</b> and meetings\"],\n o:[\"<b>Work performance information</b>\",\"Change requests\",\"Plan, document, and OPA updates\"],\n tip:\"Distinguish the two: a risk <b>audit</b> examines whether the risk process is working; a risk <b>review</b> examines whether individual risks have changed. Audit is process, review is content.\"}\n];\n\nconst IDX={}; P.forEach((p,i)=>IDX[p.n]=i);\n\n/* ================= CASE ================= */\nconst S={stage:0,cost:12.0,sched:0,risk:0,stk:70,value:0};\n\nconst STAGES=[\n{key:\"INITIATING\",name:\"Initiating\",no:\"01\",\n brief:\"Your organisation has committed publicly to opening a new regional service centre. You are handed a two-page concept note, a $12.0M ceiling, and an opening date already announced to customers and tied to a contractual service commitment. Nothing else exists: no charter, no stakeholder register, no baseline, no team.\",\n lens:\"<b>Reading this in your own discipline.</b> Replace \\u201cservice centre\\u201d with whatever your organisation builds, deploys, or stands up \u2014 a plant, a ward, a branch, a platform, a campus programme. The governance questions are identical; only the nouns change.\",\n procs:[\n  {n:\"Initiate Project or Phase\",c:\"Charter authorising you as PM, naming the sponsor, and fixing what success actually means.\"},\n  {n:\"Identify Stakeholders\",c:\"31 parties registered: the regulator, the operations director who will inherit the centre, the finance function, a staff association, the local community, and the supplier market.\"}\n ],\n dec:[\n {q:\"The concept note frames success as \\u201copen by the announced date, within $12.0M.\\u201d The sponsor wants that written into the charter as the success criteria. What do you do?\",\n  o:[\n  {t:\"Write it as stated \u2014 the sponsor owns the charter and both constraints are real and public.\",v:\"poor\",c:0.10,s:0,r:0.20,k:-4,val:-10,\n   f:\"Constraints are not success criteria. You have defined the project by its output, and every later trade-off will be judged against a date and a number rather than against whether the centre actually works when it opens.\",\n   p:\"Focus on Value \u2014 value is the ultimate success driver, and it absorbs the 7th Edition's adaptability and change-enablement principles.\"},\n  {t:\"Add measurable outcome criteria alongside the constraints: service capacity at opening, staff certified and ready, and systems availability sustained through the first month.\",v:\"best\",c:0,s:0,r:-0.10,k:6,val:20,\n   f:\"Correct. The charter now states what the centre must achieve, not only when it must exist. Every subsequent change request can be tested against benefit \u2014 which is exactly what the Governance domain is for.\",\n   p:\"Focus on Value + Adopt a Holistic View \u2014 success is defined at the outcome level, not the deliverable level.\"},\n  {t:\"Defer the success criteria until requirements have been elicited during planning.\",v:\"mid\",c:0.03,s:2,r:0.08,k:-1,val:0,\n   f:\"Understandable but weak. Requirements elicitation needs a value frame to be judged against; without one you will collect a wish list and then cut it by budget rather than by benefit.\",\n   p:\"Focus on Value \u2014 deferring the value definition defers the only stable decision criterion you have.\"}]},\n {q:\"A staff association representing the employees who will transfer into the new centre has no contractual role and no approval authority. The sponsor's view: \\u201cThey are noise. Keep them off the register.\\u201d\",\n  o:[\n  {t:\"Comply \u2014 the register should hold parties with contractual or approval authority.\",v:\"poor\",c:0,s:0,r:0.35,k:-8,val:-5,\n   f:\"You have removed your earliest warning system. A group with no formal authority but real influence over the people you need becomes a staffing and reputational problem you will discover during execution, at the worst possible cost.\",\n   p:\"Build an Empowered Culture \u2014 the 8th Edition broadened this principle beyond the team to all stakeholders.\"},\n  {t:\"Register them, classify by power and interest, and open an early information channel.\",v:\"best\",c:0.02,s:0,r:-0.22,k:7,val:10,\n   f:\"Correct. Identification is about influence, not authority. Early engagement converts a future objector into a reviewer, and it gives you a channel into the workforce you are about to reorganise.\",\n   p:\"Integrate Sustainability Within All Project Areas \u2014 new in the 8th Edition, and its social dimension has stakeholder consequences from day one.\"},\n  {t:\"Register them but take no action until the transfer plan is ready.\",v:\"mid\",c:0,s:1,r:0.10,k:0,val:0,\n   f:\"Half a decision. A register that is never worked is documentation, not engagement. You will meet them anyway \u2014 later, in public, and on their terms.\",\n   p:\"Focus on Value \u2014 engagement absorbed into this principle is continuous, not event-driven.\"}]}]},\n\n{key:\"PLANNING\",name:\"Planning\",no:\"02\",\n brief:\"Charter signed. You have nine weeks to produce an integrated baseline. The premises fit-out is well understood and will run predictive. The core systems deployment and process design are volatile and will run in iterations. Two domains will fight you: Finance, because the ceiling was set before scope existed, and Risk, because nobody has surveyed the building you were given.\",\n lens:\"<b>Reading this in your own discipline.</b> Every project has a stable package and a volatile one. Whether it is civils versus software, hardware versus training, or clinical build versus workflow redesign, the planning problem is the same: one baseline, two rates of change.\",\n procs:[\n  {n:\"Integrate and Align Project Plans\",c:\"Nine subsidiary plans reconciled \u2014 this is where you catch the resource plan contradicting the schedule.\"},\n  {n:\"Plan Sourcing Strategy\",c:\"What you build in-house versus buy, how work is packaged, and which contract type each package can bear.\"},\n  {n:\"Plan Scope Management\",c:\"Two change regimes: tight tolerance on fit-out, backlog refinement on systems and process design.\"},\n  {n:\"Elicit and Analyze Requirements\",c:\"Facilitated sessions with the operations director and front-line staff \u2014 not a form sent to department heads.\"},\n  {n:\"Define Scope\",c:\"Exclusions matter most: no changes to the national platform, no work beyond the leased floor plate.\"},\n  {n:\"Develop Scope Structure\",c:\"WBS for the fit-out package, a refined product backlog for systems and process design.\"},\n  {n:\"Plan Schedule Management\",c:\"Monthly baseline review on the predictive side, two-week iterations on the adaptive side.\"},\n  {n:\"Develop Schedule\",c:\"Critical path runs through systems integration testing, not through the fit-out everyone is watching.\"},\n  {n:\"Plan Financial Management\",c:\"Funding drawdown profile agreed with finance \u2014 quarterly release, not a single allocation.\"},\n  {n:\"Estimate Costs\",c:\"Parametric on fit-out area rates; three-point on systems integration and training.\"},\n  {n:\"Develop Budget\",c:\"Cost baseline $11.4M plus $0.6M management reserve held outside it.\"},\n  {n:\"Plan Stakeholder Engagement\",c:\"Engagement assessment matrix built: current versus desired level for all 31 parties.\"},\n  {n:\"Plan Communications Management\",c:\"Communications sits inside the Stakeholders domain now \u2014 plan it here, not separately.\"},\n  {n:\"Plan Resource Management\",c:\"RACI plus a team charter; the operations lead must be seconded 10 months before opening.\"},\n  {n:\"Estimate Resources\",c:\"60 staff to recruit, plus trainers, integrators, and a commissioning team with long lead times.\"},\n  {n:\"Plan Risk Management\",c:\"Thresholds agreed with the sponsor: any single risk above $0.4M EMV escalates.\"},\n  {n:\"Identify Risks\",c:\"41 risks logged. Top three: unsurveyed premises condition, recruitment shortfall in a tight labour market, and a pending change to the service regulation.\"},\n  {n:\"Perform Risk Analysis\",c:\"Qualitative prioritisation feeds quantitative modelling \u2014 Monte Carlo puts P80 at $12.9M.\"},\n  {n:\"Plan Risk Responses\",c:\"Premises condition: mitigate by commissioning an early survey. Recruitment: transfer part of the risk to an agency retainer.\"}\n ],\n dec:[\n {q:\"Quantitative analysis returns P80 = $12.9M against an approved ceiling of $12.0M. The sponsor has already given the board that number. The baseline is due Friday.\",\n  o:[\n  {t:\"Baseline at $12.0M and manage the gap through aggressive reserve drawdown.\",v:\"poor\",c:0.75,s:6,r:0.55,k:-9,val:-15,\n   f:\"You have baselined a number you know is wrong. Reserve will be gone by month eight, and the first honest conversation with the board will happen from a position of failure rather than foresight.\",\n   p:\"Be an Accountable Leader \u2014 merges stewardship and leadership behaviours; integrity here is a competency, not a virtue.\"},\n  {t:\"Present the P80 distribution to the sponsor with two funded options: raise the ceiling, or descope the second service line to a later phase.\",v:\"best\",c:0.15,s:0,r:-0.40,k:8,val:15,\n   f:\"Correct. You are not asking for money \u2014 you are handing the sponsor a decision with quantified consequences and a stated benefit trade-off. This is what the Finance domain replaced Cost management to do.\",\n   p:\"Be an Accountable Leader + Focus on Value \u2014 the descope option is framed by benefit retained, not scope removed.\"},\n  {t:\"Rerun the simulation with tighter three-point ranges to bring P80 under the ceiling.\",v:\"poor\",c:0.60,s:4,r:0.70,k:-6,val:-10,\n   f:\"That is estimate manipulation with a technical vocabulary. Narrowing ranges without new information does not reduce uncertainty \u2014 it conceals it, and it corrupts the one artifact the board will rely on.\",\n   p:\"Embed Quality Into Processes and Deliverables \u2014 the quality of the estimating process is itself in scope for this principle.\"}]},\n {q:\"Your sourcing strategy has to package the work. The systems and process-design scope will keep changing for another six months. The fit-out scope is fully defined today.\",\n  o:[\n  {t:\"One fixed-price contract covering everything \u2014 cleanest interface, single point of accountability.\",v:\"poor\",c:0.48,s:3,r:0.45,k:-5,val:-8,\n   f:\"You have transferred undefined scope on a fixed price. The supplier will price the ambiguity into the bid, and every design iteration afterwards becomes a variation claim.\",\n   p:\"Adopt a Holistic View \u2014 contract form and delivery approach are interacting parts of one system.\"},\n  {t:\"Split the packages: fixed price for the fit-out, cost-reimbursable with a target price for systems and process design.\",v:\"best\",c:0.05,s:0,r:-0.30,k:5,val:12,\n   f:\"Correct. Contract type follows scope maturity, not organisational habit. You have matched commercial risk to actual definition \u2014 and kept the strategic sourcing decision inside the Governance domain where the 8th Edition puts it.\",\n   p:\"Adopt a Holistic View \u2014 tailoring is now a dedicated section of the Guide rather than a principle, but the reasoning is unchanged.\"},\n  {t:\"Delay all contracting until the systems scope stabilises in six months.\",v:\"mid\",c:0.18,s:9,r:0.22,k:-2,val:0,\n   f:\"You protected commercial clarity and spent nine weeks of float doing it. The fit-out package was ready to award \u2014 holding it hostage to an unrelated package is a false coupling.\",\n   p:\"Adopt a Holistic View \u2014 recognising that two packages have independent readiness is part of seeing the system.\"}]}]},\n\n{key:\"EXECUTING\",name:\"Executing\",no:\"03\",\n brief:\"Month 7. Fit-out is under way, the systems team is on its fourth iteration, and the building survey you funded has come back worse than assumed: the floor loading is inadequate and the server room needs structural reinforcement. Meanwhile your seconded operations lead has resigned, and the staff association has asked to walk the site.\",\n lens:\"<b>Reading this in your own discipline.</b> The pattern here is universal: a funded risk materialises, a key person with undocumented knowledge leaves, and a stakeholder you cultivated early asks for access. Nothing about it is sector-specific.\",\n procs:[\n  {n:\"Manage Project Execution\",c:\"Deliverables produced, approved changes implemented, work performance data generated.\"},\n  {n:\"Manage Project Knowledge\",c:\"The departing operations lead holds the escalation logic nobody has ever written down.\"},\n  {n:\"Manage Quality Assurance\",c:\"Process audit on the systems team's iteration discipline \u2014 assurance, not inspection of output.\"},\n  {n:\"Manage Stakeholder Engagement\",c:\"Staff association site walk hosted; two workflow comments accepted, one declined with written rationale.\"},\n  {n:\"Manage Communications\",c:\"Sits inside the Stakeholders domain in the 8th Edition.\"},\n  {n:\"Acquire Resources\",c:\"Replacement operations lead sourced; a six-week overlap funded from reserve.\"},\n  {n:\"Lead the Team\",c:\"Merges Develop Team and Manage Team \u2014 capability building and performance direction are one act.\"},\n  {n:\"Implement Risk Responses\",c:\"The structural response executes against the premises risk you identified and reserved for in planning.\"}\n ],\n dec:[\n {q:\"The structural reinforcement adds $0.52M and four weeks. Your premises risk carried a $0.45M mitigation reserve. The fit-out contractor offers to absorb the delay by working double shifts, at your cost.\",\n  o:[\n  {t:\"Accept the double shifts immediately to protect the announced opening date.\",v:\"mid\",c:0.72,s:0,r:0.15,k:0,val:0,\n   f:\"Possibly right \u2014 but you decided before assessing. Compressed shift working on structural alterations raises defect and safety exposure that you have not priced, on the one part of the building nothing else can be built on.\",\n   p:\"Embed Quality Into Processes and Deliverables \u2014 schedule recovery that degrades the process degrades the asset.\"},\n  {t:\"Draw the reserve, execute the reinforcement as planned, and route the schedule impact through Assess and Implement Changes with a quality and safety assessment of the double-shift option.\",v:\"best\",c:0.52,s:2,r:-0.35,k:4,val:8,\n   f:\"Correct. The risk was identified, analysed, and reserved for \u2014 this is the response working as designed. The double-shift offer is a change, and changes get assessed before they get accepted.\",\n   p:\"Embed Quality + Be an Accountable Leader \u2014 the reserve exists precisely so this is a decision and not a crisis.\"},\n  {t:\"Escalate the whole matter to the sponsor and pause the work pending direction.\",v:\"poor\",c:0.30,s:7,r:0.38,k:-6,val:-8,\n   f:\"You escalated a risk you had already been funded to manage. Pausing burns float you cannot recover, and it signals to the sponsor that reserves do not buy decisions.\",\n   p:\"Be an Accountable Leader \u2014 accountability is not delegation upward.\"}]},\n {q:\"Your operations lead leaves in three weeks. She holds the undocumented judgement about when a case gets escalated and to whom \u2014 the logic the whole service model depends on.\",\n  o:[\n  {t:\"Ask her to write a handover document before she leaves.\",v:\"mid\",c:0.02,s:1,r:0.12,k:0,val:0,\n   f:\"A document captures explicit knowledge. Escalation judgement is tacit \u2014 it lives in calls she has never had to justify in writing, and a rushed document will miss exactly those.\",\n   p:\"Adopt a Holistic View \u2014 knowledge in a system is not all of one kind.\"},\n  {t:\"Pair the incoming lead with her for the full three weeks, sitting on live cases together, and record the walkthroughs.\",v:\"best\",c:0.08,s:0,r:-0.20,k:5,val:10,\n   f:\"Correct. Tacit knowledge transfers through observation and shared practice, not documentation. This is why Manage Project Knowledge is an executing process rather than a closing one.\",\n   p:\"Build an Empowered Culture \u2014 continuity is a property of the team, not of the archive.\"},\n  {t:\"Accept the loss and rely on the systems supplier's business analyst, who has documented the workflows.\",v:\"poor\",c:0.20,s:3,r:0.48,k:-5,val:-12,\n   f:\"You have transferred owner knowledge to a party that leaves at handover. The operations team inherits a service they cannot explain and did not design.\",\n   p:\"Integrate Sustainability \u2014 economic sustainability includes the organisation's capability to run what you hand it.\"}]}]},\n\n{key:\"MONITORING\",name:\"Monitoring & Controlling\",no:\"04\",\n brief:\"Month 13. Earned value shows CPI 0.94 and SPI 0.97. The regulator has published a change to the service standard that requires an additional verification step in every transaction \u2014 a genuine external change. The staff association has gone quiet, which your engagement matrix flags as a drop from supportive to neutral. Two of these ten processes will decide whether the programme lands.\",\n lens:\"<b>Reading this in your own discipline.</b> A systemic cost variance, a mandatory external requirement, and a stakeholder cooling off \u2014 this is the standard mid-project condition in every sector. The response is governance, not heroics.\",\n procs:[\n  {n:\"Monitor and Control Project Performance\",c:\"Converts raw data into work performance reports the sponsor can decide from.\"},\n  {n:\"Assess and Implement Changes\",c:\"The mandatory regulatory change enters here \u2014 mandatory does not mean unpriced.\"},\n  {n:\"Validate Scope\",c:\"Formal acceptance of the completed fit-out by the operations director.\"},\n  {n:\"Monitor and Control Scope\",c:\"Absorbs product-correctness checking; Control Quality no longer exists as a standalone process.\"},\n  {n:\"Monitor and Control Schedule\",c:\"SPI 0.97; the critical path has moved onto systems integration testing.\"},\n  {n:\"Monitor and Control Finances\",c:\"Earned value management lives here in the 8th Edition.\"},\n  {n:\"Monitor Stakeholder Engagement\",c:\"Matrix movement detected: staff association supportive \u2192 neutral.\"},\n  {n:\"Monitor Communications\",c:\"Weekly report open rate has fallen to 20% \u2014 distribution is not communication.\"},\n  {n:\"Monitor and Control Resourcing\",c:\"Recruitment is running 8 hires behind the curve needed for training to start on time.\"},\n  {n:\"Monitor Risks\",c:\"The regulatory change was a watch-list item. It has now occurred.\"}\n ],\n dec:[\n {q:\"CPI is 0.94 with 40% of the work remaining. The sponsor asks for a single number: what will this cost at completion?\",\n  o:[\n  {t:\"Actual cost so far plus the remaining budget \u2014 the variances to date were one-off events.\",v:\"poor\",c:0.65,s:2,r:0.42,k:-7,val:-8,\n   f:\"That is EAC = AC + (BAC \u2212 EV), which assumes all future work performs exactly to plan. With a 0.94 CPI driven by structural rework and rehired staff, that assumption has no evidence behind it.\",\n   p:\"Embed Quality Into Processes \u2014 the quality of a forecast is process quality.\"},\n  {t:\"EAC = BAC \u00f7 CPI, presented as a range against the P80 distribution with the drivers named.\",v:\"best\",c:0.28,s:0,r:-0.28,k:6,val:12,\n   f:\"Correct. The CPI-based forecast assumes the current performance pattern continues, which is the defensible assumption here. Giving a range with named drivers keeps the sponsor deciding rather than reacting.\",\n   p:\"Be an Accountable Leader + Focus on Value \u2014 a forecast is a decision input, not a verdict.\"},\n  {t:\"Decline to forecast until the regulatory change has been priced.\",v:\"mid\",c:0.10,s:3,r:0.20,k:-3,val:0,\n   f:\"The change is real, but it is not the whole picture. Withholding a forecast because one input is unresolved leaves the sponsor blind to the systemic variance that already exists independently of it.\",\n   p:\"Focus on Value \u2014 information withheld has a cost.\"}]},\n {q:\"The regulator's additional verification step is mandatory and external. The systems supplier submits a $0.86M variation to build it. Your management reserve stands at $0.28M.\",\n  o:[\n  {t:\"Approve it \u2014 regulatory changes are non-negotiable and outside your control.\",v:\"poor\",c:0.86,s:3,r:0.35,k:-4,val:-5,\n   f:\"Mandatory does not mean unpriced. You accepted a supplier's number for scope neither party had defined, on a package where you hold no independent benchmark.\",\n   p:\"Be an Accountable Leader \u2014 external compulsion is not a reason to stop governing.\"},\n  {t:\"Run it through Assess and Implement Changes: validate the technical minimum the regulation actually requires, price it independently, then take a funded change to the sponsor.\",v:\"best\",c:0.55,s:1,r:-0.22,k:6,val:10,\n   f:\"Correct. The change gate exists for exactly this. Independent pricing on a mandatory change is where Governance earns its keep, and a reserve shortfall is a sponsor decision \u2014 not something a PM conceals.\",\n   p:\"Adopt a Holistic View + Be an Accountable Leader.\"},\n  {t:\"Absorb what the reserve covers and defer the balance to a post-opening phase.\",v:\"mid\",c:0.28,s:0,r:0.60,k:-2,val:-14,\n   f:\"You cannot part-comply with a service regulation. Deferring a mandatory verification step past opening converts a cost problem into an authorisation-to-operate problem.\",\n   p:\"Integrate Sustainability \u2014 compliance sits inside the quality and sustainability envelope, not beside it.\"}]}]},\n\n{key:\"CLOSING\",name:\"Closing\",no:\"05\",\n brief:\"Month 18. The centre is fitted out, systems are live, and 30 days of readiness testing has returned 94% transaction availability against a 95% specification. The operations team is on site. The supplier wants final acceptance and release of retention. One process closes this programme \u2014 and it is the one most projects perform worst.\",\n lens:\"<b>Reading this in your own discipline.</b> A performance shortfall at handover, a supplier arguing it is already fixed, and 140 pages of lessons nobody will read. Change the units and this is every closure meeting you have ever attended.\",\n procs:[\n  {n:\"Close Project or Phase\",c:\"The only process in the Closing focus area \u2014 acceptance, contracts, records, transition, and benefit handover in one.\"}\n ],\n dec:[\n {q:\"Availability is 94% against a 95% contractual specification, measured over 30 days. The supplier argues the shortfall came from a single integration fault already rectified, and requests final acceptance.\",\n  o:[\n  {t:\"Accept \u2014 the fault is rectified and one percentage point is within measurement noise.\",v:\"poor\",c:0,s:0,r:0.52,k:-6,val:-18,\n   f:\"You accepted against a specification that was not met, on an argument you did not verify. The operations team inherits a performance claim with no evidence behind it and no commercial leverage left to test it.\",\n   p:\"Embed Quality Into Processes and Deliverables \u2014 quality is verified at the deliverable, not negotiated at handover.\"},\n  {t:\"Extend the test window by 30 days with retention held, then close on evidence.\",v:\"best\",c:0.05,s:2,r:-0.50,k:5,val:22,\n   f:\"Correct. Retention is the last instrument you hold, and a second window costs almost nothing while the supplier is still mobilised. Close Project or Phase is an evidence process, not an administrative one.\",\n   p:\"Embed Quality + Be an Accountable Leader \u2014 the service outlives the project, and so does this decision.\"},\n  {t:\"Accept conditionally with a warranty side-letter covering availability for 12 months.\",v:\"mid\",c:0.03,s:0,r:0.18,k:2,val:6,\n   f:\"Commercially reasonable and better than blind acceptance \u2014 but a warranty is a claim mechanism, not a demonstration. You have swapped evidence for recourse, and recourse costs the operator time it does not have.\",\n   p:\"Focus on Value \u2014 value confirmed beats value promised.\"}]},\n {q:\"Your programme has produced 140 pages of documented lessons. What actually happens to them?\",\n  o:[\n  {t:\"File them in the PMO repository and reference them in the closure report.\",v:\"poor\",c:0,s:0,r:0,k:-2,val:-8,\n   f:\"That is archiving, not learning. A repository nobody queries is an organisational asset with a book value of zero.\",\n   p:\"Adopt a Holistic View \u2014 the project sits inside a system that either learns or does not.\"},\n  {t:\"Convert the top eight into changes to the organisation's estimating norms, sourcing playbook, and stakeholder templates, each with a named owner.\",v:\"best\",c:0,s:0,r:0,k:4,val:16,\n   f:\"Correct. Knowledge that does not change a future decision was never captured. Naming an owner is what separates a lesson from an observation.\",\n   p:\"Build an Empowered Culture + Integrate Sustainability \u2014 organisational capability is the durable output.\"},\n  {t:\"Run a closure workshop with the project team and the operations group, then file.\",v:\"mid\",c:0,s:0,r:0,k:2,val:4,\n   f:\"The workshop matters \u2014 tacit knowledge moves in rooms, not repositories. But without a change to a norm or a template it evaporates when the team disperses.\",\n   p:\"Build an Empowered Culture.\"}]}]}\n];\n\n/* ================= SHARED RENDER ================= */\nfunction schematic(p){\n  return `<div class=\"why\">${p.why}</div>\n   <div class=\"delta\"><b>8th Edition change:</b> ${p.new}</div>\n   <div class=\"sch\">\n     <div class=\"col i\"><h5>Inputs</h5><ul>${p.i.map(x=>`<li>${x}</li>`).join('')}</ul></div>\n     <div class=\"arw\">\u25b6</div>\n     <div class=\"col t\"><h5>Tools &amp; Techniques</h5><ul>${p.t.map(x=>`<li>${x}</li>`).join('')}</ul></div>\n     <div class=\"arw\">\u25b6</div>\n     <div class=\"col o\"><h5>Outputs</h5><ul>${p.o.map(x=>`<li>${x}</li>`).join('')}</ul></div>\n   </div>\n   <div class=\"tip\"><span class=\"lb\">Workshop note</span>${p.tip}</div>`;\n}\nfunction bindProcs(root){\n  root.querySelectorAll('.ph').forEach(h=>h.onclick=()=>h.parentElement.classList.toggle('open'));\n}\n\n/* ================= MODE ================= */\ndocument.querySelector('.min').addEventListener('click',e=>{\n  const b=e.target.closest('.mode'); if(!b)return;\n  document.querySelectorAll('.mode').forEach(m=>m.classList.toggle('on',m===b));\n  const sim=b.dataset.m==='sim';\n  document.getElementById('simView').style.display=sim?'':'none';\n  document.getElementById('libView').style.display=sim?'none':'';\n  document.getElementById('panel').style.display=sim?'':'none';\n  document.getElementById('libbar').style.display=sim?'none':'';\n  window.scrollTo({top:0});\n});\n\n/* ================= SIMULATION ================= */\nconst rail=document.getElementById('rail'), area=document.getElementById('stageArea');\nlet answers={};\nfunction answeredIn(i){return Object.keys(answers).filter(k=>k.split('-')[0]==String(i)).length;}\nfunction fmt(){\n  document.getElementById('m-stage').textContent=(S.stage+1)+\" / 5\";\n  const c=document.getElementById('m-cost');\n  c.textContent=\"$\"+S.cost.toFixed(2)+\"M\"; c.className=\"val \"+(S.cost>12?\"dn\":S.cost<12?\"up\":\"\");\n  const sc=document.getElementById('m-sched');\n  sc.textContent=(S.sched>0?\"+\":\"\")+S.sched+\" wks\"; sc.className=\"val \"+(S.sched>0?\"dn\":\"up\");\n  const r=document.getElementById('m-risk');\n  r.textContent=\"$\"+Math.max(0,S.risk).toFixed(2)+\"M\"; r.className=\"val \"+(S.risk>0.3?\"dn\":S.risk<0?\"up\":\"gd\");\n  const k=document.getElementById('m-stk');\n  k.textContent=Math.max(0,Math.min(100,S.stk))+\"%\"; k.className=\"val \"+(S.stk>=70?\"up\":S.stk>=50?\"gd\":\"dn\");\n}\nfunction drawRail(){\n  rail.innerHTML=STAGES.map((s,i)=>\n   `<div class=\"st ${i===S.stage?'on':''} ${answeredIn(i)===s.dec.length?'done':''}\" data-i=\"${i}\">\n      <div class=\"no\">${s.no}</div><div class=\"nm\">${s.name}</div></div>`).join('');\n}\nrail.addEventListener('click',e=>{\n  const t=e.target.closest('.st'); if(!t)return;\n  S.stage=+t.dataset.i; draw(); window.scrollTo({top:0,behavior:'smooth'});\n});\n\nfunction draw(){\n  const s=STAGES[S.stage];\n  area.innerHTML=`\n  <div class=\"card\">\n    <div class=\"eyebrow\">Focus Area ${s.no} \u00b7 ${s.key}</div>\n    <h2>${s.name}</h2>\n    <div class=\"brief\">${s.brief}</div>\n    <div class=\"lens\">${s.lens}</div>\n    <h3>Processes performed in this focus area <span class=\"mono\" style=\"color:var(--blue);font-size:13px\">(${s.procs.length})</span></h3>\n    <p style=\"font-size:12.5px;color:var(--mute);margin-bottom:10px\">Each card shows how the process applies here. Open it for the full purpose, the 8th Edition change, and the inputs / tools and techniques / outputs schematic.</p>\n    <div id=\"ldg\">${s.procs.map(pr=>{\n      const p=P[IDX[pr.n]]; const num=IDX[pr.n]+1;\n      return `<div class=\"proc\">\n        <div class=\"ph\"><span class=\"idx\">${String(num).padStart(2,'0')}</span>\n         <div class=\"t\"><h4>${p.n}</h4><div class=\"ctx\">${pr.c}</div>\n          <div class=\"tags\"><span>${p.d}</span><span class=\"fa\">${p.f}</span></div></div>\n         <span class=\"caret\">\u25b6</span></div>\n        <div class=\"pb\">${schematic(p)}</div></div>`;}).join('')}</div>\n    <button class=\"mini\" id=\"expandStage\" style=\"margin-top:10px\">Open all ${s.procs.length} schematics</button>\n  </div>\n  ${s.dec.map((d,di)=>`\n  <div class=\"dec\">\n    <div class=\"hd\"><div class=\"tagl\">Decision ${S.stage+1}.${di+1}</div><h3>${s.name} gate</h3></div>\n    <div class=\"bd\"><div class=\"q\">${d.q}</div>\n      <div class=\"opts\" data-d=\"${di}\">${d.o.map((o,oi)=>\n        `<button class=\"opt\" data-o=\"${oi}\"><span class=\"ol\">${String.fromCharCode(65+oi)}</span>${o.t}</button>`).join('')}</div>\n      <div class=\"fb\" id=\"fb${di}\"></div></div>\n  </div>`).join('')}\n  <div class=\"navrow\">\n    <button class=\"btn alt\" id=\"back\" ${S.stage===0?'disabled':''}>\u2190 Previous</button>\n    <button class=\"btn\" id=\"fwd\">${S.stage===4?'Generate closure report':'Next focus area \u2192'}</button>\n  </div>`;\n\n  bindProcs(area);\n  document.getElementById('expandStage').onclick=e=>{\n    const cs=area.querySelectorAll('.proc');\n    const any=[...cs].some(c=>!c.classList.contains('open'));\n    cs.forEach(c=>c.classList.toggle('open',any));\n    e.target.textContent=any?'Close all schematics':`Open all ${s.procs.length} schematics`;\n  };\n\n  function paint(di,oi){\n    const o=STAGES[S.stage].dec[di].o[oi];\n    const box=area.querySelector(`.opts[data-d=\"${di}\"]`);\n    box.querySelectorAll('.opt').forEach((el,j)=>{\n      el.classList.remove('dim','best','mid','poor');\n      el.classList.add(j===oi?(o.v==='best'?'best':o.v==='mid'?'mid':'poor'):'dim');\n    });\n    const lab=o.v==='best'?'Strong call':o.v==='mid'?'Partially sound':'Weak call';\n    const col=o.v==='best'?'var(--ok)':o.v==='mid'?'var(--warn)':'var(--bad)';\n    const fb=document.getElementById('fb'+di);\n    fb.className='fb show';\n    fb.innerHTML=`<div class=\"verdict\" style=\"color:${col}\">${lab}</div>${o.f}\n      <div class=\"deltas\">\n        <span class=\"${o.c>0?'r':o.c<0?'g':''}\">EAC ${o.c>0?'+':''}$${o.c.toFixed(2)}M</span>\n        <span class=\"${o.s>0?'r':o.s<0?'g':''}\">Schedule ${o.s>0?'+':''}${o.s} wks</span>\n        <span class=\"${o.r>0?'r':o.r<0?'g':''}\">Risk EMV ${o.r>0?'+':''}$${o.r.toFixed(2)}M</span>\n        <span class=\"${o.k<0?'r':o.k>0?'g':''}\">Stakeholder ${o.k>0?'+':''}${o.k}%</span>\n      </div>\n      <div class=\"prin\"><b>Principle in play:</b> ${o.p}</div>`;\n  }\n  area.querySelectorAll('.opts').forEach(box=>{\n    box.addEventListener('click',e=>{\n      const b=e.target.closest('.opt'); if(!b)return;\n      const di=+box.dataset.d, key=S.stage+\"-\"+di;\n      if(answers[key]!==undefined)return;\n      const oi=+b.dataset.o, o=STAGES[S.stage].dec[di].o[oi];\n      answers[key]={v:o.v,oi};\n      S.cost+=o.c; S.sched+=o.s; S.risk+=o.r; S.stk+=o.k; S.value+=o.val;\n      paint(di,oi); fmt(); drawRail();\n    });\n  });\n  STAGES[S.stage].dec.forEach((d,di)=>{\n    const a=answers[S.stage+\"-\"+di]; if(a!==undefined)paint(di,a.oi);\n  });\n\n  document.getElementById('back').onclick=()=>{if(S.stage>0){S.stage--;draw();window.scrollTo({top:0,behavior:'smooth'});}};\n  document.getElementById('fwd').onclick=()=>{\n    if(S.stage<4){S.stage++;draw();window.scrollTo({top:0,behavior:'smooth'});}else report();\n  };\n  drawRail(); fmt();\n}\n\nfunction report(){\n  const vals=Object.values(answers);\n  const best=vals.filter(v=>v.v==='best').length, mid=vals.filter(v=>v.v==='mid').length;\n  const pct=vals.length?Math.round((best*100+mid*55)/(vals.length*100)*100):0;\n  const r=document.getElementById('report');\n  r.className='close-out show';\n  r.innerHTML=`\n   <div class=\"kicker\" style=\"color:var(--gold)\">Close Project or Phase \u00b7 Final Report</div>\n   <h2 style=\"margin:6px 0 2px\">The Horizon Programme</h2>\n   <div class=\"grade\">${pct}%</div>\n   <p style=\"margin-top:4px\">Governance quality across ${vals.length} of 10 decision gates \u2014 ${best} strong, ${mid} partial, ${vals.length-best-mid} weak.</p>\n   <div class=\"row\">\n     <div><small>Final EAC</small><b>$${S.cost.toFixed(2)}M</b></div>\n     <div><small>Schedule</small><b>${S.sched>0?'+':''}${S.sched} wks</b></div>\n     <div><small>Residual risk</small><b>$${Math.max(0,S.risk).toFixed(2)}M</b></div>\n     <div><small>Stakeholder</small><b>${Math.max(0,Math.min(100,S.stk))}%</b></div>\n     <div><small>Benefit index</small><b>${S.value>0?'+':''}${S.value}</b></div>\n   </div>\n   <p><b style=\"color:#fff\">Verdict.</b> ${\n     pct>=85?'Delivered on outcome, not just on output. Every gate was governed rather than reacted to \u2014 this is the standard the 2026 exam is written against.':\n     pct>=60?'The centre opens, but two or three gates were managed by instinct rather than by process. Revisit the partial calls and name the principle you traded away.':\n     'The programme completes, but governance was retrofitted after each event rather than applied before it. Re-run from Initiating and watch where the value definition was lost.'}</p>\n   <p style=\"margin-top:10px;font-size:13px;color:#93A9C6\">All 40 processes across 7 performance domains and 5 focus areas were exercised: Governance 9 \u00b7 Stakeholders 7 \u00b7 Scope 6 \u00b7 Risk 6 \u00b7 Resources 5 \u00b7 Finance 4 \u00b7 Schedule 3.</p>\n   <button class=\"btn\" style=\"margin-top:14px;background:var(--gold)\" onclick=\"location.reload()\">Run the programme again</button>`;\n  r.scrollIntoView({behavior:'smooth'});\n}\n\n/* ================= LIBRARY ================= */\nconst DOMS=[\"Governance\",\"Stakeholders\",\"Scope\",\"Risk\",\"Resources\",\"Finance\",\"Schedule\"];\nconst FAS=[\"Initiating\",\"Planning\",\"Executing\",\"Monitoring & Controlling\",\"Closing\"];\nlet fD=\"All\", fF=\"All\", fQ=\"\";\nconst chips=document.getElementById('chips');\nfunction drawChips(){\n  const dc=d=>P.filter(p=>p.d===d).length, fc=f=>P.filter(p=>p.f===f).length;\n  chips.innerHTML=`<button class=\"chip ${fD==='All'&&fF==='All'?'on':''}\" data-k=\"reset\">All 40</button>`+\n   DOMS.map(d=>`<button class=\"chip ${fD===d?'on':''}\" data-d=\"${d}\">${d}<span class=\"c\">${dc(d)}</span></button>`).join('')+\n   FAS.map(f=>`<button class=\"chip ${fF===f?'on':''}\" data-f=\"${f}\">${f}<span class=\"c\">${fc(f)}</span></button>`).join('');\n}\nchips.addEventListener('click',e=>{\n  const b=e.target.closest('.chip'); if(!b)return;\n  if(b.dataset.k==='reset'){fD='All';fF='All';}\n  else if(b.dataset.d)fD=(fD===b.dataset.d?'All':b.dataset.d);\n  else if(b.dataset.f)fF=(fF===b.dataset.f?'All':b.dataset.f);\n  drawChips(); drawLib();\n});\ndocument.getElementById('q').addEventListener('input',e=>{fQ=e.target.value.toLowerCase();drawLib();});\nconst strip=h=>h.replace(/<[^>]+>/g,'');\nfunction drawLib(){\n  const list=P.map((p,i)=>({p,i})).filter(({p})=>{\n    if(fD!=='All'&&p.d!==fD)return false;\n    if(fF!=='All'&&p.f!==fF)return false;\n    if(fQ&&!strip([p.n,p.why,p.new,p.tip,...p.i,...p.t,...p.o].join(' ')).toLowerCase().includes(fQ))return false;\n    return true;\n  });\n  document.getElementById('count').textContent=\n   `SHOWING ${list.length} OF 40 PROCESSES`+(fD!=='All'?` \u00b7 ${fD.toUpperCase()} DOMAIN`:'')+(fF!=='All'?` \u00b7 ${fF.toUpperCase()}`:'');\n  const el=document.getElementById('list');\n  if(!list.length){el.innerHTML='<div class=\"empty\">No process matches that filter.</div>';return;}\n  el.innerHTML=list.map(({p,i})=>`\n   <div class=\"proc\">\n     <div class=\"ph\"><span class=\"idx\">${String(i+1).padStart(2,'0')}</span>\n       <div class=\"t\"><h4>${p.n}</h4>\n         <div class=\"tags\"><span>${p.d}</span><span class=\"fa\">${p.f}</span></div></div>\n       <span class=\"caret\">\u25b6</span></div>\n     <div class=\"pb\">${schematic(p)}</div>\n   </div>`).join('');\n  bindProcs(el);\n}\ndocument.getElementById('expand').onclick=e=>{\n  const cs=document.querySelectorAll('#list .proc');\n  const any=[...cs].some(c=>!c.classList.contains('open'));\n  cs.forEach(c=>c.classList.toggle('open',any));\n  e.target.textContent=any?'Collapse all':'Expand all';\n};\n\ndrawChips(); drawLib(); draw();\n<\/script>\n</body>\n</html>\n";
