@@ -3538,21 +3538,13 @@ function refreshResultsList() {
   const filterCode = (document.getElementById('resultsFilterCode') || {}).value || '';
   const includeDeleted = (document.getElementById('resultsShowDeleted') || {}).checked || false;
   wrap.innerHTML = 'Loading...';
+  window._adminResultsSelected = window._adminResultsSelected || new Set();
   apiCall('getResults', { adminCode: adminSessionCode, code: filterCode.trim(), includeDeleted: includeDeleted })
     .then(results => {
       window._adminResultsCache = results;
-      // Bulk bar — only meaningful when filtering by one specific code
-      const bar = document.getElementById('resultsBulkBar');
-      if (bar) {
-        const codeFilter = filterCode.trim();
-        const liveForCode = results.filter(r => !r.deleted && (!codeFilter || String(r.code).toUpperCase() === codeFilter.toUpperCase()));
-        if (codeFilter && liveForCode.length > 0) {
-          bar.style.display = 'block';
-          bar.innerHTML = `\u26A0 Showing results for code <strong>${escHtml(codeFilter.toUpperCase())}</strong> \u2014 <button class="admin-btn danger" style="margin-left:8px;" onclick="deleteAllForCode('${escHtml(codeFilter.toUpperCase())}', ${liveForCode.length})">\u{1F5D1} Delete all ${liveForCode.length} result${liveForCode.length===1?'':'s'} for this code</button>`;
-        } else {
-          bar.style.display = 'none';
-        }
-      }
+      const liveIds = new Set(results.map(r => r.resultId).filter(Boolean));
+      window._adminResultsSelected.forEach(id => { if (!liveIds.has(id)) window._adminResultsSelected.delete(id); });
+      renderResultsBulkBar();
       if (!results.length) { wrap.innerHTML = '<div class="admin-note">No results found.</div>'; return; }
       results.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
       const deletedCount = results.filter(r => r.deleted).length;
@@ -3568,8 +3560,13 @@ function refreshResultsList() {
         const deletedTag = isDel
           ? `<div style="font-size:0.72rem;color:#B91C1C;margin-top:3px;">Deleted ${r.deletedAt ? new Date(r.deletedAt).toLocaleDateString() : ''}${r.deletedBy ? ' by ' + escHtml(r.deletedBy) : ''}</div>`
           : '';
+        const checked = r.resultId && window._adminResultsSelected.has(r.resultId) ? 'checked' : '';
+        const checkbox = r.resultId
+          ? `<input type="checkbox" class="no-print" onchange="toggleResultSelect('${escHtml(r.resultId)}', this.checked)" ${checked} style="cursor:pointer;width:16px;height:16px;" />`
+          : '';
         return `
         <tr ${rowStyle}>
+          <td class="no-print" style="text-align:center;">${checkbox}</td>
           <td>${r.timestamp ? new Date(r.timestamp).toLocaleString() : ''}${deletedTag}</td>
           <td><span class="admin-code-pill">${escHtml(r.code)}</span></td>
           <td>${escHtml(r.name)}</td>
@@ -3582,9 +3579,103 @@ function refreshResultsList() {
           </td>
         </tr>`;
       }).join('');
-      wrap.innerHTML = countHint + `<table class="admin-table"><tr><th>When</th><th>Code</th><th>Name</th><th>Mode</th><th>Label</th><th>Score</th><th></th></tr>${rows}</table>`;
+      const selectableResults = results.filter(r => r.resultId);
+      const allChecked = selectableResults.length > 0 && selectableResults.every(r => window._adminResultsSelected.has(r.resultId));
+      const headCheckbox = `<input type="checkbox" class="no-print" onchange="toggleResultSelectAll(this.checked)" ${allChecked ? 'checked' : ''} title="Select all" style="cursor:pointer;width:16px;height:16px;" />`;
+      wrap.innerHTML = countHint + `<table class="admin-table"><tr><th class="no-print" style="text-align:center;">${headCheckbox}</th><th>When</th><th>Code</th><th>Name</th><th>Mode</th><th>Label</th><th>Score</th><th></th></tr>${rows}</table>`;
     })
     .catch(err => { wrap.innerHTML = `<span class="admin-sync-bad">Could not load results: ${escHtml(String(err.message||err))}</span>`; });
+}
+
+function toggleResultSelect(resultId, isChecked) {
+  window._adminResultsSelected = window._adminResultsSelected || new Set();
+  if (isChecked) window._adminResultsSelected.add(resultId);
+  else window._adminResultsSelected.delete(resultId);
+  renderResultsBulkBar();
+}
+
+function toggleResultSelectAll(isChecked) {
+  window._adminResultsSelected = window._adminResultsSelected || new Set();
+  (window._adminResultsCache || []).forEach(r => {
+    if (!r.resultId) return;
+    if (isChecked) window._adminResultsSelected.add(r.resultId);
+    else window._adminResultsSelected.delete(r.resultId);
+  });
+  refreshResultsList();
+}
+
+function clearResultSelection() {
+  window._adminResultsSelected = new Set();
+  refreshResultsList();
+}
+
+function renderResultsBulkBar() {
+  const bar = document.getElementById('resultsBulkBar');
+  if (!bar) return;
+  const selected = window._adminResultsSelected || new Set();
+  const results = window._adminResultsCache || [];
+  const filterCode = (document.getElementById('resultsFilterCode') || {}).value || '';
+  const codeFilter = filterCode.trim();
+
+  if (selected.size > 0) {
+    const selectedResults = results.filter(r => r.resultId && selected.has(r.resultId));
+    const anyActive = selectedResults.some(r => !r.deleted);
+    const anyDeleted = selectedResults.some(r => r.deleted);
+    let actions = '';
+    if (anyActive) actions += `<button class="admin-btn danger" style="margin-left:8px;" onclick="bulkDeleteSelected()">\u{1F5D1} Delete selected</button>`;
+    if (anyDeleted) actions += `<button class="admin-btn gold" style="margin-left:8px;" onclick="bulkRestoreSelected()">\u21A9 Restore selected</button>`;
+    actions += `<button class="admin-btn" style="margin-left:8px;" onclick="clearResultSelection()">Clear selection</button>`;
+    bar.style.display = 'block';
+    bar.innerHTML = `<strong>${selected.size}</strong> result${selected.size===1?'':'s'} selected${actions}`;
+    return;
+  }
+  // Bulk bar \u2014 fall back to the by-code shortcut when nothing is checked
+  const liveForCode = results.filter(r => !r.deleted && (!codeFilter || String(r.code).toUpperCase() === codeFilter.toUpperCase()));
+  if (codeFilter && liveForCode.length > 0) {
+    bar.style.display = 'block';
+    bar.innerHTML = `\u26A0 Showing results for code <strong>${escHtml(codeFilter.toUpperCase())}</strong> \u2014 <button class="admin-btn danger" style="margin-left:8px;" onclick="deleteAllForCode('${escHtml(codeFilter.toUpperCase())}', ${liveForCode.length})">\u{1F5D1} Delete all ${liveForCode.length} result${liveForCode.length===1?'':'s'} for this code</button>`;
+  } else {
+    bar.style.display = 'none';
+  }
+}
+
+function bulkDeleteSelected() {
+  const selected = window._adminResultsSelected || new Set();
+  const results = (window._adminResultsCache || []).filter(r => r.resultId && selected.has(r.resultId) && !r.deleted);
+  if (!results.length) { alert('Nothing selected to delete.'); return; }
+  const msg = `Delete ${results.length} selected result${results.length===1?'':'s'}?\n\nThey will be soft-deleted \u2014 you can restore them by toggling "Show deleted".`;
+  if (!confirm(msg)) return;
+  runResultsBulkAction(results, 'deleteResult', { actorLabel: (currentUser && currentUser.name) ? currentUser.name : 'admin' });
+}
+
+function bulkRestoreSelected() {
+  const selected = window._adminResultsSelected || new Set();
+  const results = (window._adminResultsCache || []).filter(r => r.resultId && selected.has(r.resultId) && r.deleted);
+  if (!results.length) { alert('Nothing selected to restore.'); return; }
+  runResultsBulkAction(results, 'restoreResult', {});
+}
+
+function runResultsBulkAction(results, action, extraParams) {
+  let done = 0, failed = 0;
+  const wrap = document.getElementById('resultsListWrap');
+  if (wrap) wrap.innerHTML = `<div class="admin-note">Processing 0 of ${results.length}...</div>`;
+  const next = (i) => {
+    if (i >= results.length) {
+      const summary = failed ? `Done: ${done}, ${failed} failed.` : `Done: ${done} of ${results.length}.`;
+      window._adminResultsSelected = new Set();
+      alert(summary);
+      refreshResultsList();
+      return;
+    }
+    apiCall(action, Object.assign({ adminCode: adminSessionCode, resultId: results[i].resultId }, extraParams))
+      .then(() => { done++; })
+      .catch(() => { failed++; })
+      .finally(() => {
+        if (wrap) wrap.innerHTML = `<div class="admin-note">Processing ${done + failed} of ${results.length}...</div>`;
+        next(i + 1);
+      });
+  };
+  next(0);
 }
 
 function deleteResultRow(idx) {
