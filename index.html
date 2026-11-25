@@ -1751,6 +1751,66 @@
   .login-admin-link { display:inline-block; margin: 10px 8px 0 8px; font-size:0.82rem; color:#2E75B6; cursor:pointer; text-decoration:underline; }
   .login-links-row { margin-top: 18px; padding-top: 14px; border-top: 1px solid #EEF2F7; }
 
+  /* ===== LANDING PAGE ===== */
+  .landing-page { text-align: left; }
+  .landing-topbar { background: #15294A; border-radius: 10px 10px 0 0; padding: 9px 18px; }
+  .landing-topbar-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .landing-topbar-inner span { font-size: 0.76rem; color: #B9CBE4; }
+  .landing-topbar-inner a { color: #B9CBE4; text-decoration: none; }
+  .landing-topbar-link { color: #FFD56B !important; cursor: pointer; font-weight: 700; margin-left: 16px; font-size: 0.78rem; }
+  .landing-nav { background: #fff; border-bottom: 1px solid #EEF2F7; padding: 14px 18px; }
+  .landing-nav-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .landing-logo { font-weight: 800; color: #1F3864; font-size: 1.05rem; display: flex; align-items: center; gap: 8px; }
+  .landing-logo-badge { background: #B8860B; color: #fff; border-radius: 6px; padding: 3px 7px; font-size: 0.68rem; font-weight: 800; }
+  .landing-nav-links { display: flex; gap: 18px; font-size: 0.82rem; flex-wrap: wrap; }
+  .landing-nav-links span { color: #2E75B6; cursor: pointer; font-weight: 600; }
+  .landing-nav-links span:hover { color: #1F3864; text-decoration: underline; }
+  .landing-nav-cta { background: #1F3864; color: #fff; padding: 9px 18px; border-radius: 8px;
+    font-size: 0.82rem; font-weight: 700; cursor: pointer; border: none; }
+  .landing-nav-cta:hover { background: #2E75B6; }
+
+  .landing-hero { background: linear-gradient(135deg, #1F3864 0%, #15294A 100%); padding: 42px 24px 48px; text-align: center; }
+  .landing-hero h1 { color: #fff; font-size: 1.7rem; line-height: 1.35; font-weight: 800; margin-bottom: 14px; max-width: 620px; margin-left: auto; margin-right: auto; }
+  .landing-hero h1 .accent { color: #FFD56B; }
+  .landing-hero p.sub { color: rgba(255,255,255,0.88); font-size: 0.96rem; line-height: 1.55; margin-bottom: 26px; max-width: 580px; margin-left: auto; margin-right: auto; }
+  .landing-hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .landing-btn-primary { background: #B8860B; color: #fff; border: none; padding: 14px 24px; border-radius: 9px;
+    font-size: 0.98rem; font-weight: 800; cursor: pointer; box-shadow: 0 3px 12px rgba(184,134,11,0.4); transition: transform .15s, background .15s; }
+  .landing-btn-primary:hover { background: #C9931A; transform: translateY(-1px); }
+  .landing-btn-secondary { background: rgba(255,255,255,0.1); color: #fff; border: 1.5px solid rgba(255,255,255,0.5);
+    padding: 14px 24px; border-radius: 9px; font-size: 0.98rem; font-weight: 700; cursor: pointer; transition: background .15s; }
+  .landing-btn-secondary:hover { background: rgba(255,255,255,0.2); }
+
+  .landing-steps-section { padding: 38px 18px; background: #F5F9FE; }
+  .landing-section-title { text-align: center; color: #1F3864; font-size: 1.2rem; font-weight: 800; margin-bottom: 6px; }
+  .landing-section-subtitle { text-align: center; color: #6B7280; font-size: 0.86rem; margin-bottom: 26px; }
+  .landing-steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  @media (max-width: 760px) { .landing-steps-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .landing-steps-grid { grid-template-columns: 1fr; } .landing-hero h1 { font-size: 1.4rem; } }
+  .landing-step-card { background: #fff; border-top: 4px solid #B8860B; border-radius: 10px; padding: 18px 16px; box-shadow: 0 2px 10px rgba(31,56,100,0.07); }
+  .landing-step-num { width: 30px; height: 30px; border-radius: 8px; background: #1F3864; color: #fff; display: flex;
+    align-items: center; justify-content: center; font-weight: 800; font-size: 0.88rem; margin-bottom: 12px; }
+  .landing-step-card h3 { color: #1F3864; font-size: 0.92rem; font-weight: 800; margin-bottom: 6px; }
+  .landing-step-card p { color: #6B7280; font-size: 0.8rem; line-height: 1.45; margin: 0; }
+
+  .landing-about-section { padding: 40px 18px; }
+  .landing-about-card { max-width: 700px; margin: 0 auto; display: flex; gap: 22px; align-items: center;
+    background: linear-gradient(135deg, #FFF8E7 0%, #FFFDF5 100%); border: 1px solid #E8D9A8; border-radius: 14px;
+    padding: 26px; box-shadow: 0 3px 14px rgba(184,134,11,0.1); }
+  .landing-about-photo { flex: 0 0 auto; width: 100px; height: 100px; border-radius: 50%; object-fit: cover;
+    border: 4px solid #B8860B; box-shadow: 0 3px 10px rgba(0,0,0,0.15); }
+  .landing-about-name { font-weight: 800; color: #1F3864; font-size: 1.1rem; margin-bottom: 4px; }
+  .landing-about-creds { font-size: 0.8rem; color: #7A5A10; font-weight: 700; margin-bottom: 10px; line-height: 1.4; }
+  .landing-about-pitch { font-size: 0.88rem; color: #5B6B85; font-style: italic; line-height: 1.5; margin: 0; }
+  @media (max-width: 620px) { .landing-about-card { flex-direction: column; text-align: center; padding: 22px 18px; } }
+
+  .landing-final-cta { background: #1F3864; padding: 38px 18px; text-align: center; border-radius: 10px; margin: 0 0 18px; }
+  .landing-final-cta h2 { color: #fff; font-size: 1.2rem; margin-bottom: 18px; font-weight: 800; }
+
+  .landing-footer { background: #15294A; padding: 20px 18px; text-align: center; border-radius: 0 0 10px 10px; }
+  .landing-footer a, .landing-footer span { color: #9FB4D4; font-size: 0.78rem; margin: 0 9px; cursor: pointer; text-decoration: none; }
+  .landing-footer a:hover, .landing-footer span:hover { color: #FFD56B; }
+
   /* ===== USER BADGE IN HEADER ===== */
   .user-badge { font-size: 0.82rem; background: rgba(255,255,255,0.12); padding: 7px 13px; border-radius: 20px;
     border: 1px solid rgba(255,213,107,0.35); display:flex; align-items:center; gap:10px; }
@@ -2477,7 +2537,7 @@ function logoutUser() {
   clearUserSession();
   clearTrialSession();
   currentUser = null;
-  renderLogin();
+  renderLanding();
 }
 
 // ---- Self-service registration ----
@@ -2494,7 +2554,7 @@ function goRegister() {
       <button class="login-btn" onclick="attemptRegister()">Start Trial \u2192</button>
       <div class="login-error" id="regError"></div>
       <p style="font-size:12px;color:#8898ee;margin-top:10px;line-height:1.4;">Your information is used only for course access, results tracking, and certification — it is never shared.</p>
-      <span class="login-admin-link" onclick="renderLogin()">\u2190 Back to login</span>
+      <span class="login-admin-link" onclick="renderLanding()">\u2190 Back to Home</span>
     </div>
   `;
   document.getElementById('regName').focus();
@@ -2733,6 +2793,102 @@ function toggleCodeVisibility(inputId, btn) {
   btn.textContent = nowHidden ? '\u{1F576}\uFE0F' : '\u{1F441}\uFE0F';
   btn.classList.toggle('revealed', nowHidden);
   inp.focus();
+}
+
+function renderLanding() {
+  clearTimer();
+  renderHeaderBadge();
+  card.innerHTML = `
+    <div class="landing-page">
+      <div class="landing-topbar">
+        <div class="landing-topbar-inner">
+          <span>✉️ <a href="mailto:${INSTRUCTOR_EMAIL}">${INSTRUCTOR_EMAIL}</a></span>
+          <span>
+            <span class="landing-topbar-link" onclick="goRegister()">Register</span><span class="landing-topbar-link" onclick="renderLogin()">Login</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="landing-nav">
+        <div class="landing-nav-inner">
+          <div class="landing-logo"><span class="landing-logo-badge">PMP®</span> PMP Mastery Hub</div>
+          <div class="landing-nav-links">
+            <span onclick="landingScrollTo('landingSteps')">How It Works</span>
+            <span onclick="landingScrollTo('landingAbout')">About the Instructor</span>
+            <span onclick="goVerifyCertificate()">Verify Certificate</span>
+          </div>
+          <button class="landing-nav-cta" onclick="goRegister()">Start Free Trial</button>
+        </div>
+      </div>
+
+      <div class="landing-hero" id="landingHero">
+        <h1>Master the PMP® Exam with <span class="accent">PMBOK 8</span>-Aligned Practice</h1>
+        <p class="sub">1,000+ exam-style questions, full-length mock exams, and 11+ interactive workshops — built by Dr. Eng. Khalid Fawzy, PMP®, from how he actually teaches PMP in the classroom.</p>
+        <div class="landing-hero-ctas">
+          <button class="landing-btn-primary" onclick="goRegister()">\u{1F389} Start Free 48-Hour Trial →</button>
+          <button class="landing-btn-secondary" onclick="renderLogin()">\u{1F511} Already have a code?</button>
+        </div>
+      </div>
+
+      <div class="landing-steps-section" id="landingSteps">
+        <div class="landing-section-title">How to Study With Us</div>
+        <div class="landing-section-subtitle">Four simple steps from sign-up to certification</div>
+        <div class="landing-steps-grid">
+          <div class="landing-step-card" style="border-top-color:#B8860B;">
+            <div class="landing-step-num">1</div>
+            <h3>Register &amp; Start Free</h3>
+            <p>Sign up with your name, email, and WhatsApp number — instant 48-hour access, no code required.</p>
+          </div>
+          <div class="landing-step-card" style="border-top-color:#2E75B6;">
+            <div class="landing-step-num">2</div>
+            <h3>Study &amp; Practice</h3>
+            <p>1,000+ exam-style questions, full mock exams, and interactive workshops covering every PMBOK 8 domain.</p>
+          </div>
+          <div class="landing-step-card" style="border-top-color:#1F3864;">
+            <div class="landing-step-num">3</div>
+            <h3>Track Your Progress</h3>
+            <p>Review detailed results by session, spot your weakest domains, and drill exactly where you need it.</p>
+          </div>
+          <div class="landing-step-card" style="border-top-color:#B8860B;">
+            <div class="landing-step-num">4</div>
+            <h3>Get Certified</h3>
+            <p>Complete the program and claim your official completion certificate.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="landing-about-section" id="landingAbout">
+        <div class="landing-about-card">
+          <img class="landing-about-photo" src="${INSTRUCTOR_PHOTO}" alt="Khalid Fawzy, PMP" />
+          <div>
+            <div class="landing-about-name">Dr. Eng. Khalid Fawzy, PMP®</div>
+            <div class="landing-about-creds">24+ years leading projects across MENA &amp; GCC · Author of 2 PMP books · PMP trainer since 2018</div>
+            <div class="landing-about-pitch">"I built this platform because I couldn't find one that matched how I actually teach PMP. Try it free for 48 hours."</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="landing-final-cta">
+        <h2>Ready to pass the PMP® exam?</h2>
+        <div class="landing-hero-ctas">
+          <button class="landing-btn-primary" onclick="goRegister()">Start Free Trial →</button>
+          <button class="landing-btn-secondary" onclick="renderLogin()">Already have a code?</button>
+        </div>
+      </div>
+
+      <div class="landing-footer">
+        <span onclick="goForgotCode()">Forgot your code?</span>
+        <span onclick="goVerifyCertificate()">Verify a Certificate</span>
+        <span onclick="goAdminLogin()">Admin login</span>
+        <a href="mailto:${INSTRUCTOR_EMAIL}?subject=PMP%20Mastery%20Hub%20Inquiry">Contact Instructor</a>
+      </div>
+    </div>
+  `;
+}
+
+function landingScrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function renderLogin() {
@@ -3815,7 +3971,7 @@ function init() {
       });
     return;
   }
-  renderLogin();
+  renderLanding();
 }
 
 // ===== HELPERS =====
