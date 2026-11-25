@@ -2896,50 +2896,21 @@ function renderLogin() {
   renderHeaderBadge();
   card.innerHTML = `
     <div class="login-wrap">
-      <div class="instructor-card">
-        <img class="instructor-photo" src="${INSTRUCTOR_PHOTO}" alt="Khalid Fawzy, PMP" />
-        <div class="instructor-info">
-          <div class="instructor-name">Dr. Eng. Khalid Fawzy, PMP\u00ae</div>
-          <div class="instructor-creds">24+ years leading projects across MENA &amp; GCC \u00b7 Author of 2 PMP books \u00b7 PMP trainer since 2018</div>
-          <div class="instructor-pitch">"I built this platform because I couldn't find one that matched how I actually teach PMP. Try it free for 48 hours."</div>
-        </div>
+      <h1>\u{1F511} Log In</h1>
+      <p>Enter your access code to continue your PMP Mastery Hub course.</p>
+      <div class="code-input-wrap">
+        <input type="password" id="loginCodeInput" class="login-input" placeholder="ACCESS CODE" maxlength="20" autocomplete="off" />
+        <button type="button" class="code-eye-btn" onclick="toggleCodeVisibility('loginCodeInput', this)" aria-label="Show or hide access code">\u{1F441}\uFE0F</button>
       </div>
-
-      <div class="hero-cta-box">
-        <h2>\u{1F389} Start Your Free 48-Hour Trial</h2>
-        <p>No code needed. Register once with your email and you're in \u2014 instant access to 1000+ questions, mock exams, and course sessions.</p>
-        <button class="hero-cta-btn" onclick="goRegister()">Start Free Trial \u2192</button>
-      </div>
-
-      <div class="how-it-works">
-        <div class="how-step">
-          <div class="how-step-num">1</div>
-          <div class="how-step-txt">Register with<br>your email</div>
-        </div>
-        <div class="how-step">
-          <div class="how-step-num">2</div>
-          <div class="how-step-txt">Browse free for<br>48 hours</div>
-        </div>
-        <div class="how-step">
-          <div class="how-step-num">3</div>
-          <div class="how-step-txt">Get permanent<br>code by email</div>
-        </div>
-      </div>
-
-      <button class="code-login-toggle" onclick="toggleCodeLogin()" id="codeLoginToggleBtn">
-        \u{1F511} Already have an access code? \u2192
-      </button>
-      <div class="code-login-panel" id="codeLoginPanel">
-        <div class="code-input-wrap">
-          <input type="password" id="loginCodeInput" class="login-input" placeholder="ACCESS CODE" maxlength="20" autocomplete="off" />
-          <button type="button" class="code-eye-btn" onclick="toggleCodeVisibility('loginCodeInput', this)" aria-label="Show or hide access code">\u{1F441}\uFE0F</button>
-        </div>
-        <button class="login-btn" onclick="attemptLogin()" style="margin-top:12px;">Log In</button>
-        <div class="login-error" id="loginError"></div>
-      </div>
+      <button class="login-btn" onclick="attemptLogin()" style="margin-top:12px;">Log In</button>
+      <div class="login-error" id="loginError"></div>
 
       <div class="login-links-row">
-        <a class="contact-instructor-btn" href="mailto:${INSTRUCTOR_EMAIL}?subject=PMP%20Mastery%20Hub%20Inquiry">
+        <div style="font-size:0.88rem;color:#5B6B85;">New here? <span class="login-admin-link" style="margin:0;" onclick="goRegister()">Start a free 48-hour trial →</span></div>
+        <div style="margin-top:12px;">
+          <span class="login-admin-link" onclick="renderLanding()">← Back to Home</span>
+        </div>
+        <a class="contact-instructor-btn" href="mailto:${INSTRUCTOR_EMAIL}?subject=PMP%20Mastery%20Hub%20Inquiry" style="margin-top:12px;">
           \u2709\uFE0F Contact Instructor
         </a>
         <div style="margin-top:8px;">
@@ -2950,6 +2921,13 @@ function renderLogin() {
       </div>
     </div>
   `;
+  setTimeout(() => {
+    const inp = document.getElementById('loginCodeInput');
+    if (inp) {
+      inp.focus();
+      inp.addEventListener('keydown', e => { if (e.key === 'Enter') attemptLogin(); });
+    }
+  }, 30);
 }
 
 // Toggles the returning-user access-code login section
